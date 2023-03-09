@@ -1,0 +1,78 @@
+.coco-layout_wrap {
+    background: c-base-color(light, 2);
+}
+.coco-cart-wrap {
+    padding: $padding-32 0 $padding-50 + 14px 0;
+    .coco-cart-title {
+        font-weight: $roboto-bold;
+        font-size: $caption-font-size-md;
+        line-height: $line-height-base;
+        color: c-base-color(dark, 1);
+        padding: $padding-5x;
+    }
+    .checkout-table {
+        margin-top: 13px;
+        > thead {
+            > tr {
+                > th {
+                    padding: $padding-20 $padding-28;
+                }
+            }
+        }
+        .td-item-price {
+            .price-max {
+                color: c-base-color(dark, 2);
+                text-decoration: line-through;
+                margin-bottom: 4px;
+            }
+        }
+    }
+    .coco-cart-confirm {
+        width: 100%;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+        @media (min-width: 991px) {
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+        .cart-confirm--label {
+            padding-right: 0;
+            text-align: center;
+            margin-bottom: 15px;
+            @media (min-width: 991px) {
+                padding-right: $padding-32;
+                text-align: right;
+            }
+            .confirm--label_item {
+                font-weight: $roboto-bold;
+                font-size: $caption-font-size-md;
+                line-height: $line-height-lg;
+                color: c-base-color(dark, 1);
+                > p {
+                    font-weight: $roboto-bold;
+                    font-size: $section-title-font-size-xl;
+                    line-height: $line-height-xxxxl;
+                    color: c-base-color(danger, 1);
+                    padding-left: $padding-10;
+                }
+            }
+        }
+        > button {
+            max-width: 300px;
+        }
+    }
+}
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    table {
+        tr,
+        td {
+            white-space: nowrap;
+        }
+    }
+}

@@ -1,0 +1,90 @@
+.coco-box-content {
+    width: 100%;
+    position: relative;
+    margin-top: 1.5rem;
+    background: c-base-color(light, 1);
+
+    @media (max-width: 639px) {
+        &.d-sm-none {
+            display: none;
+        }
+    }
+
+    @media (min-width: 640px) {
+        &.d-sm-block {
+            display: none;
+        }
+    }
+
+    .separator-left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        border-left: 6px solid c-base-color(dark, 1);
+    }
+
+    @media (min-width: 640px) {
+        .title__content {
+            font-size: 24px;
+            line-height: 26px;
+        }
+    }
+
+    .main__content {
+        padding: $padding-16 $padding-40;
+        .title__content {
+            font-size: 20px;
+            line-height: 22px;
+            text-align: left;
+            margin-bottom: 9px;
+            font-weight: $roboto-bold;
+            color: c-base-color(dark, 1);
+            text-transform: uppercase;
+        }
+        .content-desciption {
+            overflow: hidden;
+            transition: height 180ms;
+            // max-height: 300px;
+            // &.collapse {
+            //     max-height: 300px;
+            // }
+            // &.expand {
+            //     height: 100%;
+            //     max-height: 100%;
+            // }
+        }
+        .mask-content {
+            mask-image: linear-gradient(180deg, #000 60%, transparent);
+            -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+        }
+        .footer-end-content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            .btn-expand-content {
+                flex-direction: column;
+                color: #444444;
+                background: transparent;
+                font-weight: 600;
+                font-size: $body-font-size;
+                border: 0;
+                padding: $padding-6 $padding-16;
+
+                &.ic-flip img {
+                    transform: rotate(180deg);
+                }
+
+                img {
+                    width: 18px;
+                    margin-top: 4px;
+                }
+
+                &:focus {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

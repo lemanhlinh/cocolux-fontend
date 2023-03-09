@@ -1,0 +1,99 @@
+/*------begin: HEADER TOP------*/
+.header-top {
+    text-align: center;
+    background: c-base-color(primary, 1);
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: $padding-10;
+    max-width: 1320px;
+    margin: auto;
+    @media (min-width: 991px) {
+        display: flex;
+    }
+    &--phone {
+        display: flex;
+        align-items: center;
+        > img {
+            background: c-base-color(primary, 1);
+            padding: $padding-2;
+            border-radius: 50%;
+            border: 1px solid c-base-color(light, 1);
+        }
+        > span {
+            font-family: $roboto-family;
+            font-size: $body-font-size;
+            line-height: 19px;
+            padding-left: $padding-8;
+            color: c-base-color(light, 1);
+        }
+    }
+
+    &--title {
+        margin: 0 auto;
+        width: 50%;
+        overflow: hidden;
+        font-family: $roboto-family;
+        font-size: 14px;
+        line-height: 19px;
+        color: #ffffff;
+        overflow: hidden;
+        white-space: nowrap;
+        span {
+            display: block;
+            animation: marquee 10s linear infinite;
+        }
+    }
+
+    // Animation for header-top--title
+    @keyframes marquee {
+        from {
+            transform: translate(100%, 0);
+        }
+        to {
+            transform: translate(-150%, 0);
+        }
+    }
+
+    &--language {
+        display: flex;
+        .btnLang {
+            > button {
+                cursor: pointer;
+                padding: $padding-1 $padding-8;
+                background: c-base-color(dark, 1);
+                outline: none;
+                border: none;
+                transition: all ease 0.3s;
+                > a {
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    span {
+                        transition: all ease 0.3s;
+                        font-family: $roboto-family;
+                        font-weight: $roboto-bold;
+                        font-size: $caption-font-size-lg;
+                        line-height: 22px;
+                        display: inline-block;
+                        color: c-base-color(light, 1);
+                    }
+                }
+                &:focus {
+                    background: c-base-color(light, 1);
+                    span {
+                        color: c-base-color(dark, 1);
+                    }
+                }
+                &:hover {
+                    background: c-base-color(light, 1);
+                    span {
+                        color: c-base-color(dark, 1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*------end HEADER TOP------*/

@@ -1,0 +1,56 @@
+//
+// Fonts
+//
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+// Font family
+$roboto-family: 'Roboto', sans-serif;
+
+$roboto-bold: 700;
+$roboto-bolder: 900;
+$roboto-light: 300;
+$roboto-lighter: 200;
+
+// Font size
+$font-size-base: 1rem !default;
+$lead-font-size: $font-size-base * 1.25 !default;
+
+$font-weight-base: 500 !default;
+$font-weight-lg: 800 !default;
+$font-weight-sm: 700 !default;
+$font-weight-xs: 600 !default;
+
+$body-font-size: 14px;
+$hero-font-size: 32px;
+
+$section-title-font-size: 20px;
+$section-title-font-size-sm: 18px;
+$section-title-font-size-md: 20px;
+$section-title-font-size-lg: 22px;
+$section-title-font-size-xl: 24px;
+
+$caption-font-size: 12px;
+$caption-font-size-sm: 12px;
+$caption-font-size-md: 14px;
+$caption-font-size-lg: 16px;
+
+$smaller-caption-font-size: 10px;
+
+// Font Weight
+$font-weight-lighter: lighter !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 500 !default;
+$font-weight-bolder: 600 !default;
+$font-weight-boldest: 700 !default;
+
+// Lineheights
+$line-height-base: 19px !default;
+$line-height-sm: 16px;
+$line-height-lg: 22px;
+$line-height-xl: 24px;
+$line-height-xxl: 26px;
+$line-height-xxxl: 28px;
+$line-height-xxxxl: 32px;
+$hero-line-height: 43px;

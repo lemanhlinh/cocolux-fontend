@@ -1,0 +1,17 @@
+// 1: Include global functions
+@import 'base/functions';
+
+// 2: Include global mixins
+@import 'base/mixins';
+
+// 3: Include global variables
+@import 'base/variables';
+
+// 4: Include global pages
+@import 'pages/init';
+
+// 4: Include global layouts
+@import 'layouts/init';
+
+// 4: Include global components
+@import 'components/init';

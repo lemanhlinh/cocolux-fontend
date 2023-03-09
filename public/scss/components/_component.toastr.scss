@@ -1,0 +1,44 @@
+.toast-wrap {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    // display: flex;
+    // flex-direction: column;
+    // align-items: flex-end;
+    z-index: 11;
+    // transition: 0.25s;
+}
+.cc-toast {
+    color: c-base-color(light, 1);
+    padding: $padding-15;
+    border-radius: 5px;
+    font-weight: $roboto-bold;
+    box-shadow: 0 4px 10px $depth-1;
+    font-size: $body-font-size;
+    min-width: 300px;
+    @media (min-width: 991px) {
+        min-width: 400px;
+        font-size: $caption-font-size-lg;
+    }
+    &:not(:last-child) {
+        margin-bottom: 5px;
+    }
+    &.toast-danger {
+        background-color: c-base-color(danger, 1);
+    }
+    &.toast-success {
+        background-color: c-base-color(success, 1);
+    }
+    &.toast-warning {
+        background-color: c-base-color(warning, 1);
+    }
+    .toast-messages {
+        margin-right: 5px;
+    }
+    .toast-close {
+        cursor: pointer;
+        font-size: $caption-font-size-lg;
+        float: right;
+    }
+}

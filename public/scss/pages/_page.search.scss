@@ -1,0 +1,156 @@
+.coco-search-wrap {
+    padding-bottom: 50px;
+    &--body {
+        display: flex;
+        border-top: 1px solid c-base-color(grey, 2);
+        background: c-base-color(light, 1);
+        padding-top: 15px;
+        @media (min-width: 1024px) {
+            padding-top: 30px;
+        }
+        .coco-search__left {
+            flex-grow: 1;
+            display: none;
+            flex-direction: column;
+            background: c-base-color(light, 1);
+            position: relative;
+            @media (min-width: 768px) {
+                display: flex;
+                width: 35%;
+            }
+            @media (min-width: 1024px) {
+                width: 20%;
+            }
+            @media (min-width: 1200px) {
+                width: 15%;
+            }
+            &::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                height: calc(100% - 50px);
+                border-left: 1px solid c-base-color(light, 2);
+            }
+        }
+        .coco-search__right {
+            width: 100%;
+            @media (min-width: 991px) {
+                width: 83%;
+            }
+            box-sizing: border-box;
+            background: c-base-color(light, 1);
+            .card-list-item {
+                &--header {
+                    font-weight: $roboto-bold;
+                    font-size: 16px;
+                    line-height: 22px;
+                    text-align: left;
+                    color: c-base-color(dark, 1);
+                    text-transform: uppercase;
+                    padding: $padding-15x;
+                }
+                &--content {
+                    margin-top: 23px;
+                    .list-items {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
+                        background: c-base-color(light, 1);
+                        overflow: hidden;
+                        padding: $padding-5x;
+                        .product-wrapper {
+                            padding: $padding-5 $padding-10;
+                            box-sizing: border-box;
+                            .btn {
+                                padding: $padding-5 $padding-12;
+                                height: 30px;
+                                box-sizing: border-box;
+                            }
+                            .product-bottom {
+                                .product-bottom-progress {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    .card-list-item-filter {
+                        display: none;
+                        align-items: center;
+                        padding: $padding-10;
+                        background: c-base-color(light, 3);
+                        @media (min-width: 768px) {
+                            display: flex;
+                        }
+                        &.border-bottom {
+                            border-bottom: 1px solid #d4d4d4;
+                            padding: $padding-10 $padding-10 $padding-5 $padding-10;
+                        }
+                        > span {
+                            font-weight: $roboto-bold;
+                            font-size: $body-font-size;
+                            width: 10%;
+                            display: none;
+                            @media (min-width: 991px) {
+                                display: block;
+                            }
+                        }
+                        .btn {
+                            margin-right: 8px;
+                            font-weight: normal;
+                            border-color: c-base-color(grey, 3);
+                            padding: $padding-10;
+                            &.active,
+                            &:hover {
+                                background: c-base-color(danger, 1);
+                                border-color: c-base-color(danger, 1);
+                                color: c-base-color(light, 1);
+                                opacity: 1;
+                            }
+                        }
+                        .item-collection {
+                            display: flex;
+                            flex-wrap: wrap;
+                            .item-sort {
+                                position: relative;
+                                margin-bottom: 5px;
+                                background: c-base-color(danger, 1);
+                                border-color: c-base-color(danger, 1);
+                                white-space: nowrap;
+                                color: c-base-color(light, 1);
+                                &:hover .del-item-sort {
+                                    visibility: visible;
+                                    opacity: 1;
+                                    transition: all ease 0.2s;
+                                }
+                            }
+                            .del-item-sort {
+                                visibility: hidden;
+                                opacity: 0;
+                                position: absolute;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                width: 18px;
+                                height: 18px;
+                                top: -8px;
+                                right: -7px;
+                                border-radius: 50%;
+                                background: #272727;
+                                > img {
+                                    width: 8px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .coco-paginate-wrap {
+                margin: 0;
+                padding: $padding-24y;
+                background: c-base-color(light, 1);
+            }
+        }
+    }
+}

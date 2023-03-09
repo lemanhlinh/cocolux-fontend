@@ -1,0 +1,125 @@
+// State Color
+$c-state-colors: (
+    // Metronic states
+    brand:
+        (
+            base: #5d78ff,
+            inverse: #ffffff,
+        ),
+    light: (
+        base: #ffffff,
+        inverse: #282a3c,
+    ),
+    dark: (
+        base: #282a3c,
+        inverse: #ffffff,
+    ),
+    // Bootstrap states
+    primary:
+        (
+            base: #5867dd,
+            inverse: #ffffff,
+        ),
+    success: (
+        base: #0abb87,
+        //1dc9b7,
+        inverse: #ffffff,
+    ),
+    info: (
+        base: #5578eb,
+        inverse: #ffffff,
+    ),
+    warning: (
+        base: #ffb822,
+        inverse: #ffffff,
+    ),
+    danger: (
+        base: #fd397a,
+        inverse: #ffffff,
+    )
+) !default;
+
+// Base colors
+$c-base-colors: (
+    grey: (
+        1: #707070,
+        2: #d4d4d4,
+        3: #bebebe,
+        4: #d1d1d1,
+    ),
+    light: (
+        1: #ffffff,
+        2: #f3f3f3,
+        3: #e5e4e4,
+        4: #f7f7f7,
+    ),
+    dark: (
+        1: #000000,
+        2: #707070,
+        3: #272727,
+    ),
+    danger: (
+        1: #c73030,
+        //1: #ff6600,
+        2: #e54028,
+        3: #f61c0d,
+    ),
+    warning: (
+        1: #ffb822,
+    ),
+    success: (
+        1: #0abb87,
+    ),
+    blue: (
+        1: #4688f1,
+        2: #39589a,
+        3: #e7ecf7,
+    ),
+    yellow: (
+        1: #ffeb3b,
+        2: #fefced,
+    ),
+    primary: (
+        1: #000,
+        2: #272727,
+        3: #f5fbf6,
+    ),
+    pink:(
+        1:#f0aab9
+    ),
+    secondary: (
+        1: #c73030,
+    ),
+) !default;
+
+// Social network colors(see: https://brandcolors.net/)
+$c-social-colors: (
+    facebook: (
+        base: #3b5998,
+        inverse: #ffffff,
+    ),
+    google: (
+        base: #dc4e41,
+        inverse: #ffffff,
+    ),
+    twitter: (
+        base: #4ab3f4,
+        inverse: #ffffff,
+    ),
+    instagram: (
+        base: #517fa4,
+        inverse: #ffffff,
+    ),
+    youtube: (
+        base: #b31217,
+        inverse: #ffffff,
+    ),
+    linkedin: (
+        base: #0077b5,
+        inverse: #ffffff,
+    ),
+    skype: (
+        base: #00aff0,
+        inverse: #ffffff,
+    ),
+) !default;

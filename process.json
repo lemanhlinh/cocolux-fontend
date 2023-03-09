@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "script": "yarn",
+            "args": "start:prod",
+            "name": "sv-cocoshop-web-test"
+        }
+    ]
+}

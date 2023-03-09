@@ -1,0 +1,317 @@
+.coco-layout_wrap {
+    background: c-base-color(light, 1);
+}
+
+// Modal login
+.modal-login {
+    transition: none !important;
+
+    .modal-header {
+        >h3 {
+            margin: 0;
+            padding: 0;
+            font-size: $section-title-font-size-sm;
+            line-height: $line-height-xl;
+            font-weight: $roboto-bold;
+        }
+    }
+
+    .modal-body {
+        .ccs-login-form {
+            &--top {
+                margin-top: 13px;
+                display: flex;
+                justify-content: space-between;
+
+                >button {
+                    &:nth-child(2) {
+                        margin-left: 1rem;
+                    }
+                }
+            }
+
+            &--middle {
+                display: flex;
+                flex-direction: column;
+                font-size: $caption-font-size-md;
+                line-height: $line-height-base;
+                color: c-base-color(dark, 1);
+
+                >span {
+                    // margin-top: 1rem;
+                    padding-bottom: 3px;
+                }
+
+                // .ccs-input {
+                //     margin-top: 13px;
+                //     color: c-base-color(grey, 1);
+                //     &:nth-child(1) {
+                //         margin-top: 0;
+                //     }
+                // }
+                .line-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: 15.25px;
+
+                    >div {
+                        content: '';
+                        width: 70%;
+                        height: 2px;
+                        border-top: 1px solid c-base-color(grey, 2);
+                    }
+
+                    >span {
+                        width: 70%;
+                        white-space: nowrap;
+                        padding: 0 $padding-9;
+                        text-align: center;
+                        font-size: $caption-font-size-md;
+                        line-height: $line-height-base;
+                    }
+                }
+
+                .action-group {
+                    // margin-top: 19px;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .checkbox {
+                        >label {
+                            color: c-base-color(grey, 1);
+                        }
+                    }
+
+                    >a {
+                        text-decoration: none;
+                        color: c-base-color(dark, 1);
+                        cursor: pointer;
+                    }
+                }
+
+                .btn-danger {
+                    margin-top: 18px;
+                }
+
+                .text-group {
+                    margin-top: 1rem;
+
+                    >a {
+                        padding-left: $padding-13;
+                        text-decoration: none;
+                        color: c-base-color(blue, 1);
+                    }
+                }
+            }
+        }
+
+        .ccs-register-form {
+            .ccs-login-top {
+                margin-top: 13px;
+                justify-content: space-between;
+
+                >button {
+                    width: 100%;
+                }
+            }
+
+            .text-group {
+                margin-top: 1rem;
+                font-size: $caption-font-size-md;
+                line-height: $line-height-base;
+
+                >a {
+                    padding-left: $padding-13;
+                    text-decoration: none;
+                    color: c-base-color(blue, 1);
+                }
+            }
+
+            .ccs-login-middle {
+                margin-top: 13px;
+
+                >span {
+                    width: 70%;
+                    padding: 0 $padding-9;
+                }
+            }
+
+            .ccs-login-bottom {
+                margin-top: 0;
+
+                .login-bottom--left {
+                    width: 100%;
+                    max-width: unset;
+                }
+            }
+        }
+    }
+}
+
+.ccs-login-wrap {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .ccs-login-top {
+        display: flex;
+        justify-content: center;
+
+        >button {
+            width: 19%;
+
+            &:nth-last-child(2) {
+                margin-right: 16px;
+            }
+        }
+    }
+
+    .ccs-login-middle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 15.25px;
+
+        .login-middle--line {
+            content: '';
+            width: 46%;
+            height: 2px;
+            border-top: 1px solid c-base-color(grey, 2);
+        }
+
+        >span {
+            width: 6%;
+            text-align: center;
+            font-size: $caption-font-size-md;
+            line-height: $line-height-base;
+        }
+    }
+
+    .ccs-login-bottom {
+        width: 100%;
+        margin-top: 32px;
+        display: flex;
+        justify-content: space-between;
+
+        .login-bottom--left {
+            width: 46%;
+            display: flex;
+            max-width: 328px;
+            flex-direction: column;
+
+            .bottom--left_title {
+                font-weight: $roboto-bold;
+                font-size: $section-title-font-size-sm;
+                line-height: $line-height-lg;
+                color: c-base-color(dark, 1);
+                text-align: center;
+            }
+
+            .bottom-left_radiogr {
+                width: 100%;
+
+                .ccs-radio {
+                    width: 20%;
+                }
+            }
+
+            // .ccs-input {
+            //     max-width: 294px;
+            //     width: 100%;
+            //     margin-top: 1rem;
+            //     &:nth-last-child(3) {
+            //         margin-top: 32px;
+            //     }
+            // }
+            .bottom-left_selectbox {
+                .list-select {
+                    display: flex;
+                    justify-content: space-between;
+
+                    // margin-top: 13px;
+                    .datepicker-selectbox {
+                        width: 100%;
+                        max-width: 104px;
+                        min-height: 32px;
+                        padding: 0 $padding-16;
+                        font-size: $caption-font-size-md;
+                        line-height: 18px;
+                        border: 1px solid c-base-color(grey, 3);
+                        outline: none;
+                        background: c-base-color(light, 1);
+                        box-shadow: 0px 3px 6px c-base-color(dark, 1) 29;
+                        -moz-box-shadow: 0px 3px 6px c-base-color(dark, 1) 29;
+                        -webkit-box-shadow: 0px 3px 6px c-base-color(dark, 1) 29;
+                        border-radius: 5px;
+                        transition: all ease 0.3s;
+                    }
+                }
+            }
+
+            .c-checkbox-lg1 {
+                margin-top: 16px;
+            }
+
+            .c-checkbox-lg2 {
+                margin-top: 19px;
+            }
+
+            .btn-danger {
+                margin-top: 14px;
+            }
+
+            .checkbox-promotion {
+                margin-top: 15px;
+                font-size: $caption-font-size-md;
+                line-height: $line-height-base;
+            }
+
+            .checkbox-certificate {
+                margin-top: 14px;
+                font-size: $caption-font-size-sm;
+                line-height: $line-height-sm;
+            }
+        }
+
+        .login-bottom--right {
+            width: 41%;
+            max-width: 292px;
+
+            // padding: 0 26px;
+            >div {
+                &:nth-child(2) {
+                    .right_des__header {
+                        margin-top: 24px;
+                    }
+                }
+            }
+
+            .bottom--right_title {
+                font-weight: $roboto-bold;
+                font-size: $section-title-font-size-sm;
+                line-height: $line-height-lg;
+                color: c-base-color(dark, 1);
+                text-align: center;
+            }
+
+            .bottom--right_des {
+                color: c-base-color(dark, 1);
+                text-align: center;
+
+                .right_des__header {
+                    margin-top: 19px;
+                    font-weight: $roboto-bold;
+                    font-size: $caption-font-size-md;
+                    line-height: $line-height-base;
+                }
+
+                .right_des_sub {
+                    margin-top: 5px;
+                    font-size: $caption-font-size-md;
+                    line-height: $line-height-base;
+                }
+            }
+        }
+    }
+}

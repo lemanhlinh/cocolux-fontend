@@ -1,0 +1,15 @@
+//
+// Color Functions
+//
+
+@function c-state-color($name, $type: null) {
+    @if ($type == null) {
+        $type: base;
+    }
+
+    @return c-get($c-state-colors, $name, $type);
+}
+
+@function c-base-color($type, $level) {
+    @return c-get($c-base-colors, $type, $level);
+}

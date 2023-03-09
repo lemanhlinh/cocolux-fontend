@@ -1,0 +1,151 @@
+/*---begin: Pagination Redirect---*/
+.coco-paginate-wrap {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    .coco-paginate-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        > img {
+            cursor: pointer;
+        }
+        .paginate-item--transform {
+            transform: rotate(-180deg);
+        }
+        .paginate-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            // box-shadow: 0 1px #d3d3d3;
+            border: 1px solid #d3d3d3;
+            transition: all ease 0.3s;
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &:nth-child(1) {
+                margin-right: 5px;
+            }
+
+            &:nth-last-child(1) {
+                margin-left: 5px;
+            }
+
+            img {
+                width: 0.65rem;
+                height: 0.65rem;
+            }
+        }
+        .paginate-item--child {
+            display: flex;
+            margin: 0 10px;
+            justify-content: space-between;
+
+            > button {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                margin: 0 2px;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                background: transparent;
+                border-color: transparent;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all ease 0.1s;
+                &:focus {
+                    background: c-base-color(dark, 1);
+                    > span {
+                        color: c-base-color(light, 1);
+                    }
+                }
+                > span {
+                    font-family: $roboto-family;
+                    font-size: $font-size-base - 3;
+                    line-height: 14px;
+                    font-weight: $font-weight-base + 100;
+                    color: c-base-color(dark, 1);
+                }
+            }
+            .active {
+                background: c-base-color(dark, 1);
+
+                > span {
+                    color: c-base-color(light, 1);
+                }
+            }
+        }
+    }
+}
+/*---end: Pagination Redirect---*/
+
+/*---begin: Pagination Page---*/
+.pagination-wrap {
+    display: flex;
+    align-items: center;
+    .pagination-pages {
+        padding-right: $padding-12;
+        font-family: $roboto-family;
+        font-size: 14px;
+        line-height: 19px;
+        > span {
+            color: c-state-color(danger, 1);
+        }
+    }
+    .pagination-groupbtn {
+        display: flex;
+        > button {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: c-base-color(light, 1);
+            border-color: c-base-color(light, 1);
+            box-shadow: 0px 3px 6px $depth-15;
+            -moz-box-shadow: 0px 3px 6px $depth-15;
+            -webkit-box-shadow: 0px 3px 6px $depth-15;
+            border-radius: 1px;
+            text-decoration: none;
+            transition: all ease 0.2s;
+            cursor: pointer;
+            &:active {
+                background: #f3f3f3;
+            }
+            &:focus {
+                outline: none !important;
+            }
+            > img {
+                width: 6px;
+            }
+        }
+        .pagination--prev {
+            > img {
+                transform: rotate(-180deg);
+            }
+        }
+        .prev-page-active {
+            cursor: pointer;
+            opacity: 1;
+        }
+        .prev-page-inactive {
+            cursor: none;
+            opacity: 0.5;
+        }
+        .next-page-active {
+            cursor: pointer;
+            opacity: 1;
+        }
+        .next-page-inactive {
+            opacity: 0.5;
+            cursor: none;
+        }
+    }
+}
+/*---end: Pagination Page---*/

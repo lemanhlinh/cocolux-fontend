@@ -1,0 +1,39 @@
+//
+// padding settings
+//
+.p-5 {
+    padding: $padding-5;
+}
+.px-5 {
+    padding: $padding-5x;
+}
+.py-5 {
+    padding: $padding-5y;
+}
+//
+// margin
+//
+.mr-5 {
+    margin-right: 5px;
+}
+.ml-5 {
+    margin-left: 5px;
+}
+.mt-5 {
+    margin-top: 5px;
+}
+.mb-5 {
+    margin-bottom: 5px;
+}
+//
+// margin auto
+//
+.ml-auto {
+    margin-left: auto;
+}
+.mr-auto {
+    margin-right: auto;
+}
+.m-auto {
+    margin: auto;
+}

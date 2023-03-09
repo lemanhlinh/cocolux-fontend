@@ -1,0 +1,153 @@
+//
+// buttons
+//
+button {
+    &:focus {
+        outline: 0;
+    }
+}
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: $padding-6 $padding-10;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid c-base-color(dark, 2);
+    background: c-base-color(dark, 2);
+    color: c-base-color(light, 1);
+    font-weight: 600;
+    transition: opacity 0.2s, background 0.2s;
+    text-decoration: none;
+    font-size: $body-font-size;
+    cursor: pointer;
+    > img {
+        padding-right: $padding-5;
+    }
+    &:focus {
+        outline: 0;
+    }
+    &.btn-uppercase {
+        text-transform: uppercase;
+    }
+    //
+    // button size
+    //
+    &.btn-md {
+        font-size: $body-font-size + 1;
+        padding: $padding-8 $padding-12;
+    }
+    &.btn-lg {
+        font-size: $body-font-size + 2;
+        padding: $padding-10 $padding-15;
+    }
+    &:hover,
+    &:focus,
+    &:visited {
+        opacity: 0.7;
+    }
+    &[disabled='disabled'] {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+    //
+    // button color
+    //
+    &.btn-light {
+        background: c-base-color(light, 1);
+        color: c-base-color(dark, 1);
+        border-color: c-base-color(dark, 1);
+    }
+    &.btn-danger {
+        background: c-base-color(danger, 1);
+        color: c-base-color(light, 1);
+        border-color: c-base-color(danger, 1);
+    }
+    &.btn-dark {
+        background: c-base-color(dark, 1);
+        color: c-base-color(light, 1);
+        border-color: c-base-color(dark, 1);
+    }
+    &.btn-primary {
+        background: c-base-color(primary, 1);
+        color: c-base-color(light, 1);
+        border-color: c-base-color(primary, 1);
+    }
+    &.btn-secondary {
+        background: c-base-color(secondary, 1);
+        color: c-base-color(light, 1);
+        border-color: c-base-color(secondary, 1);
+    }
+    &.btn-facebook {
+        background: #39589a;
+        color: c-base-color(light, 1);
+        border-color: #39589a;
+        img {
+            height: 18px;
+            margin-right: 8px;
+        }
+    }
+    &.btn-google {
+        // background: #e7ecf7;
+        color: c-base-color(light, 1);
+        // border-color: #e7ecf7;
+        img {
+            height: 18px;
+            margin-right: 8px;
+        }
+    }
+    //
+    // outlined button
+    //
+    &.btn-outlined {
+        background: c-base-color(light, 1);
+        color: c-base-color(dark, 2);
+        &:hover,
+        &.active {
+            background-color: c-base-color(dark, 2);
+            color: c-base-color(light, 1);
+            opacity: 1;
+        }
+        &.btn-primary {
+            background: c-base-color(light, 1);
+            color: c-base-color(primary, 1);
+            border-color: c-base-color(primary, 1);
+            &:hover {
+                background: c-base-color(primary, 1);
+                color: c-base-color(light, 1);
+            }
+        }
+        &.btn-secondary {
+            background: c-base-color(light, 1);
+            color: c-base-color(secondary, 1);
+            border-color: c-base-color(secondary, 1);
+            &:hover {
+                background: c-base-color(secondary, 1);
+                color: c-base-color(light, 1);
+            }
+        }
+    }
+
+    //
+    // Custom attributes
+    //
+    &.w-100 {
+        width: 100%;
+    }
+    &.ml-1 {
+        margin-left: 1rem;
+    }
+}
+
+.btn-group {
+    display: flex;
+    &.btn-group-vertical {
+        flex-direction: column;
+    }
+    .btn {
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+}

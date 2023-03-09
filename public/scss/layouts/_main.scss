@@ -1,0 +1,275 @@
+// Warpper
+.coco-main {
+    position: relative;
+    padding-bottom: 40px;
+    @media (min-width: 1024px) {
+        padding-bottom: 0;
+    }
+}
+.coco-page-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    background: #f3f3f3;
+    min-height: 100vh;
+
+    &--header {
+        background: c-base-color(primary, 1);
+        z-index: 100;
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        @media (min-width: 1024px) {
+            position: static;
+        }
+    }
+
+    .active-header {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all 0.3s ease 0s;
+    }
+
+    .mask-layout {
+        position: absolute;
+        display: none;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: c-base-color(dark, 1);
+        opacity: 0.7;
+        transition: all ease 0.3s;
+        -webkit-transition: all ease 0.3s;
+        z-index: 5;
+        &.show {
+            display: block;
+        }
+    }
+
+    .coco-floating-icons__wrapper {
+        display: none;
+        position: fixed;
+        top: 45%;
+        right: 1%;
+        z-index: 55;
+        @media (min-width: 991px) {
+            display: block;
+        }
+        &--icons {
+            display: flex;
+            flex-direction: column;
+            z-index: 5;
+            background: c-base-color(light, 1);
+            box-shadow: 0px 3px 6px $depth-15;
+            -moz-box-shadow: 0px 3px 6px $depth-15;
+            -webkit-box-shadow: 0px 3px 6px $depth-15;
+            border-radius: 24px;
+            a {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                transition: opacity 0.2s;
+                padding: $padding-15 $padding-10 0;
+                &:last-child {
+                    padding-bottom: $padding-15;
+                }
+                img {
+                    transform: scale(1.1);
+                }
+                opacity: 0.5;
+                &:hover {
+                    opacity: 1;
+                    ~ a {
+                        opacity: 0.5;
+                    }
+                }
+            }
+            &:not(:hover) {
+                a {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &--scrolltop {
+            display: none;
+            align-items: center;
+            z-index: 5;
+            margin-top: 25px;
+            cursor: pointer;
+            // padding: 16px 20px;
+            background: c-base-color(light, 1);
+            box-shadow: 0px 2px 4px $depth-1;
+            -moz-box-shadow: 0px 2px 4px $depth-1;
+            -webkit-box-shadow: 0px 2px 4px $depth-1;
+            border-radius: 50%;
+            transition: all ease 1s;
+            text-align: center;
+            > img {
+                width: 36px;
+            }
+        }
+    }
+
+    .coco-chatbox__wrapper {
+        width: 100%;
+        max-width: 250px;
+        display: flex;
+        flex-direction: column;
+        padding: $padding-10 $padding-16;
+        z-index: 5;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        height: 10px;
+        transition: all ease 0.3s;
+        background: c-base-color(dark, 1);
+        border-radius: 5px 5px 0px 0px;
+        @media (max-width: 996px) {
+            bottom: 60px;
+        }
+        .block-chart-title {
+            display: flex;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            .left {
+                width: 90%;
+                display: flex;
+                align-items: center;
+                > span {
+                    font-family: $roboto-family;
+                    font-size: $smaller-caption-font-size + 1;
+                    line-height: 15px;
+                    color: c-base-color(light, 1);
+                    white-space: nowrap;
+                    padding-right: $padding-11;
+                    > img {
+                        width: 9px;
+                    }
+                }
+            }
+            .right {
+                width: 10%;
+                display: flex;
+                justify-content: flex-end;
+                > img {
+                    width: 13px;
+                }
+            }
+        }
+        .clicked {
+            .left {
+                > img {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .block-chat-mess {
+            width: 100%;
+            transition: all ease 0.3s;
+        }
+
+        // Hide
+        &.hidden {
+            display: none;
+            transition: all ease 0.3s;
+        }
+        &.active {
+            height: 350px;
+            z-index: 70;
+            padding-bottom: 0;
+            .block-chart-title {
+                padding-bottom: $padding-10;
+            }
+        }
+    }
+}
+
+//
+// set color
+//
+.bg-white {
+    background: c-base-color(light, 1);
+}
+.bg-grey {
+    background: c-base-color(light, 3);
+}
+.color-light {
+    color: c-base-color(light, 1);
+}
+.color-dark {
+    color: c-base-color(dark, 1);
+}
+.color-secondary {
+    color: c-base-color(secondary, 1);
+}
+.no-sp {
+    display: none;
+    @media (min-width: 768px) {
+        display: block;
+    }
+}
+.beautify-scroll {
+    &.s-grey {
+        &::-webkit-scrollbar-track {
+            background: c-base-color(light, 1);
+        }
+        &::-webkit-scrollbar-thumb,
+        &::-webkit-scrollbar-thumb:hover {
+            background: c-base-color(gray, 3);
+        }
+    }
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: c-base-color(light, 3);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: c-base-color(dark, 1);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: c-base-color(dark, 1);
+    }
+}
+
+.beautify-scroll-horizontal {
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: c-base-color(light, 3);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: c-base-color(dark, 1);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: c-base-color(dark, 1);
+    }
+}
+
+// @include c-media-above(md) {
+//     // Container
+//     .container {
+//         margin: 0 auto;
+//         max-width: 1320px;
+//         background: #f3f3f3;
+//     }
+// }

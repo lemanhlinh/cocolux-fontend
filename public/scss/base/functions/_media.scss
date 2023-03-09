@@ -1,0 +1,11 @@
+//
+// Media Functions
+//
+
+@function c-media-breakpoint($type) {
+    @if (c-has($c-media-breakpoints, $type)) {
+        @return c-get($c-media-breakpoints, $type);
+    } @else {
+        @return $type;
+    }
+}

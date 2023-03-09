@@ -1,0 +1,85 @@
+.coco-popup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1112;
+
+    &--overlay {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    &--container {
+        position: absolute;
+        top: 50%;
+        overflow: visible;
+        @media (min-width: 765px) {
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+        }
+        @media (max-width: 765px) {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        .popup-image {
+            display: block;
+            height: 100%;
+            position: relative;
+            background-position: 50%;
+            background-size: cover;
+            transition-duration: 0.15s;
+            transition-property: transform;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            img {
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform: translateZ(0);
+            }
+            @media (max-width: 765px) {
+                .image-home{
+                    height: auto;
+                }
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            top: -10px;
+            right: -6px;
+            height: 24px;
+            width: 24px;
+            background: #fff;
+            border-radius: 50%;
+            color: #000;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        &.horizontal {
+            .close-btn {
+                right: -10px;
+            }
+        }
+    }
+
+    &.hidden {
+        display: none;
+    }
+}
