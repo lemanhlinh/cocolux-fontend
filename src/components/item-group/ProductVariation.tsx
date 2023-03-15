@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Utilities } from 'src/helpers/utilities';
 
 // Modules
-import { ProductDeal, ProductModel, ProductOption } from 'src/helpers/models';
+import { ProductDeal, ProductOption } from 'src/helpers/models';
 
 // Components
 import { Image } from 'src/components/base-group';
@@ -14,37 +14,27 @@ import { isNil } from 'lodash';
 interface Props {
     column: string;
     item: ProductOption;
-    parent: ProductModel;
 }
 
-export const ProductItemVariation: React.FC<Props> = ({ parent, item, column }) => {
+export const ProductItemVariation: React.FC<Props> = ({ item, column }) => {
+    console.log(item);
     const [price, setPrice] = useState<number>(0);
     const [normalPrice, setNormalPrice] = useState<number>(0);
     const [itemDeal, setItemDeal] = useState<ProductDeal>({} as ProductDeal);
 
     useEffect(() => {
-        if (!isNil(parent)) {
+        if (!isNil(item)) {
             // Get item price
-            const _item = Utilities.getCurrentPriceItem(parent);
+            const _item = Utilities.getCurrentPriceItemOption(item);
             if (!isNil(_item.price) && !isNil(_item.normal_price)) {
                 setPrice(_item.price);
                 setNormalPrice(_item.normal_price);
             }
 
             // Get item deal
-            const currentDeal = Utilities.getCurrentItemDeal(parent);
+            const currentDeal = Utilities.getCurrentItemDealOption(item);
             if (!isNil(currentDeal) && currentDeal.id) {
                 setItemDeal(currentDeal);
-            }
-
-            if (parent.attributes && parent.attributes?.length) {
-                // Load detail brand
-                const brand = parent.attributes.find(
-                    (i: any) => i.value && i.name.toLowerCase() === 'thương hiệu'
-                );
-                if (brand && brand?.value) {
-                    parent.brand = brand.value.name;
-                }
             }
         }
     }, [parent]);
@@ -63,12 +53,12 @@ export const ProductItemVariation: React.FC<Props> = ({ parent, item, column }) 
                                 : null
                         }
                     </div>
-                    <Link href={{ pathname: '/item-detail', query: { slug: item.slug ? item.slug.toLocaleLowerCase() : parent.slug.toLocaleLowerCase() } }} as={`/${item.slug ? item.slug.toLocaleLowerCase() : parent.slug.toLocaleLowerCase()}`}>
+                    <Link href={{ pathname: '/item-detail', query: { slug: item.slug.toLocaleLowerCase() } }} as={`/${item.slug.toLocaleLowerCase()}`}>
                         <a className='thumbnail'>
                             <Image
                                 alt={item.name}
                                 title={item.name}
-                                src={Utilities.resizeImage(300, item.images[0])}
+                                src={Utilities.resizeImage(300, item.images?item.images[0]:'')}
                             />
                             {
                                 itemDeal.image_layer
@@ -105,8 +95,8 @@ export const ProductItemVariation: React.FC<Props> = ({ parent, item, column }) 
                     </div>
                     <p className='brand'>
                         {
-                            parent.brand
-                                ? parent.brand
+                            item.brand
+                                ? item.brand
                                 : 'Cocolux'
                         }
                     </p>

@@ -115,11 +115,11 @@ export const ProductItem: React.FC<Props> = ({ item, column }) => {
                                 : 'Cocolux'
                         }
                     </p>
-                    <h2 className='title'>
+                    <div className='title'>
                         <Link href={{ pathname: '/item-detail', query: { slug: item.slug.toLocaleLowerCase() } }} as={`/${item.slug.toLocaleLowerCase()}`}>
                             <a>{item.name}</a>
                         </Link>
-                    </h2>
+                    </div>
                 </div>
             </div>
         </div>

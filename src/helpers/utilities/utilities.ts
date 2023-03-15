@@ -1,7 +1,7 @@
 import moment from 'moment';
 import Cookie from 'universal-cookie';
 import { imageUrl } from 'config/vars';
-import { ProductModel, ProductDeal, ProductPrice } from '../models';
+import { ProductModel, ProductDeal, ProductPrice, ProductOption } from '../models';
 import { isNil } from 'lodash';
 
 export class Utilities {
@@ -70,11 +70,67 @@ export class Utilities {
         return deal;
     }
 
+        /**
+     * Get Current Item Deal
+     * @param item
+     */
+        public static getCurrentItemDealOption = (item: ProductOption) => {
+            let deal = {} as ProductDeal;
+            if (
+                !isNil(item.flash_deal) &&
+                item.flash_deal.id &&
+                !isNil(item.hot_deal) &&
+                item.hot_deal.id
+            ) {
+                deal = { ...item.flash_deal };
+            }
+            if (isNil(item.flash_deal) && !isNil(item.hot_deal) && item.hot_deal.id) {
+                deal = { ...item.hot_deal };
+            }
+            if (isNil(item.hot_deal) && !isNil(item.flash_deal) && item.flash_deal.id) {
+                deal = { ...item.flash_deal };
+            }
+            return deal;
+        }
+
     /**
      * Get Current Price Item
      * @param item
      */
     public static getCurrentPriceItem = (item: ProductModel) => {
+        const operator = {
+            price: item.price,
+            normal_price: item.normal_price,
+        } as ProductPrice;
+        if (
+            !isNil(item.hot_deal) &&
+            item.hot_deal.id &&
+            !isNil(item.flash_deal) &&
+            item.flash_deal.id
+        ) {
+            operator.price = item.flash_deal.price;
+            operator.normal_price = item.flash_deal.normal_price;
+        }
+        if (isNil(item.flash_deal) && isNil(item.hot_deal)) {
+            operator.price = item.price;
+            operator.normal_price = item.normal_price;
+        }
+        if (isNil(item.flash_deal) && !isNil(item.hot_deal) && item.hot_deal.id) {
+            operator.price = item.hot_deal.price;
+            operator.normal_price = item.hot_deal.normal_price;
+        }
+        if (isNil(item.hot_deal) && !isNil(item.flash_deal) && item.flash_deal.id) {
+            operator.price = item.flash_deal.price;
+            operator.normal_price = item.flash_deal.normal_price;
+        }
+        return operator;
+    }
+
+    /**
+     * Get Current Price Item
+     * @param item
+     */
+    public static getCurrentPriceItemOption = (item: ProductOption) => {
         const operator = {
             price: item.price,
             normal_price: item.normal_price,

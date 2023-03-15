@@ -15,7 +15,6 @@ const SearchPage = () => {
     const router = useRouter();
     const queryParams = router.query as any;
     const [totalItem, setTotalItem] = useState<number>(0);
-    const [totalItemPage, setTotalItemPage] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [items, setListItem] = useState<ProductModel[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -63,14 +62,14 @@ const SearchPage = () => {
             if (params.attributes) params.attributes = params.attributes.toString();
 
             // submit request
-            await ItemAPI.list(
+            await ItemAPI.listOption(
                 params
             ).then((response: any) => {
                 setCurrentPage(page || 1);
-                setListItem(response.data || []);
-                const count = response.data.reduce((acc: number, curr: any) => acc + curr.variations.length, 0);
-                setTotalItem(count || 0);
-                setTotalItemPage(response.count || 0);
+                const filterData = response.data.filter((item: any) => item.type === 'item' && item.slug != null);
+                setListItem(filterData || []);
+                response.data = filterData;
+                setTotalItem(response.count || 0);
             }).catch((error: any) => {
                 throw Error(error);
             }).finally(() => {
@@ -184,16 +183,11 @@ const SearchPage = () => {
                                             <>
                                                 {
                                                     items.map((item: any) => (
-                                                        <>
-                                                            {item.variations && item.variations.map((variation: any, index: number) => (
-                                                                <ProductItemVariation
-                                                                    key={item.id + index}
-                                                                    parent={item}
-                                                                    item={variation}
-                                                                    column='col-1over5 col-6'
-                                                                />
-                                                            ))}
-                                                        </>
+                                                        <ProductItemVariation
+                                                            key={item.id}
+                                                            item={item}
+                                                            column='col-1over5 col-6'
+                                                        />
                                                     ))
                                                 }
                                                 {!items.length && <div className='px-5'>Không tìm thấy kết quả phù hợp.</div>}
@@ -203,7 +197,7 @@ const SearchPage = () => {
                             </div>
                         </div>
                         <div className='card-list-item--footer'>
-                            <Pagination totalRecord={totalItemPage} currentPage={currentPage} />
+                            <Pagination totalRecord={totalItem} currentPage={currentPage} />
                         </div>
                     </div >
                 </div>

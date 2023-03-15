@@ -35,6 +35,20 @@ export class ItemAPI {
         }
     }
 
+    public static async listOption(params: any = {}): Promise<any> {
+        try {
+            params.statuses = 'active';
+            params.is_visible = true;
+            params.order_by = params.order_by ? params.order_by : 'asc';
+            params.sort_by = params.sort_by ? params.sort_by : 'view_count';
+            const operations = stringify(params);
+            const responses = await ReqeustAPI.get(`${apiUrl}/v1/product-options?${operations}`);
+            return responses.data;
+        } catch (e) {
+            throw e;
+        }
+    }
+
     public static async listComment(params: any = {}): Promise<any> {
         try {
             const operations = stringify(params);

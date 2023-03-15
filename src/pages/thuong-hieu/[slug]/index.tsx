@@ -14,7 +14,7 @@ import BrandSortBox from './BrandSortBox';
 import BrandFilterBox from './BrandFilterBox';
 import NotFoundPage from 'src/pages/not-found';
 import { loadBrandDetail } from 'src/stores/brand';
-import { ProductItem } from 'src/components/item-group';
+import { ProductItemVariation } from 'src/components/item-group';
 import { LazyLoadProduct } from 'src/components/loading-group';
 import { Breadcrumb, Pagination, BoxContent } from 'src/components/base-group';
 
@@ -73,11 +73,13 @@ const BrandDetailPage = () => {
         }
 
         // submit request
-        await ItemAPI.list(
+        await ItemAPI.listOption(
             params
         ).then((response: any) => {
             setCurrentPage(page || 1);
-            setListItem(response.data || []);
+            const filterData = response.data.filter((item: any) => item.type === 'item' && item.slug != null);
+            setListItem(filterData || []);
+            response.data = filterData;
             setTotalItem(response.count || 0);
         }).catch((error: any) => {
             throw Error(error);
@@ -195,19 +197,18 @@ const BrandDetailPage = () => {
                                             ))
                                         )
                                         : (
-                                            items.length
-                                                ? (
-                                                    items.map(item => (
-                                                        <ProductItem
+                                            <>
+                                                {
+                                                    items.map((item: any) => (
+                                                        <ProductItemVariation
                                                             key={item.id}
                                                             item={item}
                                                             column='col-1over5 col-6'
                                                         />
                                                     ))
-                                                )
-                                                : (
-                                                    !items.length && <div className='px-5'>Không tìm thấy kết quả phù hợp.</div>
-                                                )
+                                                }
+                                                {!items.length && <div className='px-5'>Không tìm thấy kết quả phù hợp.</div>}
+                                            </>
                                         )
                                 }
                             </div>
