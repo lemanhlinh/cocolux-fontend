@@ -71,6 +71,7 @@ export interface ProductOption {
     option_id: string;
     parent_id: string;
     barcode: string;
+    brand: string;
     images: [string];
     options: [number];
     indexes: [number];
