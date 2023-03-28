@@ -256,7 +256,7 @@ const CategoryDetailPage: NextPage<Props> = ({ category }) => {
                             </div>
                         </div>
                         <div className='card-list-item--footer'>
-                            <BoxContent title={category.name} content={category.content} maxHeight={300} className='d-sm-block' />
+                            {/* <BoxContent title={category.name} content={category.content} maxHeight={300} className='d-sm-block' /> */}
                             <Pagination totalRecord={totalItem} currentPage={currentPage} />
                         </div>
                     </div >

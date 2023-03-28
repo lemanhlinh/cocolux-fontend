@@ -11,9 +11,10 @@ import { parse } from 'querystring';
 interface Props {
     setFilters: any;
     filters: FilterModel[];
+    all: any;
 }
 
-const SearchFilterBox: React.FC<Props> = ({ filters, setFilters }) => {
+const SearchFilterBox: React.FC<Props> = ({ filters, setFilters, all }) => {
     const router = useRouter();
     const { categories } = useSelector((state: any) => state.layout);
 
@@ -21,6 +22,7 @@ const SearchFilterBox: React.FC<Props> = ({ filters, setFilters }) => {
      * Fetch data
      * @returns
      */
+
     async function fetchData() {
         const data = [...filters] as any[];
         const queryParams = parse(location.search.replace('?', ''));
@@ -91,6 +93,7 @@ const SearchFilterBox: React.FC<Props> = ({ filters, setFilters }) => {
                         order_by: 'asc',
                         sort_by: 'position',
                         attribute_code: el.code,
+                        attribute_id: el.id,
                         ...omit(queryParams, ['keyword', 'attributes'])
                     });
                     if (response.data) {
@@ -102,10 +105,12 @@ const SearchFilterBox: React.FC<Props> = ({ filters, setFilters }) => {
                             const checked = queryParams.attributes && typeof queryParams.attributes === 'string'
                                 ? includes(queryParams.attributes.split(','), `${el.id}:${value.id}`)
                                 : false;
+                            const id = `${el.id}:${value.id}`;
+                            const count = all.filter((item: { normalize_attribute?: string[] }) => item.normalize_attribute && item.normalize_attribute.includes(id)).length;
                             return {
-                                id: `${el.id}:${value.id}`,
+                                id: id,
                                 name: value.name,
-                                count: 1,
+                                count: count,
                                 checked: checked,
                                 options: []
                             };

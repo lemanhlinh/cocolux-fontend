@@ -39,6 +39,7 @@ export class ItemAPI {
         try {
             params.statuses = 'active';
             params.is_visible = true;
+            params.slugs = true;
             params.order_by = params.order_by ? params.order_by : 'asc';
             params.sort_by = params.sort_by ? params.sort_by : 'view_count';
             const operations = stringify(params);

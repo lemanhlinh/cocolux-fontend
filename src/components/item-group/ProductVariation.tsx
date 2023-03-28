@@ -17,7 +17,6 @@ interface Props {
 }
 
 export const ProductItemVariation: React.FC<Props> = ({ item, column }) => {
-    console.log(item);
     const [price, setPrice] = useState<number>(0);
     const [normalPrice, setNormalPrice] = useState<number>(0);
     const [itemDeal, setItemDeal] = useState<ProductDeal>({} as ProductDeal);
@@ -101,7 +100,7 @@ export const ProductItemVariation: React.FC<Props> = ({ item, column }) => {
                         }
                     </p>
                     <h2 className='title'>
-                        <Link href={{ pathname: '/item-detail', query: { slug: item.slug ? item.slug.toLocaleLowerCase() : parent.slug.toLocaleLowerCase() } }} as={`/${item.slug ? item.slug.toLocaleLowerCase() : parent.slug.toLocaleLowerCase()}`}>
+                        <Link href={{ pathname: '/item-detail', query: { slug: item.slug.toLocaleLowerCase() } }} as={`/${item.slug.toLocaleLowerCase()}`}>
                             <a>{item.name}</a>
                         </Link>
                     </h2>

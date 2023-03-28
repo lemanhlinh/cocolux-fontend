@@ -21,6 +21,8 @@ const SearchPage = () => {
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [filters, setFilters] = useState<FilterModel[]>([]);
     const [paramSelected, setParamSelected] = useState<any[]>([]);
+    const [all, setAll] = useState<any[]>([]);
+
 
     /**
      * Redirect
@@ -59,6 +61,7 @@ const SearchPage = () => {
             const page = parseInt(params.page, 10);
             params.limit = parseInt(params.limit, 10) || 30;
             params.skip = page ? Math.ceil(page - 1) * params.limit : 0;
+            params.types = 'item';
             if (params.attributes) params.attributes = params.attributes.toString();
 
             // submit request
@@ -66,10 +69,9 @@ const SearchPage = () => {
                 params
             ).then((response: any) => {
                 setCurrentPage(page || 1);
-                const filterData = response.data.filter((item: any) => item.type === 'item' && item.slug != null);
-                setListItem(filterData || []);
-                response.data = filterData;
+                setListItem(response.data || []);
                 setTotalItem(response.count || 0);
+                setAll(response.all || 0);
             }).catch((error: any) => {
                 throw Error(error);
             }).finally(() => {
@@ -131,7 +133,7 @@ const SearchPage = () => {
             <div className='coco-search-wrap--body'>
                 <div className='coco-search__left'>
                     {/* begin:: Filter Box */}
-                    <SearchFilterBox filters={filters} setFilters={setFilters} />
+                    <SearchFilterBox filters={filters} setFilters={setFilters} all={all} />
                     {/* end:: Filter Box */}
                 </div>
                 <div className='coco-search__right'>
