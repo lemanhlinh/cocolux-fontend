@@ -290,9 +290,31 @@
             border-radius: $card-round;
             .title-content {
                 font-weight: $roboto-bold;
-                font-size: $section-title-font-size-sm;
+                font-size: $section-title-font-size;
                 line-height: $line-height-xl;
                 padding-bottom: $padding-12;
+            }
+            .toc-blog{
+                display: block;
+                width: 100%;
+                background-color: #f3f3f3;
+                padding: 20px 20px 0 20px;
+                margin-bottom: 20px;
+                .title-toc-blog{
+                    font-weight: bold;
+                }
+                .my-toc-blog{
+                    padding: 0;
+                    ul{
+                        li{
+                            margin-bottom: 7px;
+                            a{
+                                font-size: $caption-font-size-md;
+                                color: #000;
+                            }
+                        }
+                    }
+                }
             }
         }
         .middle__topbox {
