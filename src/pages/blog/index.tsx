@@ -4,6 +4,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import Head from 'next/head';
 import { head, isNil } from 'lodash';
+import { NextPage } from 'next';
 
 // Modules
 import { ArticleAPI, ItemAPI } from 'src/helpers/services';
@@ -14,19 +15,27 @@ import { Pagination } from 'src/components/base-group';
 import { HotItem } from 'src/components/item-group';
 import { LazyLoadArticleDetail } from 'src/components/loading-group';
 
-const Article = () => {
+interface Props{
+    topArticles: [],
+    articles: [],
+    currentPage: number,
+    totalRecord: number,
+    recommendList: []
+}
+
+const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRecord, recommendList }) => {
     // Declaration states
     const router = useRouter();
     const queryParams = router.query as any;
     const [items, setListItems] = useState<[]>([]);
-    const [articles, setArticle] = useState<[]>([]);
+    // const [articles, setArticle] = useState<[]>([]);
     const [categories, setCategory] = useState<[]>([]);
-    const [topArticles, setTopArticle] = useState<[]>([]);
-    const [recommendList, setRecommend] = useState<[]>([]);
+    // const [topArticles, setTopArticle] = useState<[]>([]);
+    // const [recommendList, setRecommend] = useState<[]>([]);
     const [categoryId, setCategoryId] = useState<any>(null);
-    const [totalRecord, setTotalRecord] = useState<number>(0);
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const [isFirstLoad, setFirstLoad] = useState<boolean>(true);
+    // const [totalRecord, setTotalRecord] = useState<number>(0);
+    // const [currentPage, setCurrentPage] = useState<number>(0);
+    const [isFirstLoad, setFirstLoad] = useState<boolean>(false);
 
     const fetchListItems = async () => {
         await ItemAPI.list({
@@ -39,34 +48,34 @@ const Article = () => {
         });
     };
 
-    const fetchTopArticles = async (categoryId: number) => {
-        await ArticleAPI.list({
-            skip: 0,
-            limit: 4,
-            categories: categoryId,
-            is_favorite_visible: true
-        }).then((response: any) => {
-            if (response.code) return;
-            setTopArticle(response.data);
-        });
-    };
+    // const fetchTopArticles = async (categoryId: number) => {
+        // await ArticleAPI.list({
+        //     skip: 0,
+        //     limit: 4,
+        //     categories: categoryId,
+        //     is_favorite_visible: true
+        // }).then((response: any) => {
+        //     if (response.code) return;
+        //     setTopArticle(response.data);
+        // });
+    // };
 
-    const fetchArticleRecommend = async (categoryId: number) => {
-        await ArticleAPI.list({
-            skip: 0,
-            limit: 5,
-            view_count: true,
-            categories: categoryId
-        }).then((response: any) => {
-            if (response.code) return;
-            setRecommend(response.data);
-        });
-    };
+    // const fetchArticleRecommend = async (categoryId: number) => {
+    //     await ArticleAPI.list({
+    //         skip: 0,
+    //         limit: 5,
+    //         view_count: true,
+    //         categories: categoryId
+    //     }).then((response: any) => {
+    //         if (response.code) return;
+    //         setRecommend(response.data);
+    //     });
+    // };
 
     const onChangeCategory = async (categoryId: number) => {
-        setFirstLoad(true);
-        setTopArticle([]);
-        setRecommend([]);
+        setFirstLoad(false);
+        // setTopArticle([]);
+        // setRecommend([]);
         router.push({
             pathname: '/blog',
             query: { categories: categoryId ? categoryId : null, skip: 0, page: '1' }
@@ -76,29 +85,29 @@ const Article = () => {
     /**
      * Load list articles
      */
-    const fetchListArticles = async () => {
-        // Prepare params
-        const params = { ...queryParams };
-        const page = parseInt(params.page, 8);
-        params.limit = parseInt(params.limit, 10) || 8;
-        params.skip = page ? Math.ceil(page - 1) * params.limit : 0;
-        params.order_by = 'desc';
-        params.sort_by = 'created_at';
-        if (params.categories) setCategoryId(+params.categories);
+    // const fetchListArticles = async () => {
+    //     // Prepare params
+    //     const params = { ...queryParams };
+    //     const page = parseInt(params.page, 8);
+    //     params.limit = parseInt(params.limit, 10) || 8;
+    //     params.skip = page ? Math.ceil(page - 1) * params.limit : 0;
+    //     params.order_by = 'desc';
+    //     params.sort_by = 'created_at';
+    //     if (params.categories) setCategoryId(+params.categories);
 
-        // Submit request
-        await ArticleAPI.list(
-            params
-        ).then((res: any) => {
-            setCurrentPage(page || 1);
-            setArticle(res.data || []);
-            setTotalRecord(res.count || 0);
-        }).finally(() => {
-            setTimeout(() => {
-                setFirstLoad(false);
-            }, 300);
-        });
-    };
+    //     // Submit request
+    //     await ArticleAPI.list(
+    //         params
+    //     ).then((res: any) => {
+    //         setCurrentPage(page || 1);
+    //         setArticle(res.data || []);
+    //         setTotalRecord(res.count || 0);
+    //     }).finally(() => {
+    //         setTimeout(() => {
+    //             setFirstLoad(false);
+    //         }, 300);
+    //     });
+    // };
 
     /**
      *  Load list categories
@@ -128,20 +137,20 @@ const Article = () => {
         fetchListCategories();
     }, []);
 
-    useEffect(() => {
-        if (!isNil(categoryId)) {
-            fetchTopArticles(categoryId);
-            fetchArticleRecommend(categoryId);
-        }
-    }, [categoryId]);
+    // useEffect(() => {
+    //     if (!isNil(categoryId)) {
+    //         fetchTopArticles(categoryId);
+    //         fetchArticleRecommend(categoryId);
+    //     }
+    // }, [categoryId]);
 
     /**
      * Load default data
      * @private
      */
-    useEffect(() => {
-        fetchListArticles();
-    }, [queryParams]);
+    // useEffect(() => {
+    //     fetchListArticles();
+    // }, [queryParams]);
 
     return (
         <div className='ccs-blog row'>
@@ -461,5 +470,34 @@ const Article = () => {
         </div>
     );
 };
+
+Article.getInitialProps = async ( query ) => {
+
+    const params: any = query.query;
+    const response = await ArticleAPI.list({
+        skip: 0,
+        limit: 4,
+        categories: params.categories,
+        is_favorite_visible: true
+    });
+
+    const page = parseInt(params.page, 8);
+    params.limit = parseInt(params.limit, 10) || 8;
+    params.skip = page ? Math.ceil(page - 1) * params.limit : 0;
+    params.order_by = 'desc';
+    params.sort_by = 'created_at';
+
+    // Submit request
+    const res = await ArticleAPI.list(params);
+
+    const responseRe = await ArticleAPI.list({
+        skip: 0,
+        limit: 5,
+        view_count: true,
+        categories: params.categories
+    })
+
+    return ({ topArticles: response.data, articles: res.data, currentPage: page, totalRecord: res.count, recommendList: responseRe.data } || null);
+}
 
 export default Article;

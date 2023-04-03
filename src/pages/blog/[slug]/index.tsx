@@ -4,7 +4,8 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
 import { isNil } from 'lodash';
-
+import Toc from 'react-toc';
+import { NodeHtmlMarkdown } from 'node-html-markdown';
 // Modules
 import { ArticleAPI, ItemAPI } from 'src/helpers/services';
 import { Utilities } from 'src/helpers/utilities';
@@ -27,7 +28,17 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
     const [recommend, setRecommend] = useState<[]>([]);
     const [breadCums, setBreadCum] = useState<any>([]);
     const [categoryId, setCategoryId] = useState<any>(null);
-    const [isFirstLoad, setFirstLoad] = useState<boolean>(true);
+    const [isFirstLoad, setFirstLoad] = useState<boolean>(false);
+
+    const markDownTextContent = NodeHtmlMarkdown.translate(model.content);
+    const matchers = { "[?!#]": "-", "\\*": "" };
+    const tocProps: any = {
+        markdownText: markDownTextContent,
+        ordered: false,
+        className: "my-toc-blog",
+        lowestHeadingLevel: 3,
+        customMatchers: matchers
+      };
 
     const fetchListItems = async () => {
         await ItemAPI.list({
@@ -225,7 +236,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                                                         ))
                                                     )
                                                     : (
-                                                        <div className='empty-data'>Không có dữ liệu hiển thị.</div>
+                                                        <div className='empty-data'>Không có dữ liệu hiển thị. </div>
                                                     )
                                             }
                                         </div>
@@ -245,6 +256,10 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                                 <>
                                     <div className='middle__content'>
                                         <h1 className='title-content'>{model.title}</h1>
+                                        <div className='toc-blog'>
+                                            <p className='title-toc-blog'>Mục lục:</p>
+                                            <Toc {...tocProps} />
+                                        </div>
                                         <div
                                             className='ck-content'
                                             dangerouslySetInnerHTML={renderStringToHtml(model.content)}

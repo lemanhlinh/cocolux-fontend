@@ -54,7 +54,7 @@ export const Pagination: React.FC<Props> = ({ totalRecord, currentPage, perPage 
      */
     const onPageChange = (page: number) => {
         const oldParams = { ...router.query };
-        Router.push({ query: { ...oldParams, page } });
+        Router.replace({ query: { ...oldParams, page } });
     };
 
     return (

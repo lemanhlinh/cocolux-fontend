@@ -5,18 +5,23 @@ import { ProductItemVariation } from 'src/components/item-group';
 import { LazyLoadProduct } from 'src/components/loading-group';
 import { FilterModel, ProductModel } from 'src/helpers/models';
 import { ItemAPI } from 'src/helpers/services';
+import { NextPage } from 'next';
 
 // Components
 import SearchSortBox from './SearchSortBox';
 import SearchFilterBox from './SearchFilterBox';
 import { Breadcrumb, Pagination } from 'src/components/base-group';
 
-const SearchPage = () => {
+interface Props {
+    items: ProductModel[],
+    totalItem: number,
+    currentPage: number,
+    all: any[]
+}
+
+const SearchPage: NextPage<Props> = ({ items = [], totalItem = 0, currentPage = 1, all = [] }) => {
     const router = useRouter();
     const queryParams = router.query as any;
-    const [totalItem, setTotalItem] = useState<number>(0);
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const [items, setListItem] = useState<ProductModel[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [filters, setFilters] = useState<FilterModel[]>([]);
@@ -54,32 +59,9 @@ const SearchPage = () => {
      * @hooks
      */
     useEffect(() => {
-        async function fetchListItem() {
-            const params = { ...queryParams };
-            const page = parseInt(params.page, 10);
-            params.limit = parseInt(params.limit, 10) || 30;
-            params.skip = page ? Math.ceil(page - 1) * params.limit : 0;
-            if (params.attributes) params.attributes = params.attributes.toString();
-
-            // submit request
-            await ItemAPI.listOption(
-                params
-            ).then((response: any) => {
-                setCurrentPage(page || 1);
-                const filterData = response.data.filter((item: any) => item.type === 'item' && item.slug != null);
-                setListItem(filterData || []);
-                response.data = filterData;
-                setTotalItem(response.count || 0);
-            }).catch((error: any) => {
-                throw Error(error);
-            }).finally(() => {
-                setLoading(false);
-                setFirstLoad(false);
-            });
-        }
-
-        // Request
-        fetchListItem();
+        setFirstLoad(true);
+        setFirstLoad(false);
+        setLoading(false);
     }, [queryParams]);
 
     /**
@@ -131,7 +113,7 @@ const SearchPage = () => {
             <div className='coco-search-wrap--body'>
                 <div className='coco-search__left'>
                     {/* begin:: Filter Box */}
-                    <SearchFilterBox filters={filters} setFilters={setFilters} />
+                    <SearchFilterBox filters={filters} setFilters={setFilters} all={all} />
                     {/* end:: Filter Box */}
                 </div>
                 <div className='coco-search__right'>
@@ -204,6 +186,22 @@ const SearchPage = () => {
             </div>
         </div>
     );
+};
+
+/**
+ * Load Props
+ * @param {*} param
+ */
+SearchPage.getInitialProps = async ({ query }: any = {}) => {
+    const page = parseInt(query.page, 10) || 1;
+    query.limit = parseInt(query.limit, 10) || 30;
+    query.skip = page ? Math.ceil(page - 1) * query.limit : 0;
+    query.types = 'item';
+    if (query.attributes) query.attributes = query.attributes.toString();
+
+    const response = await ItemAPI.listOption(query);
+
+    return { items: response.data, totalItem: response.count, currentPage: page, all: response.all || null };
 };
 
 export default SearchPage;
