@@ -28,7 +28,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
     const [recommend, setRecommend] = useState<[]>([]);
     const [breadCums, setBreadCum] = useState<any>([]);
     const [categoryId, setCategoryId] = useState<any>(null);
-    const [isFirstLoad, setFirstLoad] = useState<boolean>(true);
+    const [isFirstLoad, setFirstLoad] = useState<boolean>(false);
 
     const markDownTextContent = NodeHtmlMarkdown.translate(model.content);
     const matchers = { "[?!#]": "-", "\\*": "" };

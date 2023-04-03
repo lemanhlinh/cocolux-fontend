@@ -2,34 +2,20 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-// Modules
-import { ItemAPI } from 'src/helpers/services';
-
 // Components
 import { HotItem } from 'src/components/item-group';
 import { Carousel } from 'src/components/base-group';
 import { LazyLoadProduct } from 'src/components/loading-group';
+interface Props {
+    items: [];
+}
 
-const HomeListHotItem = () => {
-    const [items, setListItems] = useState<[]>([]);
+const HomeListHotItem: React.FC<Props> = ({ items }) => {
+
     const [loading, setLoading] = useState<Boolean>(true);
-
-    const fetchListItems = async () => {
-        await ItemAPI.list({
-            skip: 0,
-            limit: 10,
-            is_top_hot: true
-        }).then((response: any) => {
-            if (response.code) return;
-            setListItems(response.data);
-            if (response.data.length) setLoading(false);
-        }).finally(() => {
-            setLoading(false);
-        });
-    };
-
     useEffect(() => {
-        fetchListItems();
+        setLoading(true);
+        setLoading(false);
     }, []);
 
     return (

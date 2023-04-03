@@ -36,7 +36,7 @@ export const ProductItemVariation: React.FC<Props> = ({ item, column }) => {
                 setItemDeal(currentDeal);
             }
         }
-    }, [parent]);
+    }, [item]);
 
     return (
         <div className={column}>

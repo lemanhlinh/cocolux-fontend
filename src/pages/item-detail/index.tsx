@@ -441,7 +441,7 @@ const ItemDetailPage = () => {
 
     /**
      * Follow Item
-     * @param {*} visible
+     * @param {*} viq   sible
      */
     const onFollowItem = () => {
         dispatch(addProductFollowForm(true));

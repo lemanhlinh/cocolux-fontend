@@ -238,7 +238,7 @@ const CategoryFilterBox: React.FC<Props> = ({ category, filters, setFilters }) =
                                                         filter.options.map((option: any) => (
                                                             option.count !== '0'
                                                                 ? (
-                                                                    <section>
+                                                                    <section key={option.id}>
                                                                         <span
                                                                             id={option.id}
                                                                             key={option.id}

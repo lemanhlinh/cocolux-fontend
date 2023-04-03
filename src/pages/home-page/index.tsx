@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import $ from 'jquery';
+import { NextPage } from 'next';
+
+// Modules
+import { ItemAPI } from 'src/helpers/services';
 
 // Components
 import HomeBanner from './HomeBanner';
@@ -11,7 +15,11 @@ import HomeListHotItem from './HomeListHotItem';
 import HomeListArticle from './HomeListArticle';
 import HomeListStore from './HomeListStore';
 
-const HomePage = () => {
+interface Props {
+    itemProducts: [];
+}
+
+const HomePage: NextPage<Props> = ({ itemProducts }) => {
     const [productListVisible, setProductListVisible] = useState<boolean>(false);
     const [articleListVisible, setArticleListVisible] = useState<boolean>(false);
     const [storeListVisible, setStoreListVisible] = useState<boolean>(false);
@@ -70,7 +78,7 @@ const HomePage = () => {
                 {/* end:: sale item */}
 
                 {/* begin:: top hot item */}
-                <HomeListHotItem />
+                {itemProducts && <HomeListHotItem items={itemProducts} />}
                 {/* end:: top hot item */}
 
                 {/* begin:: brand item */}
@@ -91,6 +99,20 @@ const HomePage = () => {
             </div>
         </>
     );
+};
+
+/**
+ * Load Props
+ * @param {*} param
+ */
+HomePage.getInitialProps = async () => {
+    const itemProducts = await ItemAPI.list({
+        skip: 0,
+        limit: 10,
+        is_top_hot: true
+    });
+
+    return { itemProducts: itemProducts.data || null };
 };
 
 export default HomePage;

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { isNil } from 'lodash';
+import { NextPage } from 'next';
 
 // Modules
 import { Utilities } from 'src/helpers/utilities';
@@ -18,24 +19,22 @@ import { ProductItemVariation } from 'src/components/item-group';
 import { LazyLoadProduct } from 'src/components/loading-group';
 import { Breadcrumb, Pagination, BoxContent } from 'src/components/base-group';
 
-const BrandDetailPage = () => {
+interface Props{
+    datatest: any,
+    items: ProductModel[],
+    totalItem: number,
+    currentPage: number,
+}
+
+const BrandDetailPage: NextPage<Props> = ({ datatest = null, items = [], currentPage = 1, totalItem = 0 }) => {
     const router = useRouter();
     const { data: brand } = useSelector((state: any) => state.brand);
 
     // Declaration State
     const queryParams = router.query as any;
-    const [totalItem, setTotalItem] = useState<number>(0);
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const [items, setListItem] = useState<ProductModel[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [filters, setFilters] = useState<FilterModel[]>([]);
     const [paramSelected, setParamSelected] = useState<any[]>([]);
-
-    useEffect(() => {
-        if (!isNil(brand)) {
-            fetchListItem();
-        }
-    }, [queryParams]);
 
     useEffect(() => {
         const selected = [] as any[];
@@ -50,43 +49,6 @@ const BrandDetailPage = () => {
 
         setParamSelected(selected);
     }, [filters]);
-
-    /**
-     * Fetch List Item
-     */
-    const fetchListItem = async () => {
-        setLoading(true);
-        const params = { ...queryParams } as any;
-        const page = parseInt(params.page, 10);
-        params.limit = parseInt(params.limit, 10) || 30;
-        params.skip = page ? Math.ceil(page - 1) * params.limit : 0;
-        switch (typeof params.attributes) {
-            case 'string':
-                params.attributes = [params.attributes, `${brand.attribute_id}:${brand.id}`].toString();
-                break;
-            case 'object':
-                params.attributes = [...params.attributes, `${brand.attribute_id}:${brand.id}`].toString();
-                break;
-            default:
-                params.attributes = `${brand.attribute_id}:${brand.id}`;
-                break;
-        }
-
-        // submit request
-        await ItemAPI.listOption(
-            params
-        ).then((response: any) => {
-            setCurrentPage(page || 1);
-            const filterData = response.data.filter((item: any) => item.type === 'item' && item.slug != null);
-            setListItem(filterData || []);
-            response.data = filterData;
-            setTotalItem(response.count || 0);
-        }).catch((error: any) => {
-            throw Error(error);
-        }).finally(() => {
-            setLoading(false);
-        });
-    };
 
     /**
      * Remove param filter
@@ -242,11 +204,30 @@ BrandDetailPage.getInitialProps = async ({ store, query }: any = {}) => {
             })
         );
 
-        return { query };
+        const page = parseInt(query.page, 10) || 1;
+        query.limit = parseInt(query.limit, 10) || 30;
+        query.skip = page ? Math.ceil(page - 1) * query.limit : 0;
+        switch (typeof query.attributes) {
+            case 'string':
+                query.attributes = [query.attributes, `${respone.data.attribute_id}:${brandId}`].toString();
+                break;
+            case 'object':
+                query.attributes = [...query.attributes, `${respone.data.attribute_id}:${brandId}`].toString();
+                break;
+            default:
+                query.attributes = `${respone.data.attribute_id}:${brandId}`;
+                break;
+        }
+        query.types = 'item';
+        const response = await ItemAPI.listOption(query);
+
+        return { datatest: respone.data, items: response.data, currentPage: page, totalItem: response.count || null };
     } catch (error: any) {
         return {
-            isFailure: true,
-            messages: error.messages
+            datatest: [],
+            items: [],
+            currentPage: 1,
+            totalItem: 0            
         };
     }
 };

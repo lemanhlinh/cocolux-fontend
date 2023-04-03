@@ -16,19 +16,18 @@ import { ProductItem } from 'src/components/item-group';
 import CategoryFilterBox from './CategoryFilterBox';
 import CategorySortBox from './CategorySortBox';
 import NotFoundPage from 'src/pages/not-found';
-
 interface Props {
     category: any;
+    items: ProductModel[];
+    totalItem: number;
 }
 
-const CategoryDetailPage: NextPage<Props> = ({ category }) => {
+const CategoryDetailPage: NextPage<Props> = ({ category, items, totalItem }) => {
     const router = useRouter();
     const queryParams = router.query as any;
     const { categories } = useSelector((state: any) => state.layout);
     const [breadCums, setBreadCum] = useState<any>([]);
-    const [totalItem, setTotalItem] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(0);
-    const [items, setListItem] = useState<ProductModel[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [filters, setFilters] = useState<FilterModel[]>([]);
     const [paramSelected, setParamSelected] = useState<any[]>([]);
@@ -57,8 +56,10 @@ const CategoryDetailPage: NextPage<Props> = ({ category }) => {
 
     useEffect(() => {
         if (!isNil(category)) {
-            fetchListItem();
-
+            setLoading(true);
+            const params = { ...queryParams } as any;
+            const page = parseInt(params.page, 10);
+            setCurrentPage(page || 1);
             // Load breadcums
             const routers = [];
             if (category.path && category.path?.length) {
@@ -100,38 +101,9 @@ const CategoryDetailPage: NextPage<Props> = ({ category }) => {
                 );
             }
             setBreadCum(routers);
+            setLoading(false);
         }
     }, [queryParams]);
-
-    const fetchListItem = async () => {
-        setLoading(true);
-        const params = { ...queryParams } as any;
-        const page = parseInt(params.page, 10);
-        params.limit = parseInt(params.limit, 10) || 30;
-        params.skip = page ? Math.ceil(page - 1) * params.limit : 0;
-        if (params.attributes) params.attributes = params.attributes.toString();
-        switch (typeof params.categories) {
-            case 'string':
-                params.categories = `${params.categories}`;
-                break;
-            default:
-                params.categories = `${category.id}`;
-                break;
-        }
-
-        // Submit request
-        await ItemAPI.list(
-            params
-        ).then((response: any) => {
-            setCurrentPage(page || 1);
-            setListItem(response.data || []);
-            setTotalItem(response.count || 0);
-        }).catch((error: any) => {
-            throw Error(error);
-        }).finally(() => {
-            setLoading(false);
-        });
-    };
 
     /**
      * Remove param filter
@@ -276,11 +248,25 @@ const CategoryDetailPage: NextPage<Props> = ({ category }) => {
  */
 CategoryDetailPage.getInitialProps = async ({ query }: any = {}) => {
     if (isNil(query.slug)) {
-        return { category: null };
+        return { category: null, items: null, totalItem: 0 };
     }
     const categoryId = query.slug.split('-i.')[1];
     const response = await ConfigAPI.detailCategory(categoryId);
-    return { category: response.data || null };
+    const page = parseInt(query.page, 10);
+    query.limit = parseInt(query.limit, 10) || 30;
+    query.skip = page ? Math.ceil(page - 1) * query.limit : 0;
+    if (query.attributes) query.attributes = query.attributes.toString();
+    switch (typeof query.categories) {
+        case 'string':
+            query.categories = `${query.categories}`;
+            break;
+        default:
+            query.categories = `${categoryId}`;
+            break;
+    }
+    const items = await ItemAPI.list(query);
+
+    return { category: response.data, items: items.data, totalItem: items.count || null };
 };
 
 export default CategoryDetailPage;

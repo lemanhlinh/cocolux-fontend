@@ -10,6 +10,13 @@ const handle = app.getRequestHandler();
         await app.prepare();
         const server = express();
 
+        // server.get('/danh-muc/trang-diem-makeup-i.1', (req, res) => {
+        //     res.redirect(301, '/danh-muc/trang-diem-makeup-i.83');
+        // });
+        // server.get('/danh-muc/kem-lot-makeup-primer-i.9', (req, res) => {
+        //     res.redirect(301, '/danh-muc/kem-lot-i.85');
+        // });
+
         server.get('', (req: any, res: any) => app.render(req, res, '/home-page', req.query));
         server.get('/search', (req: any, res: any) => app.render(req, res, '/search', req.query));
 

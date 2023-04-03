@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
+import { NextPage } from 'next';
+import { isNil } from 'lodash';
 
 // Modules
 import { BrandAPI } from 'src/helpers/services';
@@ -38,9 +40,12 @@ const LIST_ALPHABETS = [
     { key: 'Y', href: 'brand_Y' },
     { key: 'Z', href: 'brand_Z' }
 ];
+interface Props{
+    brands: []
+}
 
-const BrandPage = () => {
-    const [brands, setListBrand] = useState<[]>([]);
+const BrandPage: NextPage<Props> = ({ brands }) => {
+    // const [brands, setListBrand] = useState<[]>([]);
     const [keyActive, setKeyActive] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [classActive] = useState<string>('');
@@ -77,27 +82,11 @@ const BrandPage = () => {
     //     return () => window.removeEventListener('scroll', handleScroll);
     // });
 
-    /**
-     * Get List Brand
-     * @private
-     */
-    const fetchListBrand = async () => {
-        try {
-            await BrandAPI.list({
-                skip: 0,
-                limit: 500
-            }).then((respone: any) => {
-                setListBrand(respone.data || []);
-            }).finally(() => {
-                setLoading(false);
-            });
-        } catch (error) {
-            throw Error(error);
-        }
-    };
 
     useEffect(() => {
-        fetchListBrand();
+        setLoading(true);
+        if(brands)
+            setLoading(false);
     }, []);
 
     return (
@@ -182,6 +171,20 @@ const BrandPage = () => {
             </div>
         </div>
     );
+};
+
+
+/**
+ * Load Props
+ * @param {*} param
+ */
+BrandPage.getInitialProps = async () => {
+    const brands = await BrandAPI.list({
+        skip: 0,
+        limit: 500
+    });
+
+    return { brands: brands.data || [] };
 };
 
 export default BrandPage;
