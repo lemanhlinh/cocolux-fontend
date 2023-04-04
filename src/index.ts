@@ -10,12 +10,72 @@ const handle = app.getRequestHandler();
         await app.prepare();
         const server = express();
 
-        // server.get('/danh-muc/trang-diem-makeup-i.1', (req, res) => {
-        //     res.redirect(301, '/danh-muc/trang-diem-makeup-i.83');
-        // });
-        // server.get('/danh-muc/kem-lot-makeup-primer-i.9', (req, res) => {
-        //     res.redirect(301, '/danh-muc/kem-lot-i.85');
-        // });
+        server.get('/danh-muc/trang-diem-makeup-i.1', (_req, res) => {
+            res.redirect(301, '/danh-muc/trang-diem-makeup-i.83');
+        });
+        server.get('/danh-muc/kem-lot-makeup-primer-i.9', (_req, res) => {
+            res.redirect(301, '/danh-muc/kem-lot-i.85');
+        });
+        server.get('/danh-muc/kem-nen-bb-cc-i.10', (_req, res) => {
+            res.redirect(301, '/danh-muc/kem-nen-bb-cream-i.86');
+        });
+        server.get('/danh-muc/phan-nuoc-cushion-i.11', (_req, res) => {
+            res.redirect(301, '/danh-muc/phan-nuoc-cushion-i.91');
+        });
+        server.get('/danh-muc/che-khuyet-diem-concealer-i.12', (_req, res) => {
+            res.redirect(301, '/danh-muc/che-khuyet-diem-i.88');
+        });
+        server.get('/danh-muc/phan-phu-powder-i.13', (_req, res) => {
+            res.redirect(301, '/danh-muc/phan-phu-i.89');
+        });
+        server.get('/danh-muc/phan-mat-phan-ma-i.14', (_req, res) => {
+            res.redirect(301, '/danh-muc/phan-mat-nhu-mat-i.94');
+        });
+        server.get('/danh-muc/ke-mat-eyeliner-i.15', (_req, res) => {
+            res.redirect(301, '/danh-muc/ke-mat-i.95');
+        });
+        server.get('/danh-muc/ke-may-eyebrown-i.16', (_req, res) => {
+            res.redirect(301, '/danh-muc/ke-chan-may-i.96');
+        });
+        server.get('/danh-muc/mascara-i.17', (_req, res) => {
+            res.redirect(301, '/danh-muc/mascara-i.97');
+        });
+        server.get('/danh-muc/cac-sp-khac-others-i.18', (_req, res) => {
+            res.redirect(301, '/danh-muc/san-pham-khac-i.179');
+        });
+        server.get('/danh-muc/son-moi-lips-i.2', (_req, res) => {
+            res.redirect(301, '/danh-muc/son-moi-lips-i.98');
+        });
+        server.get('/danh-muc/son-duong-lipbalm-i.19', (_req, res) => {
+            res.redirect(301, '/danh-muc/son-duong-i.101');
+        });
+        server.get('/danh-muc/son-thoi-lipstick-i.20', (_req, res) => {
+            res.redirect(301, '/danh-muc/son-thoi-i.99');
+        });
+        server.get('/danh-muc/son-kem-liptint-i.21', (_req, res) => {
+            res.redirect(301, '/danh-muc/son-kem-i.100');
+        });
+        server.get('/danh-muc/cham-soc-moi-lipcare-i.22', (_req, res) => {
+            res.redirect(301, '/danh-muc/tay-da-chet-moi-i.104');
+        });
+        server.get('/danh-muc/cham-soc-da-skincare-i.3', (_req, res) => {
+            res.redirect(301, '/danh-muc/cham-soc-da-skincare-i.105');
+        });
+        server.get('/danh-muc/tay-trang-micellar-water-i.23', (_req, res) => {
+            res.redirect(301, '/danh-muc/tay-trang-i.107');
+        });
+        server.get('/danh-muc/sua-rua-mat-cleansing-foam-i.24', (_req, res) => {
+            res.redirect(301, '/danh-muc/sua-rua-mat-i.108');
+        });
+        server.get('/danh-muc/tay-da-chet-scrub-i.25', (_req, res) => {
+            res.redirect(301, '/danh-muc/tay-te-bao-chet-da-mat-i.109');
+        });
+        server.get('/danh-muc/nuoc-hoa-hong-toner-i.26', (_req, res) => {
+            res.redirect(301, '/danh-muc/nuoc-hoa-hong-toner-i.111');
+        });
+        server.get('/danh-muc/sua-duong-lotion-i.27', (_req, res) => {
+            res.redirect(301, '/danh-muc/lotion-sua-duong-i.113');
+        });
 
         server.get('', (req: any, res: any) => app.render(req, res, '/home-page', req.query));
         server.get('/search', (req: any, res: any) => app.render(req, res, '/search', req.query));
