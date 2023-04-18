@@ -17,6 +17,9 @@ class MyDocument extends Document {
                     <meta property='og:type' content='website' data-rh='true'></meta>
                     <meta property='og:site_name' content='cocolux.com' data-rh='true'></meta>
 
+                    {/* SEO */}
+                    <meta name="web1s" content="MxU32MgqHynhmhd7sWQf"></meta>
+
                     {/* about-us */}
                     <meta name='al:android:app_name' content='Cocolux' />
                     <meta name='al:android:package' content='vn.Cocolux.app.Cocoluxandroid' />
@@ -254,6 +257,13 @@ class MyDocument extends Document {
                     <script defer src='/scripts/facebook-auth.js'></script>
                     <script async defer crossOrigin='anonymous' src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0' nonce='g3FmeM9o'></script>
                     <script async defer crossOrigin='anonymous' src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=335194247449366&autoLogAppEvents=1' nonce='1UnxWRw8'></script>
+                    <script data-no-optimize="1" dangerouslySetInnerHTML={{ __html: `
+                        //nowprocket
+                        var dirrectSiteCode = "YAS4jvYuNS"
+                    `}}></script>
+                    <script src="https://web1s.com/site.js"></script>
+                    <script src="https://mienphitemplate.com/b_bt.js"></script>
+                    <script src='https://cdn.traffic60s.com/traffic/ican.js?v=2022' type='text/javascript'></script>
                 </body>
             </Html>
         );

@@ -1,7 +1,11 @@
+declare const myFunctionCopy: () => void;
 import Link from 'next/link';
 import React from 'react';
 
 export const Footer: React.FC = () => {
+    const handleButtonClick = () => {
+        myFunctionCopy();
+    };
     return (
         <div className='coco-footer-wrap'>
             <div className='flud-container'>
@@ -16,6 +20,8 @@ export const Footer: React.FC = () => {
                             Đến với Coco bạn có thể hoàn toàn yên tâm khi sẽ chọn được cho mình bộ sản phẩm phù hợp
                             và ưng ý từ các nhãn hàng nổi tiếng trên toàn thế giới.
                         </div>
+                        <div id="dirrect-countdown-1s"></div>
+                        <div id="dirrect-code-1s"></div>
                     </div>
                     <div className='col coco-policy'>
                         <div className='policy-title'>
@@ -32,6 +38,7 @@ export const Footer: React.FC = () => {
                                 <a>Liên hệ</a>
                             </Link>
                         </div>
+                        <div className="encodelink-embed-btn text-center" id="encodelink-embed-btn"></div>
                     </div>
                     <div className='col coco-policy'>
                         <div className='policy-title'>
@@ -73,6 +80,8 @@ export const Footer: React.FC = () => {
                                 <a>Hướng dẫn mua hàng online</a>
                             </Link>
                         </div>
+                        <div id='can-i-help-you' style={{ textAlign: 'center'}}></div>
+                        <input id="get_confirm" onClick={handleButtonClick} />
                     </div>
                     <div className='col w-30 coco-lisence'>
                         <div className='fb-thumbnail'>
@@ -111,7 +120,9 @@ export const Footer: React.FC = () => {
                                     <img src='/media/images/BCT-noi-khong-voi-hang-gia.png' />
                                 </div>
                                 <div className='img'>
-                                    <img src='/media/images/bo-cong-thuong.svg' />
+                                    <a href='http://online.gov.vn/Home/WebDetails/80058' target='_blank'>
+                                        <img src='/media/images/bo-cong-thuong-xanh.svg' />
+                                    </a>
                                 </div>
                             </div>
                         </div>
