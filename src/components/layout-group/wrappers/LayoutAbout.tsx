@@ -6,12 +6,28 @@ import { useRouter } from 'next/router';
 import { Breadcrumb } from 'src/components/base-group';
 
 interface Props {
+    content?: any;
     children: any;
 }
 
-export const LayoutAbout: React.FC<Props> = ({ children }) => {
+export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
     const router = useRouter();
     const [listMenu, setListMenu] = useState<any>({ QUESTION: [], INFORMATION: [] });
+    const [breadCums, setBreadCum] = useState<any>([]);
+
+    useEffect(() => {
+        // Load breadcum
+        const items = [] as any;
+    
+        if (content?.alias) {
+            items.push({
+                as: `/thong-tin/${content.alias}`,
+                href: '/about/[slug]',
+                name: content.title
+            });
+        }
+        setBreadCum(items as any);
+    }, []);
 
     /**
      * Load Data
@@ -125,9 +141,7 @@ export const LayoutAbout: React.FC<Props> = ({ children }) => {
     return (
         <div className='layout-aboutus-wrapper'>
             <Breadcrumb
-                routes={[
-                    { as: '/', href: '/', name: 'Giới thiệu Coco' }
-                ]}
+                routes={breadCums}
             />
             <div className='layout-aboutus-wrapper--top row no-margin'>
                 <div className='layout-aboutus--left col-md-4 col-lg-3'>

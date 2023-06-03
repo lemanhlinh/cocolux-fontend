@@ -281,25 +281,93 @@
         }
         .middle__content {
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             background: $card-bg;
             overflow: hidden;
-            padding: $padding-18 $padding-26;
             border-radius: $card-round;
+            &>div{
+                padding: $padding-18 $padding-26;
+            }
             .title-content {
                 font-weight: $roboto-bold;
                 font-size: $section-title-font-size;
                 line-height: $line-height-xl;
+                padding: $padding-18 $padding-26;
                 padding-bottom: $padding-12;
+                text-align: center;
+            }
+            .item-gallery {
+                width: 100%;
+                display: flex;
+                margin-bottom: 14px;
+                padding: 0;
+
+                .item-wrap {
+                    .card {
+                        border-color: #f3f3f3;
+
+                        &:hover {
+                            border-color: c-base-color(secondary, 1);
+                        }
+                    }
+                }
+            }
+            .block-expand-row {
+                width: 100%;
+                display: flex;
+                margin-bottom: 10px;
+                align-items: center;
+                justify-content: flex-end;
+                padding: 0;
+
+                .expand-toggle {
+                    display: flex;
+                    align-items: center;
+                    font-size: 14px;
+                    cursor: pointer;
+                    font-weight: 500;
+                    text-decoration: none;
+                    transition: all ease 0.3s;
+
+                    &:hover {
+                        opacity: 0.86;
+                    }
+
+                    .toggle-icon {
+                        display: inline-block;
+                        position: relative;
+                        width: 12px;
+                        height: 7px;
+                        margin-left: 6px;
+                        overflow: hidden;
+
+                        &.flip-icon {
+                            transform: rotate(180deg);
+                        }
+
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            left: 0;
+                            top: -8px;
+                            width: 12px;
+                            height: 12px;
+                            transform: rotate(45deg);
+                            -ms-transform: rotate(45deg);
+                            background: #000000;
+                        }
+                    }
+                }
+            }
+            .description{
+                margin-bottom: 15px;
+                line-height: 1.7999999999999998;
+                text-align: justify;
             }
             .toc-blog{
                 display: block;
-                width: 100%;
                 background-color: #f3f3f3;
-                padding: 20px 20px 0 20px;
-                margin-bottom: 20px;
+                padding: 20px;
+                margin: 0 20px;
                 .title-toc-blog{
                     font-weight: bold;
                 }
@@ -307,14 +375,23 @@
                     padding: 0;
                     ul{
                         li{
-                            margin-bottom: 7px;
+                            
                             a{
                                 font-size: $caption-font-size-md;
                                 color: #000;
+                                margin-bottom: 7px;
+                                display: block;
                             }
                         }
                     }
                 }
+            }
+            .ck-content{
+                span{
+                    font-family: 'Be Vietnam Pro', sans-serif !important;
+                }
+                line-height: 1.7999999999999998;
+                text-align: justify;
             }
         }
         .middle__topbox {

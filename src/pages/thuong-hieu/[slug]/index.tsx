@@ -24,9 +24,10 @@ interface Props{
     items: ProductModel[],
     totalItem: number,
     currentPage: number,
+    all: any[]
 }
 
-const BrandDetailPage: NextPage<Props> = ({ datatest = null, items = [], currentPage = 1, totalItem = 0 }) => {
+const BrandDetailPage: NextPage<Props> = ({ datatest = null, items = [], currentPage = 1, totalItem = 0, all = [] }) => {
     const router = useRouter();
     const { data: brand } = useSelector((state: any) => state.brand);
 
@@ -110,7 +111,7 @@ const BrandDetailPage: NextPage<Props> = ({ datatest = null, items = [], current
             <div className='coco-search-wrap--body'>
                 <div className='coco-search__left'>
                     {/* begin:: Filter Box */}
-                    <BrandFilterBox filters={filters} setFilters={setFilters} />
+                    <BrandFilterBox filters={filters} setFilters={setFilters} all={all} />
                     {/* end:: Filter Box */}
                 </div>
                 <div className='coco-search__right'>
@@ -176,7 +177,7 @@ const BrandDetailPage: NextPage<Props> = ({ datatest = null, items = [], current
                             </div>
                         </div>
                         <div className='card-list-item--footer'>
-                            <BoxContent title={brand.name} content={brand.content} maxHeight={300} className='d-sm-block' />
+                            {/* <BoxContent title={brand.name} content={brand.content} maxHeight={300} className='d-sm-block' /> */}
                             <Pagination totalRecord={totalItem} currentPage={currentPage} />
                         </div>
                     </div >
@@ -221,13 +222,14 @@ BrandDetailPage.getInitialProps = async ({ store, query }: any = {}) => {
         query.types = 'item';
         const response = await ItemAPI.listOption(query);
 
-        return { datatest: respone.data, items: response.data, currentPage: page, totalItem: response.count || null };
+        return { datatest: respone.data, items: response.data, currentPage: page, totalItem: response.count, all: response.all || null };
     } catch (error: any) {
         return {
             datatest: [],
             items: [],
             currentPage: 1,
-            totalItem: 0            
+            totalItem: 0,
+            all: []            
         };
     }
 };

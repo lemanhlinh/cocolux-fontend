@@ -49,10 +49,7 @@ const initialState = {
             value: 0,
             label: 'Chuyển khoản: Tên tài khoản: PHẠM MINH CHƯƠNG \n\
                     - Vietcombank : 0451000502912 chi nhánh Thành Công \n\
-                    - Techcombank: 19026463056013 chi nhánh Hà Nội \n\
-                    - BIDV: xxxxxxxxxxxxxx chi nhánh Tràng An \n\
-                    - Vietinbank: 100870533806 chi nhánh Chương Dương \n\
-                    - Agribank: 1200209552247 Sở Giao Dịch'
+                    - Vietinbank: 100870533806 chi nhánh Chương Dương'
         }
     ],
     deliveryCodes: {
