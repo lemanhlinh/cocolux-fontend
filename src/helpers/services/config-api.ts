@@ -1,4 +1,4 @@
-import { apiUrl } from 'config/vars';
+import { apiUrl,apiUrlNew } from 'config/vars';
 import { stringify } from 'querystring';
 import { ReqeustAPI } from './request-api';
 
@@ -61,5 +61,16 @@ export class ConfigAPI {
         const operations = stringify(params);
         const { data } = await ReqeustAPI.get(`${apiUrl}/v1/stores?${operations}`);
         return data;
+    }
+
+    public static async listConfig(params: any = {}): Promise<any> {
+        try {
+            params.is_visible = true;
+            const operations = stringify(params);
+            const responses = await ReqeustAPI.get(`${apiUrlNew}/api/config/config_coco`,operations);
+            return responses.data;
+        } catch (e) {
+            throw e;
+        }
     }
 }

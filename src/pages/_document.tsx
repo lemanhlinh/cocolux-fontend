@@ -17,6 +17,9 @@ class MyDocument extends Document {
                     <meta property='og:type' content='website' data-rh='true'></meta>
                     <meta property='og:site_name' content='cocolux.com' data-rh='true'></meta>
 
+                    {/* SEO */}
+
+
                     {/* about-us */}
                     <meta name='al:android:app_name' content='Cocolux' />
                     <meta name='al:android:package' content='vn.Cocolux.app.Cocoluxandroid' />

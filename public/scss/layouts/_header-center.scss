@@ -173,7 +173,7 @@
             margin: 0 20px;
 
             @media (min-width: 1024px) {
-                display: flex;
+                display: none;
             }
 
             .user-avatar {
@@ -223,6 +223,7 @@
             justify-content: space-between;
             font-size: 12px;
             line-height: 16px;
+            margin-right: 20px;
 
             > img {
                 margin-right: 10px;

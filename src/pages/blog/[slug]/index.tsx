@@ -4,8 +4,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
 import { isNil } from 'lodash';
-import Toc from 'react-toc';
-import { NodeHtmlMarkdown } from 'node-html-markdown';
+import tocbot from 'tocbot';
 // Modules
 import { ArticleAPI, ItemAPI } from 'src/helpers/services';
 import { Utilities } from 'src/helpers/utilities';
@@ -25,20 +24,21 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
     const router = useRouter();
     const [hotItems, setHotItems] = useState<[]>([]);
     const [categories, setCategory] = useState<[]>([]);
+    const [topItems, setTopItems] = useState<[]>([]);
     const [recommend, setRecommend] = useState<[]>([]);
     const [breadCums, setBreadCum] = useState<any>([]);
     const [categoryId, setCategoryId] = useState<any>(null);
     const [isFirstLoad, setFirstLoad] = useState<boolean>(false);
 
-    const markDownTextContent = NodeHtmlMarkdown.translate(model.content);
-    const matchers = { "[?!#]": "-", "\\*": "" };
-    const tocProps: any = {
-        markdownText: markDownTextContent,
-        ordered: false,
-        className: "my-toc-blog",
-        lowestHeadingLevel: 3,
-        customMatchers: matchers
-      };
+
+    useEffect(() => {
+        const headings = document.querySelectorAll('h2, h3, h4');
+        headings.forEach((heading) => {
+            if (!heading.hasAttribute('id')) {
+              heading.setAttribute('id', heading.textContent?.toLowerCase().replace(/\W+/g, '-') || '');
+            }
+          });
+      }, [model.content]);
 
     const fetchListItems = async () => {
         await ItemAPI.list({
@@ -83,6 +83,11 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
             setRecommend(res.data || []);
             return true;
         });
+    };
+
+    const fetchListTopItem = () => {
+        const products = model?.products || [];
+        setTopItems(products);
     };
 
     const onChangeCategory = async (categoryId: number) => {
@@ -134,6 +139,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
      */
     useEffect(() => {
         // Handle request
+        fetchListTopItem();
         fetchListCategories();
         fetchListItems();
     }, []);
@@ -143,6 +149,22 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
             <NotFoundPage />
         );
     }
+
+    useEffect(() => {
+        tocbot.init({
+            tocSelector: '#toc',
+            contentSelector: '.ck-content',
+            headingSelector: 'h2, h3, h4',
+            listItemClass: 'toc-list-item',
+            orderedList: false,
+            headingsOffset: 150, 
+            scrollSmoothOffset: -150
+        });
+    
+        return () => {
+          tocbot.destroy();
+        };
+      }, []);
 
     return (
         <div className='ccs-blog row'>
@@ -256,9 +278,57 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                                 <>
                                     <div className='middle__content'>
                                         <h1 className='title-content'>{model.title}</h1>
+                                        {
+                                            model?.description
+                                                ? (
+                                                    <div className='description'>
+                                                        {model?.description}
+                                                    </div>
+                                                ) : null
+                                        }
+                                        {
+                                            topItems.length
+                                                ? (
+                                                    <>
+                                                    <div>
+                                                        <div className='item-gallery'>
+                                                                {
+                                                                    topItems.map((item, index) => (
+                                                                        <HotItem
+                                                                            key={index}
+                                                                            hotItem={item}
+                                                                            className={'item-wrap'}
+                                                                        />
+                                                                    ))
+                                                                }
+                                                            </div>
+                                                            {
+                                                                model?.products?.length > 3
+                                                                    ? (
+                                                                        <div className='block-expand-row'
+                                                                            onClick={() => {
+                                                                                const products = model?.products || [];
+                                                                                if (topItems.length <= 3) {
+                                                                                    setTopItems(products);
+                                                                                } else {
+                                                                                    setTopItems(products.slice(0, 3));
+                                                                                }
+                                                                            }}
+                                                                        >
+                                                                            <a className='expand-toggle'>
+                                                                                {topItems.length <= 3 ? 'Xem thêm' : 'Thu gọn'}
+                                                                                <span className={`toggle-icon ${topItems.length <= 3 ? null : 'flip-icon'}`}></span>
+                                                                            </a>
+                                                                        </div>
+                                                                    ) : null
+                                                            }
+                                                    </div>
+                                                    </>
+                                                ) : null
+                                        }
                                         <div className='toc-blog'>
                                             <p className='title-toc-blog'>Mục lục:</p>
-                                            <Toc {...tocProps} />
+                                            <div id="toc" className='my-toc-blog'></div>
                                         </div>
                                         <div
                                             className='ck-content'

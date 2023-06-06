@@ -60,6 +60,7 @@ const ItemPreviewImage: React.FC<Props> = ({ targetDefault, onCallback, backgrou
 
     return (
         <Modal visible={onCallback}>
+            <div className='background-pupop' onClick={() => onCallback(false)}></div>
             <div className='modal-content modal-lg modal-preview-image'>
                 <div className='modal-header'>
                     <div className='close' onClick={() => onCallback(false)}>

@@ -4,11 +4,11 @@
     margin-top: 1.5rem;
     background: c-base-color(light, 1);
 
-    @media (max-width: 639px) {
-        &.d-sm-none {
-            display: none;
-        }
-    }
+    // @media (max-width: 639px) {
+    //     &.d-sm-none {
+    //         display: none;
+    //     }
+    // }
 
     @media (min-width: 640px) {
         &.d-sm-block {

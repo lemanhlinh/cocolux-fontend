@@ -12,7 +12,7 @@ import { ConfigAPI, ItemAPI } from 'src/helpers/services';
 // Components
 import { Breadcrumb, Pagination, BoxContent } from 'src/components/base-group';
 import { LazyLoadProduct } from 'src/components/loading-group';
-import { ProductItem } from 'src/components/item-group';
+import { ProductItemVariation } from 'src/components/item-group';
 import CategoryFilterBox from './CategoryFilterBox';
 import CategorySortBox from './CategorySortBox';
 import NotFoundPage from 'src/pages/not-found';
@@ -20,9 +20,10 @@ interface Props {
     category: any;
     items: ProductModel[];
     totalItem: number;
+    all: any[]
 }
 
-const CategoryDetailPage: NextPage<Props> = ({ category, items, totalItem }) => {
+const CategoryDetailPage: NextPage<Props> = ({ category, items, totalItem, all}) => {
     const router = useRouter();
     const queryParams = router.query as any;
     const { categories } = useSelector((state: any) => state.layout);
@@ -162,7 +163,7 @@ const CategoryDetailPage: NextPage<Props> = ({ category, items, totalItem }) => 
             <div className='coco-search-wrap--body'>
                 <div className='coco-search__left'>
                     {/* begin:: Filter Box */}
-                    <CategoryFilterBox category={category} filters={filters} setFilters={setFilters} />
+                    <CategoryFilterBox category={category} filters={filters} setFilters={setFilters} all={all} />
                     {/* end:: Filter Box */}
                 </div>
                 <div className='coco-search__right'>
@@ -213,8 +214,8 @@ const CategoryDetailPage: NextPage<Props> = ({ category, items, totalItem }) => 
                                         : (
                                             <>
                                                 {
-                                                    items.map(item => (
-                                                        <ProductItem
+                                                    items.map((item: any) => (
+                                                        <ProductItemVariation
                                                             key={item.id}
                                                             item={item}
                                                             column='col-1over5 col-6'
@@ -247,26 +248,39 @@ const CategoryDetailPage: NextPage<Props> = ({ category, items, totalItem }) => 
  * @param {*} param
  */
 CategoryDetailPage.getInitialProps = async ({ query }: any = {}) => {
-    if (isNil(query.slug)) {
-        return { category: null, items: null, totalItem: 0 };
-    }
-    const categoryId = query.slug.split('-i.')[1];
-    const response = await ConfigAPI.detailCategory(categoryId);
-    const page = parseInt(query.page, 10);
-    query.limit = parseInt(query.limit, 10) || 30;
-    query.skip = page ? Math.ceil(page - 1) * query.limit : 0;
-    if (query.attributes) query.attributes = query.attributes.toString();
-    switch (typeof query.categories) {
-        case 'string':
-            query.categories = `${query.categories}`;
-            break;
-        default:
-            query.categories = `${categoryId}`;
-            break;
-    }
-    const items = await ItemAPI.list(query);
+    try {
+        if (isNil(query.slug)) {
+            return { category: null, items: null, totalItem: 0, all: null };
+        }
+        const categoryId = query.slug.split('-i.')[1];
+        const response = await ConfigAPI.detailCategory(categoryId);
+        const page = parseInt(query.page, 10);
+        query.limit = parseInt(query.limit, 10) || 30;
+        query.skip = page ? Math.ceil(page - 1) * query.limit : 0;
+        if (query.attributes) query.attributes = query.attributes.toString();
+        switch (typeof query.categories) {
+            case 'string':
+                query.categories = `${query.categories}`;
+                break;
+            default:
+                query.categories = `${categoryId}`;
+                break;
+        }
+        
+        // const items = await ItemAPI.list(query);
+        query.types = 'item';
+        query.sort_by = 'view_count';
+        const items = await ItemAPI.listOption(query);
 
-    return { category: response.data, items: items.data, totalItem: items.count || null };
+        return { category: response.data, items: items.data, totalItem: items.count, all: items.all || null };
+    } catch (error: any) {
+        return {
+            category: [],
+            items: [],
+            totalItem: 0,
+            all: []            
+        };
+    }
 };
 
 export default CategoryDetailPage;

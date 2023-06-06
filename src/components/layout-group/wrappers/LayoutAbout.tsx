@@ -5,13 +5,44 @@ import { useRouter } from 'next/router';
 // Components
 import { Breadcrumb } from 'src/components/base-group';
 
+// Service
+import { ContentAPI } from 'src/helpers/services';
+
 interface Props {
+    content?: any;
     children: any;
 }
 
-export const LayoutAbout: React.FC<Props> = ({ children }) => {
+export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
     const router = useRouter();
     const [listMenu, setListMenu] = useState<any>({ QUESTION: [], INFORMATION: [] });
+    const [breadCums, setBreadCum] = useState<any>([]);
+    const [listContent, setListContent] = useState<[]>([]);
+
+    const handleFetchListContent = async () => {
+        // Submit request
+        await ContentAPI.listContent(
+
+        ).then((res: any) => {
+            setListContent(res.data || []);
+        });
+    };
+
+
+    useEffect(() => {
+        handleFetchListContent();
+        // Load breadcum
+        const items = [] as any;
+    
+        if (content?.alias) {
+            items.push({
+                as: `/thong-tin/${content.alias}`,
+                href: '/about/[slug]',
+                name: content.title
+            });
+        }
+        setBreadCum(items as any);
+    }, []);
 
     /**
      * Load Data
@@ -125,21 +156,19 @@ export const LayoutAbout: React.FC<Props> = ({ children }) => {
     return (
         <div className='layout-aboutus-wrapper'>
             <Breadcrumb
-                routes={[
-                    { as: '/', href: '/', name: 'Giới thiệu Coco' }
-                ]}
+                routes={breadCums}
             />
             <div className='layout-aboutus-wrapper--top row no-margin'>
                 <div className='layout-aboutus--left col-md-4 col-lg-3'>
                     <div className='title'>THÔNG TIN</div>
                     <div className='list-group-tabs'>
                         {
-                            listMenu.INFORMATION.map((menu: any = {}) => (
-                                <Link href={menu.href} as={menu.link} key={menu.link}>
+                            listContent.map((menu: any = {}) => (
+                                <Link href={menu.alias} as={menu.alias} key={menu.alias}>
                                     <a
-                                        className={`tab-item ${router.pathname === menu.href ? 'active' : 'inactive'}`}
+                                        className={`tab-item ${router.asPath === '/thong-tin/'+menu.alias ? 'active' : 'inactive'}`}
                                     >
-                                        {menu.name}
+                                        {menu.title}
                                     </a>
                                 </Link>
                             ))

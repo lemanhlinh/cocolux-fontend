@@ -12,3 +12,4 @@ export * from './voucher-api';
 export * from './campaign-api';
 export * from './attribute-api';
 export * from './promotion-api';
+export * from './content-api';

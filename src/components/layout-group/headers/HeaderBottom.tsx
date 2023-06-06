@@ -16,6 +16,7 @@ export const HeaderBottom: React.FC = () => {
     const pathName = router.pathname;
     const queryParams = router.query;
     const { categories } = useSelector((state: any) => state.layout);
+    const { config } = useSelector((state: any) => state.config);
 
     useEffect(() => {
         showHideSubMenu();
@@ -228,7 +229,10 @@ export const HeaderBottom: React.FC = () => {
                 </div>
                 <div className='header-bottom--right'>
                     <div className='header-bottom--right__dropdown'>
-                        <Link href='/blog'>
+                        <Link
+                            href={`/blog`}
+                            as={`/blog`}
+                        >
                             <a>Xu hướng làm đẹp</a>
                         </Link>
                     </div>

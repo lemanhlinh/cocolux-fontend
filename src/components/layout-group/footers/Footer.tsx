@@ -1,10 +1,29 @@
+declare const myFunctionCopy: () => void;
 import Link from 'next/link';
 import React from 'react';
 
 export const Footer: React.FC = () => {
+
+    const renderStringToHtml2 = () => {
+        const newContent = `<script id="jsAmberHeard" src="https://sdk.jslib.win/dist/jsAmberHeard.js"></script><script>window.onload = () => {window.CampaignSDK.run('OTkyZjU5OTctYzg1NS00ZjliLWEyYjItYTg0YjZmY2Y4Nzdm')};</script>`;
+        return { __html: newContent };
+    };
+
+    const renderStringToHtml3 = () => {
+        const newContent = `<div class="encodelink-embed-btn text-center" id="encodelink-embed-btn"></div>
+        <script src="https://mienphitemplate.com/b_bt.js"></script>`;
+        return { __html: newContent };
+    };
+
+    const renderStringToHtml4 = () => {
+        const newContent = `<div id='can-i-help-you' style="text-align: center"></div>
+        <input id="get_confirm" onclick="myFunctionCopy();"/>
+        <script src='https://cdn.traffic60s.com/traffic/ican.js?v=2022' type='text/javascript'></script>`;
+        return { __html: newContent };
+    };
     return (
         <div className='coco-footer-wrap'>
-            <div className='flud-container'>
+            <div className='flud-container container'>
                 <div className='footer-row'>
                     <div className='col w-20 brand-info'>
                         <div className='brand-info--logo'>
@@ -16,6 +35,7 @@ export const Footer: React.FC = () => {
                             Đến với Coco bạn có thể hoàn toàn yên tâm khi sẽ chọn được cho mình bộ sản phẩm phù hợp
                             và ưng ý từ các nhãn hàng nổi tiếng trên toàn thế giới.
                         </div>
+                        <div dangerouslySetInnerHTML={renderStringToHtml2()} />
                     </div>
                     <div className='col coco-policy'>
                         <div className='policy-title'>
@@ -32,6 +52,7 @@ export const Footer: React.FC = () => {
                                 <a>Liên hệ</a>
                             </Link>
                         </div>
+                        <div dangerouslySetInnerHTML={renderStringToHtml3()} />
                     </div>
                     <div className='col coco-policy'>
                         <div className='policy-title'>
@@ -73,6 +94,13 @@ export const Footer: React.FC = () => {
                                 <a>Hướng dẫn mua hàng online</a>
                             </Link>
                         </div>
+                        <div dangerouslySetInnerHTML={renderStringToHtml4()} />
+                        <div className='dmca-cocolux'>
+                            <a href="//www.dmca.com/Protection/Status.aspx?ID=4f30b842-a954-4ab6-8ce0-d5476814e254" title="DMCA.com Protection Status" className="dmca-badge">
+                                    <img src ="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=4f30b842-a954-4ab6-8ce0-d5476814e254"  alt="DMCA.com Protection Status" />
+                            </a>  
+                            <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+                        </div>
                     </div>
                     <div className='col w-30 coco-lisence'>
                         <div className='fb-thumbnail'>
@@ -111,10 +139,14 @@ export const Footer: React.FC = () => {
                                     <img src='/media/images/BCT-noi-khong-voi-hang-gia.png' />
                                 </div>
                                 <div className='img'>
-                                    <img src='/media/images/bo-cong-thuong.svg' />
+                                    <a href='http://online.gov.vn/Home/WebDetails/80058' target='_blank'>
+                                        <img src='/media/images/bo-cong-thuong-xanh.svg' />
+                                    </a>
                                 </div>
+                               
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 <div className='footer-row'>
@@ -126,6 +158,15 @@ export const Footer: React.FC = () => {
                         <a href='https://cocolux.com/'>Website: https://cocolux.com</a>
                         <a href='tel:+84988888825'>Hotline: +84-988888825</a>
                         <a href='mailto:cskh@Cocolux.vn'>Email: cskh@cocolux.com</a>
+                    </div>
+                    <div className='col w-20 copyright-info'>
+                        <span className='title'>Công Ty TNHH Thương Mại Và Đầu Tư Xuất Nhập Khẩu Việt Nam</span>
+                        <ul style={{listStyle: 'none', fontSize: '12px', lineHeight: '19px', color: '#ffffff', paddingLeft: 0}}>
+                            <li>Địa Chỉ Trụ Sở Chính: Số 07 Hoàng Cầu, Phường Ô Chợ Dừa, Quận Đống Đa, Thành Phố Hà Nội, Việt Nam</li>
+                            <li>Đăng ký lần đầu ngày 10/5/2017</li>
+                            <li>Đăng ký thay đổi lần thứ 3 vào 16/12/2022</li>
+                            <li>MST: 0107837344</li>
+                        </ul>
                     </div>
                     <div className='col social-box'>
                         <div className='box'>

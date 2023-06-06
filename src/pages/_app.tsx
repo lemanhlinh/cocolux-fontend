@@ -10,6 +10,7 @@ import 'public/scss/style.core.scss';
 import { wrapper } from 'src/stores';
 import { useConfig } from 'src/helpers/hooks';
 import { addCategories, checkUserLoggedIn } from 'src/stores/layout';
+import { addConfig } from 'src/stores/config';
 import { AccountAPI, ConfigAPI } from 'src/helpers/services';
 
 // Components
@@ -59,8 +60,9 @@ RootApp.getInitialProps = async (appContext: any) => {
     const { ctx } = appContext;
     const { store } = ctx;
 
-    const { layout } = store.getState();
+    const { layout, config: configData } = store.getState();
     const { categories } = layout;
+    const { config } = configData;
 
     if (!categories.length) {
         await ConfigAPI.listCategory({
@@ -105,6 +107,20 @@ RootApp.getInitialProps = async (appContext: any) => {
             );
         });
     }
+
+    if (!config.length) {
+        await ConfigAPI.listConfig({
+        }).then((response) => {
+            let config = !response.error
+            ? response.data
+            : {};
+            
+            store.dispatch(
+                addConfig(config || {})
+            );
+        });
+    }
+
     if (ctx && ctx.res && ctx.res?.statusCode === 404) {
         appContext.ctx.res.writeHead(302, { Location: '/not-found' });
         appContext.ctx.res.end();

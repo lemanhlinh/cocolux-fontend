@@ -5,7 +5,7 @@ function Modal({ children, callback, visible }: any) {
         <>
             <div
                 id='coco-modal'
-                className='modal'
+                className='modal fade'
                 onClick={callback}
                 style={{ display: visible ? 'block' : 'none' }}
             >

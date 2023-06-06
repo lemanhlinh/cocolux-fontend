@@ -1,6 +1,7 @@
 export const env = process.env.NODE_ENV;
 export const port = process.env.PORT || 3000;
 export const apiUrl = process.env.NODE_ENV === 'production' ? process.env.API_URL : process.env.API_URL_TEST;
+export const apiUrlNew = process.env.NODE_ENV === 'production' ? process.env.API_URL_FS : process.env.API_URL_TEST_FS;
 export const imageUrl = process.env.NODE_ENV === 'production' ? process.env.IMAGE_URL : process.env.IMAGE_URL_TEST;
 
 // thrid party service

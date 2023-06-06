@@ -30,6 +30,8 @@ const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRec
     // Declaration states
     const router = useRouter();
     const queryParams = router.query as any;
+
+
     // const [items, setListItems] = useState<[]>([]);
     // const [articles, setArticle] = useState<[]>([]);
     // const [categories, setCategory] = useState<[]>([]);
@@ -478,11 +480,7 @@ const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRec
 Article.getInitialProps = async ( query ) => {
 
     const params: any = query.query;
-    const response = await ArticleAPI.list({
-        skip: 0,
-        limit: 4,
-        is_favorite_visible: true
-    });
+   
 
     const page = parseInt(params.page, 8);
     params.limit = parseInt(params.limit, 10) || 8;
@@ -490,18 +488,30 @@ Article.getInitialProps = async ( query ) => {
     params.order_by = 'desc';
     params.sort_by = 'created_at';
 
+    const categoryId = params.slug.split('-i.')[1];
+
+    params.categories = categoryId;
+
     // Submit request
     const res = await ArticleAPI.list(params);
+
+    const response = await ArticleAPI.list({
+        skip: 0,
+        limit: 4,
+        categories: categoryId,
+        is_favorite_visible: true
+    });
 
     const responseRe = await ArticleAPI.list({
         skip: 0,
         limit: 5,
-        view_count: true
+        view_count: true,
+        categories: categoryId
     })
 
     const categories = await ArticleAPI.listCategories({
         skip: 0,
-        limit: 50,
+        limit: 50
     })
 
     const firstCategory = head(categories.data) as any;

@@ -12,9 +12,10 @@ interface Props {
     category: any;
     setFilters: any;
     filters: FilterModel[];
+    all: any;
 }
 
-const CategoryFilterBox: React.FC<Props> = ({ category, filters, setFilters }) => {
+const CategoryFilterBox: React.FC<Props> = ({ category, filters, setFilters, all }) => {
     const router = useRouter();
     const { categories } = useSelector((state: any) => state.layout);
 
@@ -123,10 +124,12 @@ const CategoryFilterBox: React.FC<Props> = ({ category, filters, setFilters }) =
                             const checked = queryParams.attributes && typeof queryParams.attributes === 'string'
                                 ? includes(queryParams.attributes.split(','), `${el.id}:${value.id}`)
                                 : false;
+                                const id = `${el.id}:${value.id}`;
+                                const count = all.filter((item: { normalize_attribute?: string[] }) => item.normalize_attribute && item.normalize_attribute.includes(id)).length;
                             return {
                                 id: `${el.id}:${value.id}`,
                                 name: value.name,
-                                count: value.count,
+                                count: count,
                                 checked: checked,
                                 options: []
                             };

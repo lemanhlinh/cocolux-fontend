@@ -11,9 +11,10 @@ import { includes, omit } from 'lodash';
 interface Props {
     setFilters: any;
     filters: FilterModel[];
+    all: any;
 }
 
-const BrandFilterBox: React.FC<Props> = ({ filters, setFilters }) => {
+const BrandFilterBox: React.FC<Props> = ({ filters, setFilters, all }) => {
     const router = useRouter();
     const { categories } = useSelector((state: any) => state.layout);
 
@@ -102,10 +103,12 @@ const BrandFilterBox: React.FC<Props> = ({ filters, setFilters }) => {
                             const checked = queryParams.attributes && typeof queryParams.attributes === 'string'
                                 ? includes(queryParams.attributes.split(','), `${el.id}:${value.id}`)
                                 : false;
+                            const id = `${el.id}:${value.id}`;
+                            const count = all.filter((item: { normalize_attribute?: string[] }) => item.normalize_attribute && item.normalize_attribute.includes(id)).length;
                             return {
                                 id: `${el.id}:${value.id}`,
                                 name: value.name,
-                                count: value.count,
+                                count: count,
                                 checked: checked,
                                 options: []
                             };
