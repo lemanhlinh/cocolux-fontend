@@ -36,11 +36,11 @@ const ContentDetail: NextPage<Props> = ({ model }) => {
                 <title>{model.seo_title}</title>
                 <meta property='og:image' content={model.image} />
                 <meta property='og:title' content={model.seo_title} />
-                <meta name='al:ios:url' content={`Cocoluxvn://thong-tin/${model.id}`} />
-                <meta name='al:iphone:url' content={`Cocoluxvn://thong-tin/${model.id}`} />
-                <meta name='al:ipad:url' content={`Cocoluxvn://thong-tin/${model.id}`} />
-                <meta name='al:android:url' content={`Cocoluxvn://thong-tin/${model.id}`} />
-                <meta property='og:url' content={`https://Cocolux.com/${model.meta_url}`} />
+                <meta name='al:ios:url' content={`https://thong-tin/${model.alias}`} />
+                <meta name='al:iphone:url' content={`https://thong-tin/${model.alias}`} />
+                <meta name='al:ipad:url' content={`https://thong-tin/${model.alias}`} />
+                <meta name='al:android:url' content={`https://thong-tin/${model.alias}`} />
+                <meta property='og:url' content={`https://cocolux.com/${model.alias}`} />
                 <meta property='og:description' content={model.seo_description} />
                 <meta name='description' content={model.seo_description} />
             </Head>

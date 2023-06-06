@@ -10,4 +10,13 @@ export class ContentAPI {
             throw e;
         }
     }
+
+    public static async listContent(): Promise<any> {
+        try {
+            const responses = await ReqeustAPI.get(`${apiUrlNew}/api/contents/content_coco`);
+            return responses.data;
+        } catch (e) {
+            throw e;
+        }
+    }
 }
