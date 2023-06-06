@@ -51,36 +51,36 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
     useEffect(() => {
         const newListMenu = {
             INFORMATION: [
-                {
-                    name: 'Giới thiệu Cocolux',
-                    link: '/thong-tin/gioi-thieu',
-                    href: '/about/gioi-thieu'
-                },
+                // {
+                //     name: 'Giới thiệu Cocolux',
+                //     link: '/thong-tin/gioi-thieu',
+                //     href: '/about/gioi-thieu'
+                // },
                 {
                     name: 'Danh sách cửa hàng',
                     link: '/thong-tin/cua-hang',
                     href: '/about/cua-hang'
                 },
-                {
-                    name: 'Khách hàng thân thiết',
-                    link: '/thong-tin/khach-hang',
-                    href: '/about/khach-hang'
-                },
-                {
-                    name: 'Chính sách đổi Coco coin',
-                    link: '/thong-tin/coco-coin',
-                    href: '/about/coco-coin'
-                },
-                {
-                    name: 'Cấp độ member',
-                    link: '/thong-tin/rank-khach-hang',
-                    href: '/about/rank-khach-hang'
-                },
-                {
-                    name: 'Hướng dẫn đặt hàng',
-                    link: '/thong-tin/dat-hang',
-                    href: '/about/dat-hang'
-                },
+                // {
+                //     name: 'Khách hàng thân thiết',
+                //     link: '/thong-tin/khach-hang',
+                //     href: '/about/khach-hang'
+                // },
+                // {
+                //     name: 'Chính sách đổi Coco coin',
+                //     link: '/thong-tin/coco-coin',
+                //     href: '/about/coco-coin'
+                // },
+                // {
+                //     name: 'Cấp độ member',
+                //     link: '/thong-tin/rank-khach-hang',
+                //     href: '/about/rank-khach-hang'
+                // },
+                // {
+                //     name: 'Hướng dẫn đặt hàng',
+                //     link: '/thong-tin/dat-hang',
+                //     href: '/about/dat-hang'
+                // },
                 // {
                 //     name: 'Hướng dẫn đặt hàng 2H',
                 //     link: '/thong-tin/dat-hang-2h',
@@ -91,36 +91,36 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
                 //     link: '/thong-tin/thanh-toan',
                 //     href: '/about/thanh-toan'
                 // },
-                {
-                    name: 'Thẻ quà tặng Mobile gift',
-                    link: '/thong-tin/qua-tang',
-                    href: '/about/qua-tang'
-                },
+                // {
+                //     name: 'Thẻ quà tặng Mobile gift',
+                //     link: '/thong-tin/qua-tang',
+                //     href: '/about/qua-tang'
+                // },
                 // {
                 //     name: 'Phiếu mua hàng Cocolux',
                 //     link: '/thong-tin/phieu-mua-hang',
                 //     href: '/about/phieu-mua-hang'
                 // },
-                {
-                    name: 'Quy trình giao hàng',
-                    link: '/thong-tin/giao-hang',
-                    href: '/about/giao-hang'
-                },
-                {
-                    name: 'Điều khoản sử dụng',
-                    link: '/thong-tin/dieu-khoan',
-                    href: '/about/dieu-khoan'
-                },
-                {
-                    name: 'Chính sách đổi trả',
-                    link: '/thong-tin/doi-tra',
-                    href: '/about/doi-tra'
-                },
-                {
-                    name: 'Chính sách bảo mật',
-                    link: '/thong-tin/bao-mat',
-                    href: '/about/bao-mat'
-                }
+                // {
+                //     name: 'Quy trình giao hàng',
+                //     link: '/thong-tin/giao-hang',
+                //     href: '/about/giao-hang'
+                // },
+                // {
+                //     name: 'Điều khoản sử dụng',
+                //     link: '/thong-tin/dieu-khoan',
+                //     href: '/about/dieu-khoan'
+                // },
+                // {
+                //     name: 'Chính sách đổi trả',
+                //     link: '/thong-tin/doi-tra',
+                //     href: '/about/doi-tra'
+                // },
+                // {
+                //     name: 'Chính sách bảo mật',
+                //     link: '/thong-tin/bao-mat',
+                //     href: '/about/bao-mat'
+                // }
             ],
             QUESTION: [
                 {
@@ -163,8 +163,19 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
                     <div className='title'>THÔNG TIN</div>
                     <div className='list-group-tabs'>
                         {
+                            listMenu.INFORMATION.map((menu: any = {}) => (
+                                <Link href={menu.href} as={menu.link} key={menu.link}>
+                                    <a
+                                        className={`tab-item ${router.pathname === menu.href ? 'active' : 'inactive'}`}
+                                    >
+                                        {menu.name}
+                                    </a>
+                                </Link>
+                            ))
+                        }
+                        {
                             listContent.map((menu: any = {}) => (
-                                <Link href={menu.alias} as={menu.alias} key={menu.alias}>
+                                <Link href={'/thong-tin/'+menu.alias} as={'/thong-tin/'+menu.alias} key={'/thong-tin/'+menu.alias}>
                                     <a
                                         className={`tab-item ${router.asPath === '/thong-tin/'+menu.alias ? 'active' : 'inactive'}`}
                                     >
