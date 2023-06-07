@@ -13,3 +13,4 @@ export * from './campaign-api';
 export * from './attribute-api';
 export * from './promotion-api';
 export * from './content-api';
+export * from './question-api';

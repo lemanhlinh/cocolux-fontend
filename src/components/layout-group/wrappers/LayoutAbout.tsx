@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { Breadcrumb } from 'src/components/base-group';
 
 // Service
-import { ContentAPI } from 'src/helpers/services';
+import { ContentAPI,QuestionAPI } from 'src/helpers/services';
 
 interface Props {
     content?: any;
@@ -18,6 +18,7 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
     const [listMenu, setListMenu] = useState<any>({ QUESTION: [], INFORMATION: [] });
     const [breadCums, setBreadCum] = useState<any>([]);
     const [listContent, setListContent] = useState<[]>([]);
+    const [listQuestion, setListQuestion] = useState<[]>([]);
 
     const handleFetchListContent = async () => {
         // Submit request
@@ -28,9 +29,19 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
         });
     };
 
+    const handleFetchListQuestion = async () => {
+        // Submit request
+        await QuestionAPI.listContent(
+
+        ).then((res: any) => {
+            setListQuestion(res.data || []);
+        });
+    };
+
 
     useEffect(() => {
         handleFetchListContent();
+        handleFetchListQuestion();
         // Load breadcum
         const items = [] as any;
     
@@ -188,12 +199,12 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
                     <div className='title mt-40'>CÂU HỎI THƯỜNG GẶP</div>
                     <div className='list-group-tabs'>
                         {
-                            listMenu.QUESTION.map((menu: any = {}) => (
-                                <Link href={menu.href} as={menu.link} key={menu.link}>
+                            listQuestion.map((menu: any = {}) => (
+                                <Link href={'/hoi-dap/'+menu.alias} as={'/hoi-dap/'+menu.alias} key={'/hoi-dap/'+menu.alias}>
                                     <a
-                                        className={`tab-item ${router.pathname === menu.href ? 'active' : 'inactive'}`}
+                                        className={`tab-item ${router.asPath === '/hoi-dap/'+menu.alias ? 'active' : 'inactive'}`}
                                     >
-                                        {menu.name}
+                                        {menu.title}
                                     </a>
                                 </Link>
                             ))

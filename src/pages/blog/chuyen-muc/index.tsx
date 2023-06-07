@@ -480,7 +480,6 @@ const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRec
 Article.getInitialProps = async ( query ) => {
 
     const params: any = query.query;
-   
 
     const page = parseInt(params.page, 8);
     params.limit = parseInt(params.limit, 10) || 8;

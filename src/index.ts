@@ -256,11 +256,12 @@ const handle = app.getRequestHandler();
         // server.get('/thong-tin/giao-hang', (req: any, res: any) => app.render(req, res, '/about/giao-hang', req.query));
         // server.get('/thong-tin/dieu-khoan', (req: any, res: any) => app.render(req, res, '/about/dieu-khoan', req.query));
         // server.get('/thong-tin/doi-tra', (req: any, res: any) => app.render(req, res, '/about/doi-tra', req.query));
-        server.get('/hoi-dap/tai-khoan', (req: any, res: any) => app.render(req, res, '/about/tai-khoan', req.query));
-        server.get('/hoi-dap/don-hang-coco', (req: any, res: any) => app.render(req, res, '/about/don-hang-coco', req.query));
-        server.get('/hoi-dap/phi-van-chuyen', (req: any, res: any) => app.render(req, res, '/about/phi-van-chuyen', req.query));
+        // server.get('/hoi-dap/tai-khoan', (req: any, res: any) => app.render(req, res, '/about/tai-khoan', req.query));
+        // server.get('/hoi-dap/don-hang-coco', (req: any, res: any) => app.render(req, res, '/about/don-hang-coco', req.query));
+        // server.get('/hoi-dap/phi-van-chuyen', (req: any, res: any) => app.render(req, res, '/about/phi-van-chuyen', req.query));
         // server.get('/hoi-dap/van-chuyen-2h', (req: any, res: any) => app.render(req, res, '/about/van-chuyen-2h', req.query));
         server.get('/thong-tin/:slug', (req: any, res: any) => app.render(req, res, '/about/[slug]', { slug: req.params.slug }));
+        server.get('/hoi-dap/:slug', (req: any, res: any) => app.render(req, res, '/question/[slug]', { slug: req.params.slug }));
 
         server.get('/my-account', (req: any, res: any) => app.render(req, res, '/my-account', req.query));
         server.get('/my-account/my-order', (req: any, res: any) => app.render(req, res, '/my-account/my-order', req.query));
@@ -275,8 +276,8 @@ const handle = app.getRequestHandler();
 
         //server.get('/xu-huong-lam-dep', (req: any, res: any) => app.render(req, res, '/blog', { categories: '13', page: '1' }));
         server.get('/blog', (req: any, res: any) => app.render(req, res, '/blog', req.query));
-        server.get('/chuyen-muc/:slug', (req: any, res: any) => app.render(req, res, '/blog/chuyen-muc', { slug: req.params.slug }));
-        server.get('/blog/:slug', (req: any, res: any) => app.render(req, res, '/blog/[slug]', { slug: req.params.slug }));
+        server.get('/chuyen-muc/:slug', (req: any, res: any) => app.render(req, res, '/blog/chuyen-muc', { ...req.query, slug: req.params.slug }));
+        server.get('/blog/:slug', (req: any, res: any) => app.render(req, res, '/blog/[slug]', { ...req.query, slug: req.params.slug }));
 
         server.get('/thuong-hieu', (req: any, res: any) => app.render(req, res, '/thuong-hieu', req.query));
         server.get('/thuong-hieu/:slug', (req: any, res: any) => app.render(req, res, '/thuong-hieu/[slug]', { slug: req.params.slug }));

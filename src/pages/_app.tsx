@@ -114,9 +114,14 @@ RootApp.getInitialProps = async (appContext: any) => {
             let config = !response.error
             ? response.data
             : {};
+
+            const array_config: { [key: string]: string } = {};
+            for (const item of config) {
+                array_config[item.name] = item.value;
+            }
             
             store.dispatch(
-                addConfig(config || {})
+                addConfig(array_config || {})
             );
         });
     }

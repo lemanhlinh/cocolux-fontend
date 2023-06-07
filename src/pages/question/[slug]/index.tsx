@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { isNil } from 'lodash';
 // Modules
-import { ContentAPI,QuestionAPI } from 'src/helpers/services';
+import { QuestionAPI } from 'src/helpers/services';
 
 // Components
 import NotFoundPage from 'src/pages/not-found';
@@ -36,11 +36,11 @@ const ContentDetail: NextPage<Props> = ({ model }) => {
                 <title>{model.seo_title}</title>
                 <meta property='og:image' content={model.image} />
                 <meta property='og:title' content={model.seo_title} />
-                <meta name='al:ios:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
-                <meta name='al:iphone:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
-                <meta name='al:ipad:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
-                <meta name='al:android:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
-                <meta property='og:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
+                <meta name='al:ios:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
+                <meta name='al:iphone:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
+                <meta name='al:ipad:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
+                <meta name='al:android:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
+                <meta property='og:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
                 <meta property='og:description' content={model.seo_description} />
                 <meta name='description' content={model.seo_description} />
             </Head>
@@ -64,7 +64,7 @@ ContentDetail.getInitialProps = async ({ query }: any = {}) => {
         return { model: null };
     }
     const alias = query.slug;
-    const response = await ContentAPI.detail(alias);
+    const response = await QuestionAPI.detail(alias);
     return { model: response.data || null };
 };
 
