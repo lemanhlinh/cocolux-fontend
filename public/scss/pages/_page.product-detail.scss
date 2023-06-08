@@ -682,8 +682,24 @@
                                 text-decoration: underline;
                             }
                         }
+                       
                     }
-
+                    .none_stock{
+                        opacity: 0.5; 
+                        position: relative;
+                        &::before{
+                            content: 'Hết';
+                            position: absolute;
+                            color: #fff;
+                            z-index: 2;
+                            background-color: #ff0000;
+                            padding: 2px 4px;
+                            border-radius: 5px;
+                            bottom: 0;
+                            right: 0;
+                            font-size: 13px;
+                        }
+                    }
                     .item-sale-box {
                         width: 100%;
                         display: flex;

@@ -971,7 +971,7 @@ const ItemDetailPage = () => {
                                             {/* begin:: cart action */}
 
                                             {
-                                                option.total_final_quantity > 5
+                                                option.total_final_quantity > 0
                                                     ? (
                                                         <div className='product-buttons-group'>
                                                             <button
