@@ -11,7 +11,7 @@ export class QuestionAPI {
         }
     }
 
-    public static async listContent(): Promise<any> {
+    public static async listQuestion(): Promise<any> {
         try {
             const responses = await ReqeustAPI.get(`${apiUrlNew}/api/question/question_coco`);
             return responses.data;

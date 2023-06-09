@@ -11,9 +11,11 @@ import { LayoutAbout } from 'src/components/layout-group';
 
 interface Props {
     model: any;
+    listContent: any;
+    listQuestion: any
 }
 
-const ContentDetail: NextPage<Props> = ({ model }) => {
+const ContentDetail: NextPage<Props> = ({ model, listContent, listQuestion }) => {
 
         /**
      * Render String To Html
@@ -31,7 +33,7 @@ const ContentDetail: NextPage<Props> = ({ model }) => {
     }
 
     return (
-        <LayoutAbout content={model} >
+        <LayoutAbout content={model} listContent={listContent} listQuestion={listQuestion} >
             <Head>
                 <title>{model.seo_title}</title>
                 <meta property='og:image' content={model.image} />
@@ -61,11 +63,13 @@ const ContentDetail: NextPage<Props> = ({ model }) => {
  */
 ContentDetail.getInitialProps = async ({ query }: any = {}) => {
     if (isNil(query.slug)) {
-        return { model: null };
+        return { model: null,listContent: null, listQuestion: null };
     }
     const alias = query.slug;
     const response = await ContentAPI.detail(alias);
-    return { model: response.data || null };
+    const listContent = await ContentAPI.listContent();
+    const listQuestion = await QuestionAPI.listQuestion();
+    return ({ model: response.data, listContent: listContent.data, listQuestion: listQuestion.data } || null );
 };
 
 export default ContentDetail;

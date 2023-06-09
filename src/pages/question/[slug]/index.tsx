@@ -3,17 +3,20 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { isNil } from 'lodash';
 // Modules
-import { QuestionAPI } from 'src/helpers/services';
+import { QuestionAPI,ContentAPI } from 'src/helpers/services';
 
 // Components
 import NotFoundPage from 'src/pages/not-found';
 import { LayoutAbout } from 'src/components/layout-group';
 
+
 interface Props {
     model: any;
+    listContent: any;
+    listQuestion: any
 }
 
-const ContentDetail: NextPage<Props> = ({ model }) => {
+const QuestionDetail: NextPage<Props> = ({ model, listContent, listQuestion }) => {
 
         /**
      * Render String To Html
@@ -31,7 +34,7 @@ const ContentDetail: NextPage<Props> = ({ model }) => {
     }
 
     return (
-        <LayoutAbout content={model} >
+        <LayoutAbout content={model} listContent={listContent} listQuestion={listQuestion} >
             <Head>
                 <title>{model.seo_title}</title>
                 <meta property='og:image' content={model.image} />
@@ -59,13 +62,15 @@ const ContentDetail: NextPage<Props> = ({ model }) => {
  * Load Props
  * @param param
  */
-ContentDetail.getInitialProps = async ({ query }: any = {}) => {
+QuestionDetail.getInitialProps = async ({ query }: any = {}) => {
     if (isNil(query.slug)) {
-        return { model: null };
+        return { model: null,listContent: null, listQuestion: null };
     }
     const alias = query.slug;
     const response = await QuestionAPI.detail(alias);
-    return { model: response.data || null };
+    const listContent = await ContentAPI.listContent();
+    const listQuestion = await QuestionAPI.listQuestion();
+    return ({ model: response.data, listContent: listContent.data, listQuestion: listQuestion.data } || null );
 };
 
-export default ContentDetail;
+export default QuestionDetail;

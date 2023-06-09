@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import Image from 'next/image'
 
 // Components
 import { Carousel } from 'src/components/base-group';
@@ -81,7 +82,14 @@ const HomeBanner = () => {
                                     banners.map((banner: any, index: number) => (
                                         <Link href={`${banner.url}`} key={index}>
                                             <a key={banner.id}>
-                                                <img src={banner.image_url} alt={banner.name} />
+                                                <Image
+                                                    src={banner.image_url}
+                                                    alt={banner.name}
+                                                    width={700}
+                                                    height={400}
+                                                    priority={true}
+                                                />
+                                               
                                             </a>
                                         </Link>
                                     ))

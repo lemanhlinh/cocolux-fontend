@@ -1,9 +1,17 @@
 import Head from 'next/head';
 import React from 'react';
 import { LayoutAbout } from 'src/components/layout-group';
+import { NextPage } from 'next';
+import { QuestionAPI,ContentAPI } from 'src/helpers/services';
 
-const Counpon = () => (
-    <LayoutAbout>
+interface Props {
+    listContent: any;
+    listQuestion: any
+}
+
+const Counpon: NextPage<Props> = ({ listContent, listQuestion }) => {
+    return (
+        <LayoutAbout listContent={listContent} listQuestion={listQuestion}>
         <Head>
             <title>Phiếu mua hàng cocolux</title>
             <meta property='og:title' content='Phiếu mua hàng cocolux' />
@@ -52,5 +60,18 @@ const Counpon = () => (
     </LayoutAbout>
 
 );
+    };
+
+    
+/**
+ * Load Props
+ * @param param
+ */
+Counpon.getInitialProps = async () => {
+    const listContent = await ContentAPI.listContent();
+    const listQuestion = await QuestionAPI.listQuestion();
+    return ({listContent: listContent.data, listQuestion: listQuestion.data } || null );
+};
+
 
 export default Counpon;

@@ -1,28 +1,20 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-
+import { NextPage } from 'next';
 // Modules & Component
 import { ConfigAPI } from 'src/helpers/services';
 import { LayoutAbout } from 'src/components/layout-group';
+import { QuestionAPI,ContentAPI } from 'src/helpers/services';
 
-const Showroom = () => {
-    const [stores, setListStore] = useState<[]>([]);
+interface Props {
+    stores: any;
+    listContent: any;
+    listQuestion: any
+}
 
-    useEffect(() => {
-        async function fetchListStore() {
-            await ConfigAPI.listStore({
-                skip: 0,
-                limit: 20
-            }).then((response: any) => {
-                setListStore(response.data || []);
-            });
-        }
-
-        fetchListStore();
-    }, []);
-
+const Showroom: NextPage<Props> = ({ stores, listContent, listQuestion }) => {
     return (
-        <LayoutAbout>
+        <LayoutAbout listContent={listContent} listQuestion={listQuestion}>
             <Head>
                 <title>Cocolux - Chuỗi cửa hàng mỹ phẩm chính hãng chăm sóc da</title>
                 <meta property='og:url' content='https://cocolux.com/thong-tin/cua-hang' data-rh='true' />
@@ -61,6 +53,20 @@ const Showroom = () => {
             </div>
         </LayoutAbout>
     );
+};
+
+/**
+ * Load Props
+ * @param param
+ */
+Showroom.getInitialProps = async () => {
+    const stores = await ConfigAPI.listStore({
+        skip: 0,
+        limit: 20
+    });
+    const listContent = await ContentAPI.listContent();
+    const listQuestion = await QuestionAPI.listQuestion();
+    return ({ stores: stores.data, listContent: listContent.data, listQuestion: listQuestion.data } || null );
 };
 
 export default Showroom;

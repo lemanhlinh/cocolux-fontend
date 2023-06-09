@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import Link from 'next/link';
 import moment from 'moment';
 import Head from 'next/head';
@@ -28,8 +28,8 @@ interface Props{
 
 const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRecord, recommendList, categories, categoryId, items }) => {
     // Declaration states
-    const router = useRouter();
-    const queryParams = router.query as any;
+    // const router = useRouter();
+    // const queryParams = router.query as any;
     // const [items, setListItems] = useState<[]>([]);
     // const [articles, setArticle] = useState<[]>([]);
     // const [categories, setCategory] = useState<[]>([]);

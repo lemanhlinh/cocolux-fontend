@@ -5,46 +5,25 @@ import { useRouter } from 'next/router';
 // Components
 import { Breadcrumb } from 'src/components/base-group';
 
-// Service
-import { ContentAPI,QuestionAPI } from 'src/helpers/services';
 
 interface Props {
     content?: any;
+    listContent?: any;
+    listQuestion?: any;
     children: any;
 }
 
-export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
+export const LayoutAbout: React.FC<Props> = ({ children, content,listQuestion,listContent }) => {
     const router = useRouter();
     const [listMenu, setListMenu] = useState<any>({ QUESTION: [], INFORMATION: [] });
     const [breadCums, setBreadCum] = useState<any>([]);
-    const [listContent, setListContent] = useState<[]>([]);
-    const [listQuestion, setListQuestion] = useState<[]>([]);
 
-    const handleFetchListContent = async () => {
-        // Submit request
-        await ContentAPI.listContent(
-
-        ).then((res: any) => {
-            setListContent(res.data || []);
-        });
-    };
-
-    const handleFetchListQuestion = async () => {
-        // Submit request
-        await QuestionAPI.listContent(
-
-        ).then((res: any) => {
-            setListQuestion(res.data || []);
-        });
-    };
+    
 
 
     useEffect(() => {
-        handleFetchListContent();
-        handleFetchListQuestion();
         // Load breadcum
-        const items = [] as any;
-    
+        const items = [] as any;    
         if (content?.alias) {
             items.push({
                 as: `/thong-tin/${content.alias}`,

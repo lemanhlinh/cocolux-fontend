@@ -633,6 +633,7 @@
                             font-size: $caption-font-size;
                             line-height: 19px;
                             color: c-base-color(dark, 1);
+                            order: 1;
 
                             @media (min-width: 991px) {
                                 font-size: $body-font-size - 1;
@@ -687,6 +688,7 @@
                     .none_stock{
                         opacity: 0.5; 
                         position: relative;
+                        order: 2;
                         &::before{
                             content: 'Hết';
                             position: absolute;
