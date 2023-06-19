@@ -195,6 +195,7 @@ BrandDetailPage.getInitialProps = async ({ store, query }: any = {}) => {
     try {
         const { slug } = query;
         const brandId = slug.split('-i.')[1];
+        const brandName = slug.split('-i.')[0];
         const respone = await BrandAPI.detail(brandId);
 
         // handle success
@@ -208,18 +209,19 @@ BrandDetailPage.getInitialProps = async ({ store, query }: any = {}) => {
         const page = parseInt(query.page, 10) || 1;
         query.limit = parseInt(query.limit, 10) || 30;
         query.skip = page ? Math.ceil(page - 1) * query.limit : 0;
-        switch (typeof query.attributes) {
-            case 'string':
-                query.attributes = [query.attributes, `${respone.data.attribute_id}:${brandId}`].toString();
-                break;
-            case 'object':
-                query.attributes = [...query.attributes, `${respone.data.attribute_id}:${brandId}`].toString();
-                break;
-            default:
-                query.attributes = `${respone.data.attribute_id}:${brandId}`;
-                break;
-        }
+        // switch (typeof query.attributes) {
+        //     case 'string':
+        //         query.attributes = [query.attributes, `${respone.data.attribute_id}:${brandId}`].toString();
+        //         break;
+        //     case 'object':
+        //         query.attributes = [...query.attributes, `${respone.data.attribute_id}:${brandId}`].toString();
+        //         break;
+        //     default:
+        //         query.attributes = `${respone.data.attribute_id}:${brandId}`;
+        //         break;
+        // }
         query.types = 'item';
+        query.keyword = brandName;
         const response = await ItemAPI.listOption(query);
 
         return { datatest: respone.data, items: response.data, currentPage: page, totalItem: response.count, all: response.all || null };

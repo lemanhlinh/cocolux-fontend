@@ -291,13 +291,13 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                                                 ? (
                                                     <>
                                                     <div>
-                                                        <div className='item-gallery'>
+                                                        <div className='item-gallery row'>
                                                                 {
                                                                     topItems.map((item, index) => (
                                                                         <HotItem
                                                                             key={index}
                                                                             hotItem={item}
-                                                                            className={'item-wrap'}
+                                                                            className={'item-wrap col-md-3'}
                                                                         />
                                                                     ))
                                                                 }
@@ -311,7 +311,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                                                                                 if (topItems.length <= 3) {
                                                                                     setTopItems(products);
                                                                                 } else {
-                                                                                    setTopItems(products.slice(0, 3));
+                                                                                    setTopItems(products.slice(0, 2));
                                                                                 }
                                                                             }}
                                                                         >

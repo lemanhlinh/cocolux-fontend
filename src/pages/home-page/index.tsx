@@ -60,6 +60,11 @@ const HomePage: NextPage<Props> = ({ itemProducts }) => {
         };
     }, []);
 
+    if(config){
+        config.title = config.title?config.title:'COCOLUX - Hệ thống mỹ phẩm hàng đầu Việt Nam';
+        config.meta_des = config.meta_des?config.meta_des:'COCOLUX - Hệ thống mỹ phẩm hàng đầu Việt Nam';
+    }
+
     return (
         <>
             <Head>
@@ -68,6 +73,7 @@ const HomePage: NextPage<Props> = ({ itemProducts }) => {
                 <meta property='og:title' content={config.title} />
                 <meta property='og:image' content='https://cdn.cocolux.com/2021/09/images/banners/1630770071588-share-link.jpeg' data-rh='true' />
                 <meta property='og:description' content={config.meta_des} />
+                <meta property='og:keywords' content={config.meta_key} />
             </Head>
 
             <div className='coco-home-wrap'>
