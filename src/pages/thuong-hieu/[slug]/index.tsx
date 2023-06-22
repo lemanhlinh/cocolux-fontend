@@ -221,7 +221,7 @@ BrandDetailPage.getInitialProps = async ({ store, query }: any = {}) => {
         //         break;
         // }
         query.types = 'item';
-        query.keyword = brandName;
+        query.keyword = brandName.replaceAll('-',' ');
         const response = await ItemAPI.listOption(query);
 
         return { datatest: respone.data, items: response.data, currentPage: page, totalItem: response.count, all: response.all || null };

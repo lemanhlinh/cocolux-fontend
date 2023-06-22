@@ -673,7 +673,8 @@ const ItemDetailPage = () => {
                 <meta name='al:iphone:url' content={`Cocoluxvn://product/${data.id}`} />
                 <meta name='al:ipad:url' content={`Cocoluxvn://product/${data.id}`} />
                 <meta name='al:android:url' content={`Cocoluxvn://product/${data.id}`} />
-                <meta property='og:url' content={`https://Cocolux.com/${data.meta_url}`} />
+                <meta property='og:url' content={`https://cocolux.com/${router.query.slug}`} />
+                <link rel="canonical" href={`https://cocolux.com/${router.query.slug}`}></link>
             </Head>
             {
                 loading
