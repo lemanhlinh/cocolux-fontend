@@ -156,6 +156,7 @@ const CategoryDetailPage: NextPage<Props> = ({ category, items, totalItem, all})
                 <meta property='og:url' content={`https://Cocolux.com/danh-muc/${category.slug}`} data-rh='true'></meta>
                 <meta property='og:image' content={category.logo} data-rh='true' />
                 <meta property='og:description' content={category.meta_content} />
+                <link rel="canonical" href={`https://cocolux.com/${router.query.slug}`}></link>
             </Head>
             <Breadcrumb
                 routes={[...breadCums]}

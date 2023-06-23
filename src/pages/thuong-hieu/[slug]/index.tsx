@@ -101,6 +101,7 @@ const BrandDetailPage: NextPage<Props> = ({ datatest = null, items = [], current
                 <meta property='og:url' content={`https://Cocolux.com/thuong-hieu/${brand.slug}`} data-rh='true'></meta>
                 <meta property='og:image' content={brand.icon} data-rh='true' />
                 <meta property='og:description' content={brand.meta_description} />
+                <link rel="canonical" href={`https://cocolux.com/${router.query.slug}`}></link>
             </Head>
             <Breadcrumb
                 routes={[
@@ -221,8 +222,9 @@ BrandDetailPage.getInitialProps = async ({ store, query }: any = {}) => {
         //         break;
         // }
         query.types = 'item';
-        query.keyword = brandName.replaceAll('-',' ');
+        query.keyword = brandName.replace(/-/g, ' ');
         const response = await ItemAPI.listOption(query);
+        
 
         return { datatest: respone.data, items: response.data, currentPage: page, totalItem: response.count, all: response.all || null };
     } catch (error: any) {

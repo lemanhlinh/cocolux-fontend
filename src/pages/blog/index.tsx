@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import moment from 'moment';
 import Head from 'next/head';
@@ -28,7 +28,7 @@ interface Props{
 
 const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRecord, recommendList, categories, categoryId, items }) => {
     // Declaration states
-    // const router = useRouter();
+    const router = useRouter();
     // const queryParams = router.query as any;
     // const [items, setListItems] = useState<[]>([]);
     // const [articles, setArticle] = useState<[]>([]);
@@ -163,6 +163,7 @@ const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRec
                 <meta property='og:title' content='Tin tức mới nhất về mỹ phẩm xu hướng làm đẹp mỗi tuần' />
                 <meta property='og:image' content='https://cdn.cocolux.com/2021/09/images/banners/1630770071588-share-link.jpeg' />
                 <meta property='og:description' content='CocoLux luôn cập nhật nhanh chóng đầy đủ những tin tức, xu hướng làm đẹp được giới trẻ yêu thích nhất. Cung cấp những mẹo nhỏ tiện lợi hơn trong chăm sóc da, trang điểm giúp các nàng tiết kiệm thời gian nhưng vẫn hữu ích.' />
+                <link rel="canonical" href={`https://cocolux.com${router.pathname}`}></link>
             </Head>
             <div className='col-12 px-12'>
                 <div className='list-cate-mobile'>

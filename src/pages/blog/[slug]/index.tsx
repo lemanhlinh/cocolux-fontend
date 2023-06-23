@@ -179,6 +179,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                 <meta property='og:url' content={`https://Cocolux.com/${model.meta_url}`} />
                 <meta property='og:description' content={model.meta_description} />
                 <meta name='description' content={model.meta_description} />
+                <link rel="canonical" href={`https://cocolux.com/${router.query.slug}`}></link>
             </Head>
             <div className='col-8 mx-auto'>
                 <Breadcrumb
