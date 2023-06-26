@@ -101,7 +101,7 @@ const BrandDetailPage: NextPage<Props> = ({ datatest = null, items = [], current
                 <meta property='og:url' content={`https://Cocolux.com/thuong-hieu/${brand.slug}`} data-rh='true'></meta>
                 <meta property='og:image' content={brand.icon} data-rh='true' />
                 <meta property='og:description' content={brand.meta_description} />
-                <link rel="canonical" href={`https://cocolux.com/${router.query.slug}`}></link>
+                <link rel="canonical" href={`https://cocolux.com/thuong-hieu/${router.query.slug}`}></link>
             </Head>
             <Breadcrumb
                 routes={[

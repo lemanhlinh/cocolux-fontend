@@ -73,6 +73,7 @@ const HomePage: NextPage<Props> = ({ itemProducts }) => {
                 <meta property='og:title' content={config.title} />
                 <meta property='og:image' content='https://cdn.cocolux.com/2021/09/images/banners/1630770071588-share-link.jpeg' data-rh='true' />
                 <meta property='og:description' content={config.meta_des} />
+                <meta name="description" content={config.meta_des} />
                 <meta property='og:keywords' content={config.meta_key} />
             </Head>
 
