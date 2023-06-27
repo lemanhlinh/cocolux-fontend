@@ -79,10 +79,10 @@ export const Footer: React.FC = () => {
                         </div>
                     </div>
                     <div className='col coco-policy'>
-                        <div className='policy-title'>
+                        <div className='policy-title member-hidden'>
                             Coco Member
                         </div>
-                        <div className='list-items'>
+                        <div className='list-items member-hidden'>
                             <Link href='/thong-tin/rank-khach-hang'>
                                 <a>Quyền lợi thành viên</a>
                             </Link>

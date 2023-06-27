@@ -113,11 +113,11 @@ export const LayoutAbout: React.FC<Props> = ({ children, content,listQuestion,li
                 // }
             ],
             QUESTION: [
-                {
-                    name: 'Tài khoản',
-                    link: '/hoi-dap/tai-khoan',
-                    href: '/about/tai-khoan'
-                },
+                // {
+                //     name: 'Tài khoản',
+                //     link: '/hoi-dap/tai-khoan',
+                //     href: '/about/tai-khoan'
+                // },
                 {
                     name: 'Đơn hàng tại Cocolux',
                     link: '/hoi-dap/don-hang-coco',
@@ -152,7 +152,7 @@ export const LayoutAbout: React.FC<Props> = ({ children, content,listQuestion,li
                 <div className='layout-aboutus--left col-md-4 col-lg-3'>
                     <div className='title'>THÔNG TIN</div>
                     <div className='list-group-tabs'>
-                        {
+                        {/* {
                             listMenu.INFORMATION.map((menu: any = {}) => (
                                 <Link href={menu.href} as={menu.link} key={menu.link}>
                                     <a
@@ -162,7 +162,7 @@ export const LayoutAbout: React.FC<Props> = ({ children, content,listQuestion,li
                                     </a>
                                 </Link>
                             ))
-                        }
+                        } */}
                         {
                             listContent.map((menu: any = {}) => (
                                 <Link href={'/thong-tin/'+menu.alias} as={'/thong-tin/'+menu.alias} key={'/thong-tin/'+menu.alias}>

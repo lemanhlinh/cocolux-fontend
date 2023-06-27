@@ -103,7 +103,7 @@ const HomePage: NextPage<Props> = ({ itemProducts }) => {
                 {/* end:: article item */}
 
                 {/* begin:: store item */}
-                {storeListVisible && <HomeListStore />}
+                {/* {storeListVisible && <HomeListStore />} */}
                 {/* end:: store item */}
             </div>
         </>

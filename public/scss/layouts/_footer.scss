@@ -135,6 +135,7 @@
                     line-height: 19px;
                     margin-bottom: 4px;
                 }
+                
                 .list-items {
                     display: flex;
                     flex-direction: column;
@@ -149,6 +150,9 @@
                         margin-top: 6px;
                         color: c-base-color(light, 1);
                     }
+                }
+                .member-hidden{
+                    display: none;
                 }
                 .dmca-cocolux{
                     margin-top: 15px;
