@@ -2,10 +2,13 @@ import { apiUrl } from 'config/vars';
 import { stringify } from 'querystring';
 import { ReqeustAPI } from './request-api';
 
+const { v4: uuidv4 } = require('uuid');
+const requestId = uuidv4();
+
 export class ItemAPI {
     public static async detail(productId: string): Promise<any> {
         try {
-            const responses = await ReqeustAPI.get(`${apiUrl}/v1/products/${productId}`);
+            const responses = await ReqeustAPI.get(`${apiUrl}/v1/products/${requestId}/products/${productId}`);
             return responses.data;
         } catch (e) {
             throw e;
@@ -14,7 +17,7 @@ export class ItemAPI {
 
     public static async detailOption(optionId: string): Promise<any> {
         try {
-            const responses = await ReqeustAPI.get(`${apiUrl}/v1/product-options/${optionId}`);
+            const responses = await ReqeustAPI.get(`${apiUrl}/v1/product-options/${requestId}/product-options/${optionId}`);
             return responses.data;
         } catch (e) {
             throw e;
@@ -28,7 +31,7 @@ export class ItemAPI {
             params.order_by = params.order_by ? params.order_by : 'asc';
             params.sort_by = params.sort_by ? params.sort_by : 'position';
             const operations = stringify(params);
-            const responses = await ReqeustAPI.get(`${apiUrl}/v1/products?${operations}`);
+            const responses = await ReqeustAPI.get(`${apiUrl}/v1/products/${requestId}/products?${operations}`);
             return responses.data;
         } catch (e) {
             throw e;
@@ -43,7 +46,7 @@ export class ItemAPI {
             params.order_by = params.order_by ? params.order_by : 'asc';
             params.sort_by = params.sort_by ? params.sort_by : 'view_count';
             const operations = stringify(params);
-            const responses = await ReqeustAPI.get(`${apiUrl}/v1/product-options?${operations}`);
+            const responses = await ReqeustAPI.get(`${apiUrl}/v1/product-options/${requestId}/product-options?${operations}`);
             return responses.data;
         } catch (e) {
             throw e;

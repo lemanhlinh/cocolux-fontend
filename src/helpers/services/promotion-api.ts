@@ -1,6 +1,8 @@
 import { apiUrl } from 'config/vars';
 import { stringify } from 'querystring';
 import { ReqeustAPI } from './request-api';
+const { v4: uuidv4 } = require('uuid');
+const requestId = uuidv4();
 
 export class PromotionAPI {
     public static async listPromotion(params: any = {}): Promise<any> {
@@ -28,7 +30,7 @@ export class PromotionAPI {
             params.is_visible = true;
             params.order_by = params.order_by ? params.order_by : 'asc';
             const operations = stringify(params);
-            const responses = await ReqeustAPI.get(`${apiUrl}/v1/products?${operations}`);
+            const responses = await ReqeustAPI.get(`${apiUrl}/v1/products/${requestId}/products?${operations}`);
             return responses.data;
         } catch (e) {
             throw e;
