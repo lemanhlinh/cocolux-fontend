@@ -165,6 +165,8 @@ const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRec
                 <meta property='og:title' content='Tin tức mới nhất về mỹ phẩm xu hướng làm đẹp mỗi tuần' />
                 <meta property='og:image' content='https://cdn.cocolux.com/2021/09/images/banners/1630770071588-share-link.jpeg' />
                 <meta property='og:description' content='CocoLux luôn cập nhật nhanh chóng đầy đủ những tin tức, xu hướng làm đẹp được giới trẻ yêu thích nhất. Cung cấp những mẹo nhỏ tiện lợi hơn trong chăm sóc da, trang điểm giúp các nàng tiết kiệm thời gian nhưng vẫn hữu ích.' />
+                <meta name='description' content='CocoLux luôn cập nhật nhanh chóng đầy đủ những tin tức, xu hướng làm đẹp được giới trẻ yêu thích nhất. Cung cấp những mẹo nhỏ tiện lợi hơn trong chăm sóc da, trang điểm giúp các nàng tiết kiệm thời gian nhưng vẫn hữu ích.' />
+                <link rel="canonical" href={`https://cocolux.com/chuyen-muc/${router.query.slug}`}></link>
             </Head>
             <div className='col-12 px-12'>
                 <div className='list-cate-mobile'>
@@ -480,7 +482,6 @@ const Article: NextPage<Props> = ({ topArticles, articles, currentPage, totalRec
 Article.getInitialProps = async ( query ) => {
 
     const params: any = query.query;
-   
 
     const page = parseInt(params.page, 8);
     params.limit = parseInt(params.limit, 10) || 8;

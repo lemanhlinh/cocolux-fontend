@@ -155,7 +155,9 @@ const CategoryDetailPage: NextPage<Props> = ({ category, items, totalItem, all})
                 <meta name='al:android:url' content={`Cocoluxvn://danh-muc/${category.id}`} />
                 <meta property='og:url' content={`https://Cocolux.com/danh-muc/${category.slug}`} data-rh='true'></meta>
                 <meta property='og:image' content={category.logo} data-rh='true' />
-                <meta property='og:description' content={category.meta_content} />
+                <meta property='og:description' content={category.meta_description} />
+                <meta name="description" content={category.meta_description} />
+                <link rel="canonical" href={`https://cocolux.com/danh-muc/${router.query.slug}`}></link>
             </Head>
             <Breadcrumb
                 routes={[...breadCums]}

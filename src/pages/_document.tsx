@@ -29,8 +29,8 @@ class MyDocument extends Document {
                     <meta name='al:iphone:app_name' content='cocolux.com - Niềm Vui Mua Sắm' />
                     <meta name='al:ipad:app_store_id' content='12312312312' />
                     <meta name='al:ipad:app_name' content='cocolux.com - Niềm Vui Mua Sắm' />
-                    <meta property='og:keywords' content='mỹ phẩm,  my pham,  son môi,  son moi,  kem dưỡng da,  kem duong da,  nước hoa,  nuoc hoa,  sữa rửa mặt,  sua rua mat,  dầu gội đầu,  dau goi dau,  son 3ce,  son black rouge,  mỹ phẩm mỹ,  my pham my,  mỹ phẩm giá gốc,  my pham gia goc,  công ty mỹ phẩm,  website mỹ phẩm' />
-                    <meta property='og:description' content='COCOLUX - Hệ thống mỹ phẩm hàng đầu Việt Nam' />
+                    {/* <meta property='og:keywords' content='mỹ phẩm,  my pham,  son môi,  son moi,  kem dưỡng da,  kem duong da,  nước hoa,  nuoc hoa,  sữa rửa mặt,  sua rua mat,  dầu gội đầu,  dau goi dau,  son 3ce,  son black rouge,  mỹ phẩm mỹ,  my pham my,  mỹ phẩm giá gốc,  my pham gia goc,  công ty mỹ phẩm,  website mỹ phẩm' />
+                    <meta property='og:description' content='COCOLUX - Hệ thống mỹ phẩm hàng đầu Việt Nam' /> */}
 
                     {/* facebook && google verification */}
                     <meta name='google-site-verification' content='cUa9hcmaZu3uQwlFL-WGdNBeHBsqJvkKZo6fnlbuHtQ'></meta>

@@ -633,6 +633,7 @@
                             font-size: $caption-font-size;
                             line-height: 19px;
                             color: c-base-color(dark, 1);
+                            order: 1;
 
                             @media (min-width: 991px) {
                                 font-size: $body-font-size - 1;
@@ -682,8 +683,25 @@
                                 text-decoration: underline;
                             }
                         }
+                       
                     }
-
+                    .none_stock{
+                        opacity: 0.5; 
+                        position: relative;
+                        order: 2;
+                        &::before{
+                            content: 'Hết';
+                            position: absolute;
+                            color: #fff;
+                            z-index: 2;
+                            background-color: #ff0000;
+                            padding: 2px 4px;
+                            border-radius: 5px;
+                            bottom: 0;
+                            right: 0;
+                            font-size: 13px;
+                        }
+                    }
                     .item-sale-box {
                         width: 100%;
                         display: flex;

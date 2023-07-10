@@ -14,6 +14,7 @@ import HomeListSaleItem from './HomeListSaleItem';
 import HomeListHotItem from './HomeListHotItem';
 import HomeListArticle from './HomeListArticle';
 import HomeListStore from './HomeListStore';
+import { useSelector } from 'react-redux';
 
 interface Props {
     itemProducts: [];
@@ -23,6 +24,7 @@ const HomePage: NextPage<Props> = ({ itemProducts }) => {
     const [productListVisible, setProductListVisible] = useState<boolean>(false);
     const [articleListVisible, setArticleListVisible] = useState<boolean>(false);
     const [storeListVisible, setStoreListVisible] = useState<boolean>(false);
+    const { config } = useSelector((state: any) => state.config);
 
     const handleScroll = () => {
         let documentHeight: number;
@@ -58,14 +60,21 @@ const HomePage: NextPage<Props> = ({ itemProducts }) => {
         };
     }, []);
 
+    if(config){
+        config.title = config.title?config.title:'COCOLUX - Hệ thống mỹ phẩm hàng đầu Việt Nam';
+        config.meta_des = config.meta_des?config.meta_des:'COCOLUX - Hệ thống mỹ phẩm hàng đầu Việt Nam';
+    }
+
     return (
         <>
             <Head>
-                <title>Cocolux - Chuỗi cửa hàng mỹ phẩm chính hãng chăm sóc da</title>
+                <title>{config.title}</title>
                 <meta property='og:url' content='https://Cocolux.com' data-rh='true'></meta>
-                <meta property='og:title' content='Cocolux - Chuỗi cửa hàng mỹ phẩm chính hãng chăm sóc da' />
+                <meta property='og:title' content={config.title} />
                 <meta property='og:image' content='https://cdn.cocolux.com/2021/09/images/banners/1630770071588-share-link.jpeg' data-rh='true' />
-                <meta property='og:description' content='COCOLUX - Hệ thống mỹ phẩm hàng đầu Việt Nam' />
+                <meta property='og:description' content={config.meta_des} />
+                <meta name="description" content={config.meta_des} />
+                <meta property='og:keywords' content={config.meta_key} />
             </Head>
 
             <div className='coco-home-wrap'>
@@ -94,7 +103,7 @@ const HomePage: NextPage<Props> = ({ itemProducts }) => {
                 {/* end:: article item */}
 
                 {/* begin:: store item */}
-                {storeListVisible && <HomeListStore />}
+                {/* {storeListVisible && <HomeListStore />} */}
                 {/* end:: store item */}
             </div>
         </>

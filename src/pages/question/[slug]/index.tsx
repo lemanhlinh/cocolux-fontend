@@ -3,11 +3,12 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { isNil } from 'lodash';
 // Modules
-import { ContentAPI,QuestionAPI } from 'src/helpers/services';
+import { QuestionAPI,ContentAPI } from 'src/helpers/services';
 
 // Components
 import NotFoundPage from 'src/pages/not-found';
 import { LayoutAbout } from 'src/components/layout-group';
+
 
 interface Props {
     model: any;
@@ -15,7 +16,7 @@ interface Props {
     listQuestion: any
 }
 
-const ContentDetail: NextPage<Props> = ({ model, listContent, listQuestion }) => {
+const QuestionDetail: NextPage<Props> = ({ model, listContent, listQuestion }) => {
 
         /**
      * Render String To Html
@@ -38,11 +39,11 @@ const ContentDetail: NextPage<Props> = ({ model, listContent, listQuestion }) =>
                 <title>{model.seo_title}</title>
                 <meta property='og:image' content={model.image} />
                 <meta property='og:title' content={model.seo_title} />
-                <meta name='al:ios:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
-                <meta name='al:iphone:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
-                <meta name='al:ipad:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
-                <meta name='al:android:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
-                <meta property='og:url' content={`https://cocolux.com/thong-tin/${model.alias}`} />
+                <meta name='al:ios:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
+                <meta name='al:iphone:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
+                <meta name='al:ipad:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
+                <meta name='al:android:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
+                <meta property='og:url' content={`https://cocolux.com/hoi-dap/${model.alias}`} />
                 <meta property='og:description' content={model.seo_description} />
                 <meta name='description' content={model.seo_description} />
             </Head>
@@ -61,15 +62,15 @@ const ContentDetail: NextPage<Props> = ({ model, listContent, listQuestion }) =>
  * Load Props
  * @param param
  */
-ContentDetail.getInitialProps = async ({ query }: any = {}) => {
+QuestionDetail.getInitialProps = async ({ query }: any = {}) => {
     if (isNil(query.slug)) {
         return { model: null,listContent: null, listQuestion: null };
     }
     const alias = query.slug;
-    const response = await ContentAPI.detail(alias);
+    const response = await QuestionAPI.detail(alias);
     const listContent = await ContentAPI.listContent();
     const listQuestion = await QuestionAPI.listQuestion();
     return ({ model: response.data, listContent: listContent.data, listQuestion: listQuestion.data } || null );
 };
 
-export default ContentDetail;
+export default QuestionDetail;

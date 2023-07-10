@@ -5,35 +5,25 @@ import { useRouter } from 'next/router';
 // Components
 import { Breadcrumb } from 'src/components/base-group';
 
-// Service
-import { ContentAPI } from 'src/helpers/services';
 
 interface Props {
     content?: any;
+    listContent?: any;
+    listQuestion?: any;
     children: any;
 }
 
-export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
+export const LayoutAbout: React.FC<Props> = ({ children, content,listQuestion,listContent }) => {
     const router = useRouter();
     const [listMenu, setListMenu] = useState<any>({ QUESTION: [], INFORMATION: [] });
     const [breadCums, setBreadCum] = useState<any>([]);
-    const [listContent, setListContent] = useState<[]>([]);
 
-    const handleFetchListContent = async () => {
-        // Submit request
-        await ContentAPI.listContent(
-
-        ).then((res: any) => {
-            setListContent(res.data || []);
-        });
-    };
+    
 
 
     useEffect(() => {
-        handleFetchListContent();
         // Load breadcum
-        const items = [] as any;
-    
+        const items = [] as any;    
         if (content?.alias) {
             items.push({
                 as: `/thong-tin/${content.alias}`,
@@ -51,36 +41,36 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
     useEffect(() => {
         const newListMenu = {
             INFORMATION: [
-                {
-                    name: 'Giới thiệu Cocolux',
-                    link: '/thong-tin/gioi-thieu',
-                    href: '/about/gioi-thieu'
-                },
+                // {
+                //     name: 'Giới thiệu Cocolux',
+                //     link: '/thong-tin/gioi-thieu',
+                //     href: '/about/gioi-thieu'
+                // },
                 {
                     name: 'Danh sách cửa hàng',
                     link: '/thong-tin/cua-hang',
                     href: '/about/cua-hang'
                 },
-                {
-                    name: 'Khách hàng thân thiết',
-                    link: '/thong-tin/khach-hang',
-                    href: '/about/khach-hang'
-                },
-                {
-                    name: 'Chính sách đổi Coco coin',
-                    link: '/thong-tin/coco-coin',
-                    href: '/about/coco-coin'
-                },
-                {
-                    name: 'Cấp độ member',
-                    link: '/thong-tin/rank-khach-hang',
-                    href: '/about/rank-khach-hang'
-                },
-                {
-                    name: 'Hướng dẫn đặt hàng',
-                    link: '/thong-tin/dat-hang',
-                    href: '/about/dat-hang'
-                },
+                // {
+                //     name: 'Khách hàng thân thiết',
+                //     link: '/thong-tin/khach-hang',
+                //     href: '/about/khach-hang'
+                // },
+                // {
+                //     name: 'Chính sách đổi Coco coin',
+                //     link: '/thong-tin/coco-coin',
+                //     href: '/about/coco-coin'
+                // },
+                // {
+                //     name: 'Cấp độ member',
+                //     link: '/thong-tin/rank-khach-hang',
+                //     href: '/about/rank-khach-hang'
+                // },
+                // {
+                //     name: 'Hướng dẫn đặt hàng',
+                //     link: '/thong-tin/dat-hang',
+                //     href: '/about/dat-hang'
+                // },
                 // {
                 //     name: 'Hướng dẫn đặt hàng 2H',
                 //     link: '/thong-tin/dat-hang-2h',
@@ -91,43 +81,43 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
                 //     link: '/thong-tin/thanh-toan',
                 //     href: '/about/thanh-toan'
                 // },
-                {
-                    name: 'Thẻ quà tặng Mobile gift',
-                    link: '/thong-tin/qua-tang',
-                    href: '/about/qua-tang'
-                },
+                // {
+                //     name: 'Thẻ quà tặng Mobile gift',
+                //     link: '/thong-tin/qua-tang',
+                //     href: '/about/qua-tang'
+                // },
                 // {
                 //     name: 'Phiếu mua hàng Cocolux',
                 //     link: '/thong-tin/phieu-mua-hang',
                 //     href: '/about/phieu-mua-hang'
                 // },
-                {
-                    name: 'Quy trình giao hàng',
-                    link: '/thong-tin/giao-hang',
-                    href: '/about/giao-hang'
-                },
-                {
-                    name: 'Điều khoản sử dụng',
-                    link: '/thong-tin/dieu-khoan',
-                    href: '/about/dieu-khoan'
-                },
-                {
-                    name: 'Chính sách đổi trả',
-                    link: '/thong-tin/doi-tra',
-                    href: '/about/doi-tra'
-                },
-                {
-                    name: 'Chính sách bảo mật',
-                    link: '/thong-tin/bao-mat',
-                    href: '/about/bao-mat'
-                }
+                // {
+                //     name: 'Quy trình giao hàng',
+                //     link: '/thong-tin/giao-hang',
+                //     href: '/about/giao-hang'
+                // },
+                // {
+                //     name: 'Điều khoản sử dụng',
+                //     link: '/thong-tin/dieu-khoan',
+                //     href: '/about/dieu-khoan'
+                // },
+                // {
+                //     name: 'Chính sách đổi trả',
+                //     link: '/thong-tin/doi-tra',
+                //     href: '/about/doi-tra'
+                // },
+                // {
+                //     name: 'Chính sách bảo mật',
+                //     link: '/thong-tin/bao-mat',
+                //     href: '/about/bao-mat'
+                // }
             ],
             QUESTION: [
-                {
-                    name: 'Tài khoản',
-                    link: '/hoi-dap/tai-khoan',
-                    href: '/about/tai-khoan'
-                },
+                // {
+                //     name: 'Tài khoản',
+                //     link: '/hoi-dap/tai-khoan',
+                //     href: '/about/tai-khoan'
+                // },
                 {
                     name: 'Đơn hàng tại Cocolux',
                     link: '/hoi-dap/don-hang-coco',
@@ -162,9 +152,20 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
                 <div className='layout-aboutus--left col-md-4 col-lg-3'>
                     <div className='title'>THÔNG TIN</div>
                     <div className='list-group-tabs'>
+                        {/* {
+                            listMenu.INFORMATION.map((menu: any = {}) => (
+                                <Link href={menu.href} as={menu.link} key={menu.link}>
+                                    <a
+                                        className={`tab-item ${router.pathname === menu.href ? 'active' : 'inactive'}`}
+                                    >
+                                        {menu.name}
+                                    </a>
+                                </Link>
+                            ))
+                        } */}
                         {
                             listContent.map((menu: any = {}) => (
-                                <Link href={menu.alias} as={menu.alias} key={menu.alias}>
+                                <Link href={'/thong-tin/'+menu.alias} as={'/thong-tin/'+menu.alias} key={'/thong-tin/'+menu.alias}>
                                     <a
                                         className={`tab-item ${router.asPath === '/thong-tin/'+menu.alias ? 'active' : 'inactive'}`}
                                     >
@@ -177,12 +178,12 @@ export const LayoutAbout: React.FC<Props> = ({ children, content }) => {
                     <div className='title mt-40'>CÂU HỎI THƯỜNG GẶP</div>
                     <div className='list-group-tabs'>
                         {
-                            listMenu.QUESTION.map((menu: any = {}) => (
-                                <Link href={menu.href} as={menu.link} key={menu.link}>
+                            listQuestion.map((menu: any = {}) => (
+                                <Link href={'/hoi-dap/'+menu.alias} as={'/hoi-dap/'+menu.alias} key={'/hoi-dap/'+menu.alias}>
                                     <a
-                                        className={`tab-item ${router.pathname === menu.href ? 'active' : 'inactive'}`}
+                                        className={`tab-item ${router.asPath === '/hoi-dap/'+menu.alias ? 'active' : 'inactive'}`}
                                     >
-                                        {menu.name}
+                                        {menu.title}
                                     </a>
                                 </Link>
                             ))

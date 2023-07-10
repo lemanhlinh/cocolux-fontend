@@ -2,6 +2,7 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { isNil } from 'lodash';
 
 // Modules
@@ -49,6 +50,7 @@ const BrandPage: NextPage<Props> = ({ brands }) => {
     const [keyActive, setKeyActive] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [classActive] = useState<string>('');
+    const router = useRouter();
 
     /**
      * Handle Scroll View
@@ -97,6 +99,8 @@ const BrandPage: NextPage<Props> = ({ brands }) => {
                 <meta property='og:title' content='CocoLux với hơn 200 thương hiệu mỹ phẩm đình đám trên toàn Thế Giới' />
                 <meta property='og:image' content='https://cdn.cocolux.com/2021/09/images/banners/1630770071588-share-link.jpeg' data-rh='true' />
                 <meta property='og:description' content='Những sản phẩm tốt nhất của hơn 200 thương hiệu mỹ phẩm từ bình dân đến cao cấp đang được CocoLux giới thiệu đến tận tay người tiêu dùng, cung cấp những sản phẩm uy tín và chất lượng cao và phù hợp.' />
+                <meta name='description' content='Những sản phẩm tốt nhất của hơn 200 thương hiệu mỹ phẩm từ bình dân đến cao cấp đang được CocoLux giới thiệu đến tận tay người tiêu dùng, cung cấp những sản phẩm uy tín và chất lượng cao và phù hợp.' />
+                <link rel="canonical" href={`https://cocolux.com${router.pathname}`}></link>
             </Head>
 
             <Breadcrumb

@@ -1,11 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 export const HeaderTop: React.FC = () => {
+    const { config } = useSelector((state: any) => state.config);
     return (
         <div className='header-top'>
             <div className='header-top--phone'>
                 <img src='/media/images/ic-phone.svg' alt='Cocolux' title='Cocolux' />
-                <span>0988888825</span>
+                <span>{config.hotline}</span>
             </div>
 
             <div className='header-top--title'>

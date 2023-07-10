@@ -9,6 +9,8 @@ import tocbot from 'tocbot';
 import { ArticleAPI, ItemAPI } from 'src/helpers/services';
 import { Utilities } from 'src/helpers/utilities';
 import { HotItem } from 'src/components/item-group';
+import Slider from "react-slick";
+
 
 // Components
 import NotFoundPage from 'src/pages/not-found';
@@ -17,14 +19,15 @@ import { LazyLoadArticleDetail } from 'src/components/loading-group';
 
 interface Props {
     model: any;
+    topItems: any[];
 }
 
-const ArticleDetail: NextPage<Props> = ({ model }) => {
+const ArticleDetail: NextPage<Props> = ({ model, topItems }) => {
     // Declaration states
     const router = useRouter();
     const [hotItems, setHotItems] = useState<[]>([]);
     const [categories, setCategory] = useState<[]>([]);
-    const [topItems, setTopItems] = useState<[]>([]);
+    // const [topItems, setTopItems] = useState<[]>([]);
     const [recommend, setRecommend] = useState<[]>([]);
     const [breadCums, setBreadCum] = useState<any>([]);
     const [categoryId, setCategoryId] = useState<any>(null);
@@ -39,6 +42,64 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
             }
           });
       }, [model.content]);
+
+    function ButtonNext({ className, onClick }: any) {
+        return (
+            <div
+                className={className}
+                onClick={onClick}
+            >
+                <img src='/media/images/ic-next.svg' />
+            </div>
+        );
+    }
+    
+    function ButtonPreview({ className, onClick }: any) {
+        return (
+            <div
+                className={className}
+                onClick={onClick}
+            >
+                <img
+                    src='/media/images/ic-next.svg'
+                    alt='next-icon'
+                />
+            </div>
+        );
+    }
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 3,
+        nextArrow: <ButtonNext />,
+        prevArrow: <ButtonPreview />,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                }
+            }
+        ]
+    };
 
     const fetchListItems = async () => {
         await ItemAPI.list({
@@ -85,10 +146,10 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
         });
     };
 
-    const fetchListTopItem = () => {
-        const products = model?.products || [];
-        setTopItems(products);
-    };
+    // const fetchListTopItem = () => {
+    //     const products = model?.products || [];
+    //     setTopItems(products);
+    // };
 
     const onChangeCategory = async (categoryId: number) => {
         router.push({
@@ -139,7 +200,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
      */
     useEffect(() => {
         // Handle request
-        fetchListTopItem();
+        // fetchListTopItem();
         fetchListCategories();
         fetchListItems();
     }, []);
@@ -179,6 +240,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                 <meta property='og:url' content={`https://Cocolux.com/${model.meta_url}`} />
                 <meta property='og:description' content={model.meta_description} />
                 <meta name='description' content={model.meta_description} />
+                <link rel="canonical" href={`https://cocolux.com/blog/${router.query.slug}`}></link>
             </Head>
             <div className='col-8 mx-auto'>
                 <Breadcrumb
@@ -292,17 +354,19 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                                                     <>
                                                     <div>
                                                         <div className='item-gallery'>
-                                                                {
-                                                                    topItems.map((item, index) => (
-                                                                        <HotItem
-                                                                            key={index}
-                                                                            hotItem={item}
-                                                                            className={'item-wrap'}
-                                                                        />
-                                                                    ))
-                                                                }
+                                                                <Slider {...settings}>
+                                                                    {
+                                                                        topItems.map((item, index) => (
+                                                                            <HotItem
+                                                                                key={index}
+                                                                                hotItem={item}
+                                                                                className={'item-wrap'}
+                                                                            />
+                                                                        ))
+                                                                    }
+                                                                </Slider>
                                                             </div>
-                                                            {
+                                                            {/* {
                                                                 model?.products?.length > 3
                                                                     ? (
                                                                         <div className='block-expand-row'
@@ -311,7 +375,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                                                                                 if (topItems.length <= 3) {
                                                                                     setTopItems(products);
                                                                                 } else {
-                                                                                    setTopItems(products.slice(0, 3));
+                                                                                    setTopItems(products.slice(0, 2));
                                                                                 }
                                                                             }}
                                                                         >
@@ -321,7 +385,7 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
                                                                             </a>
                                                                         </div>
                                                                     ) : null
-                                                            }
+                                                            } */}
                                                     </div>
                                                     </>
                                                 ) : null
@@ -397,11 +461,11 @@ const ArticleDetail: NextPage<Props> = ({ model }) => {
  */
 ArticleDetail.getInitialProps = async ({ query }: any = {}) => {
     if (isNil(query.slug)) {
-        return { model: null };
+        return { model: null, topItems: null };
     }
     const articleId = query.slug.split('-i.')[1];
     const response = await ArticleAPI.detail(articleId);
-    return { model: response.data || null };
+    return { model: response.data, topItems: response.data.products || null };
 };
 
 export default ArticleDetail;

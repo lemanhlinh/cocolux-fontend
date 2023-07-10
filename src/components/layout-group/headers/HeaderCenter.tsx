@@ -17,6 +17,7 @@ export const HeaderCenter: React.FC = () => {
         id: null,
         name: 'Tất cả'
     });
+    const { config } = useSelector((state: any) => state.config);
 
     // Declarations Reducer
     const router = useRouter();
@@ -152,7 +153,7 @@ export const HeaderCenter: React.FC = () => {
                 <div className='header-center--wrapper__logo'>
                     <Link href='/home-page' as='/'>
                         <a className='logo'>
-                            <img src='/media/images/logo_cocoshop.svg' alt='Cocolux' title='Cocolux' />
+                            <img src={config.logo} alt='Cocolux' title='Cocolux' />
                         </a>
                     </Link>
                     <Link href='/home-page' as='/'>
@@ -487,7 +488,7 @@ export const HeaderCenter: React.FC = () => {
                             ? (
                                 <Link href='/my-account'>
                                     <a
-                                        className={`${pathName === '/my-account' ? 'active' : ''}`}
+                                        className={`${pathName === '/my-account' ? 'active' : 'account-d-none'}`}
                                     >
                                         <img src='/media/icons/user_sp.svg' alt='cocolux' />
                                         Cá nhân
@@ -495,7 +496,7 @@ export const HeaderCenter: React.FC = () => {
                                 </Link>
                             )
                             : (
-                                <a onClick={() => { onShowLoginForm(); }}>
+                                <a onClick={() => { onShowLoginForm(); }} className={'account-d-none'}>
                                     <img src='/media/icons/user_sp.svg' alt='cocolux' />
                                     Cá nhân
                                 </a>

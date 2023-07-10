@@ -586,7 +586,9 @@ const PaymentPage = () => {
                                                     {payment.label}
                                                     <span></span>
                                                 </label>
+                                                
                                             </div>
+                                            <img src={payment.img} alt="" style={{width: '300px'}} />
                                         </div>
                                     );
                                 })

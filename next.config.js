@@ -16,4 +16,7 @@ module.exports = {
         // !! WARN !!
         ignoreBuildErrors: true,
     },
+    images: {
+        domains: ['cdn.cocolux.com'], // Add your domain(s) here
+    },
 };

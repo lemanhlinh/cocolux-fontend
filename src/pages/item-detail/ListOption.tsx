@@ -4,7 +4,7 @@ import { Utilities } from 'src/helpers/utilities';
 
 // Components
 import { Image } from 'src/components/base-group';
-import { parse } from 'querystring';
+// import { parse } from 'querystring';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -31,13 +31,15 @@ const ItemListOption: React.FC<Props> = ({ options }) => {
                             const imageUrl = option.images && option.images.length
                                 ? Utilities.resizeImage(100, option.images[0])
                                 : '/media/images/loading.svg';
+                            const dataStocks: any[] = option.stocks;
+                            const totalQuantity = dataStocks.reduce((sum, obj) => sum + obj.total_quantity, 0);
                             return (
                                 <Link
                                     key={option.id}
                                     as={`/${option.slug}`}
                                     href={{ pathname: '/item-detail', query: { slug: option.slug } }}
                                 >
-                                    <a className={`product-type--item ${option.sku === optionId ? 'active' : ''}`}>
+                                    <a className={`product-type--item ${option.sku === optionId ? 'active' : ''} ${totalQuantity === 0 ? 'none_stock' : ''}`}>
                                         <Image
                                             src={imageUrl}
                                             alt={option.name}

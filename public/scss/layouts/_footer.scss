@@ -105,19 +105,14 @@
                     }
 
                     img {
-                        width: 100%;
-                        filter: brightness(0) invert(1);
-
                         @media (max-width: 1100px) {
                             &:nth-last-child(1) {
                                 width: auto;
-                                height: 30px;
                             }
                         }
 
                         &:nth-child(1) {
-                            max-width: 36px;
-                            padding-right: $padding-10;
+                            margin-bottom: $padding-10;
                         }
                     }
                 }
@@ -140,6 +135,7 @@
                     line-height: 19px;
                     margin-bottom: 4px;
                 }
+                
                 .list-items {
                     display: flex;
                     flex-direction: column;
@@ -154,6 +150,9 @@
                         margin-top: 6px;
                         color: c-base-color(light, 1);
                     }
+                }
+                .member-hidden{
+                    display: none;
                 }
                 .dmca-cocolux{
                     margin-top: 15px;

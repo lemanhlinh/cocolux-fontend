@@ -1,7 +1,7 @@
 declare const myFunctionCopy: () => void;
 import Link from 'next/link';
 import React from 'react';
-
+import { useSelector } from 'react-redux';
 export const Footer: React.FC = () => {
 
     const renderStringToHtml2 = () => {
@@ -21,14 +21,16 @@ export const Footer: React.FC = () => {
         <script src='https://cdn.traffic60s.com/traffic/ican.js?v=2022' type='text/javascript'></script>`;
         return { __html: newContent };
     };
+
+    const { config } = useSelector((state: any) => state.config);
+
     return (
         <div className='coco-footer-wrap'>
             <div className='flud-container container'>
                 <div className='footer-row'>
                     <div className='col w-20 brand-info'>
                         <div className='brand-info--logo'>
-                            <img src='/media/images/logo_ccs.svg' alt='footer-logo' />
-                            <img src='/media/images/logo_cocoshop.svg' alt='footer-logo' />
+                            <img src={config.logo_footer} alt='footer-logo' />
                         </div>
                         <div className='brand-info--content'>
                             Cocolux là hệ thống phân phối mỹ phẩm chính hãng và uy tín có quy mô hàng đầu Việt Nam.
@@ -77,10 +79,10 @@ export const Footer: React.FC = () => {
                         </div>
                     </div>
                     <div className='col coco-policy'>
-                        <div className='policy-title'>
+                        <div className='policy-title member-hidden'>
                             Coco Member
                         </div>
-                        <div className='list-items'>
+                        <div className='list-items member-hidden'>
                             <Link href='/thong-tin/rank-khach-hang'>
                                 <a>Quyền lợi thành viên</a>
                             </Link>

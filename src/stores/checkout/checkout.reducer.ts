@@ -35,6 +35,7 @@ const initialState = {
             value: 0,
             type: 1,
             label: 'Thanh toán khi nhận hàng (COD)',
+            img: ''
         },
         // {
         //     id: 2,
@@ -47,9 +48,9 @@ const initialState = {
             name: 'Chuyển khoản',
             type: 1,
             value: 0,
-            label: 'Chuyển khoản: Tên tài khoản: PHẠM MINH CHƯƠNG \n\
-                    - Vietcombank : 0451000502912 chi nhánh Thành Công \n\
-                    - Vietinbank: 100870533806 chi nhánh Chương Dương'
+            label: 'Chuyển khoản: Tên tài khoản: Phạm Tiến Lợi \n\
+                    - Vietcombank : 103878062018 TP Hà Nội - Hội sở',
+            img: '/media/images/payment-coco.jpg'
         }
     ],
     deliveryCodes: {
