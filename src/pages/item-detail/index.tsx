@@ -654,6 +654,9 @@ const ItemDetailPage = () => {
         });
     };
 
+    const date = new Date(data.created_at * 1000); // Multiply by 1000 to convert from seconds to milliseconds
+    const formattedDate = date.toLocaleDateString();
+
     if (isEmpty) {
         return (
             <NotFoundPage />
@@ -675,6 +678,57 @@ const ItemDetailPage = () => {
                 <meta name='al:android:url' content={`Cocoluxvn://product/${data.id}`} />
                 <meta property='og:url' content={`https://cocolux.com/${router.query.slug}`} />
                 <link rel="canonical" href={`https://cocolux.com/${router.query.slug}`}></link>
+                <script
+                        type='application/ld+json'
+                        dangerouslySetInnerHTML={{
+                            __html:
+                                `{
+                                    "@context": "https://schema.org/",
+                                    "@type": "Product",
+                                    "name":  "${data.meta_title}",
+                                    "image": [
+                                        "${data.thumbnail_url}"
+                                    ],
+                                    "description": "${data.meta_description}",
+                                    "sku": "${data.sku}",
+                                    "mpn": "${data.barcode}",
+                                    "brand": {
+                                        "@type": "Brand",
+                                        "name": "${data?.brand?.name}"
+                                    },
+                                    "review": {
+                                        "@type": "Review",
+                                        "reviewRating": {
+                                            "@type": "Rating",
+                                            "ratingValue": 5,
+                                            "bestRating": 5
+                                        },
+                                        "author": {
+                                            "@type": "Person",
+                                            "name": "CoCoLux"
+                                        }
+                                    },
+                                    "aggregateRating": {
+                                        "@type": "AggregateRating",
+                                        "ratingValue": ${Number(data.rating_average)},
+                                        "reviewCount": ${data.rating_count || 0}
+                                    },
+                                    "offers": {
+                                        "@type": "Offer",
+                                        "url": "${`https://cocolux.com/${router.query.slug}`}",
+                                        "priceCurrency": "VND",
+                                        "price": ${data.price},
+                                        "priceValidUntil": "${formattedDate}",
+                                        "itemCondition": "https://schema.org/UsedCondition",
+                                        "availability": "https://schema.org/InStock",
+                                        "seller": {
+                                            "@type": "Organization",
+                                            "name": "cocolux.com"
+                                        }
+                                    }
+                                }`
+                        }}
+                    />
             </Head>
             {
                 loading
