@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cloneDeep, includes, isNil, minBy } from 'lodash';
 import { useRouter } from 'next/router';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import $ from 'jquery';
@@ -12,7 +13,6 @@ import { fetchWishlist, setItemToWishlist } from 'src/stores/account';
 import { ITEM_LIST_TAB } from 'src/helpers/constants/layout';
 import { Toastr, Utilities } from 'src/helpers/utilities';
 import { addProductFollowForm } from 'src/stores/layout';
-import { loadProductDetail } from 'src/stores/product';
 import { ProductOption } from 'src/helpers/models';
 import { getCart } from 'src/stores/checkout';
 
@@ -32,13 +32,17 @@ import ItemListOption from './ListOption';
 import NotFoundPage from '../not-found';
 import ItemHeader from './ItemHeader';
 
-const ItemDetailPage = () => {
+interface Props {
+    data: any;
+}
+
+const ItemDetailPage: NextPage<Props> = ({ data }) => {
     const router = useRouter();
     const dispatch = useDispatch();
     const mobileDevices = /Android|webOS|iPhone|iPad|BlackBerry|IEMobile|Opera Mini/;
     const { cartInfo } = useSelector((state: any) => state.checkout);
     const { wishlist } = useSelector((state: any) => state.account);
-    const { data, isEmpty } = useSelector((state: any) => state.product);
+    // const { data, isEmpty } = useSelector((state: any) => state.product);
     const [countStore, setCountStore] = useState<any>({ count: 0, total: 0 });
     const [isWishlisted, setWishListState] = useState<boolean>(false);
     const [isVideoVisible, setVideoVisible] = useState<boolean>(true);
@@ -56,6 +60,10 @@ const ItemDetailPage = () => {
     const [currentTab, setCurrentTab] = useState(999);
     const [reactPixel, setReactPixel] = useState<any>();
 
+    const isEmpty = false;
+    if(!data){
+        const isEmpty = true;
+    }
     /**
      * Scroll
      * @hooks
@@ -694,7 +702,7 @@ const ItemDetailPage = () => {
                                     "mpn": "${data.barcode}",
                                     "brand": {
                                         "@type": "Brand",
-                                        "name": "${data?.brand?.name}"
+                                        "name": "${data?.brand}"
                                     },
                                     "review": {
                                         "@type": "Review",
@@ -705,13 +713,8 @@ const ItemDetailPage = () => {
                                         },
                                         "author": {
                                             "@type": "Person",
-                                            "name": "CoCoLux"
+                                            "name": "Dat Pham"
                                         }
-                                    },
-                                    "aggregateRating": {
-                                        "@type": "AggregateRating",
-                                        "ratingValue": ${Number(data.rating_average)},
-                                        "reviewCount": ${data.rating_count || 0}
                                     },
                                     "offers": {
                                         "@type": "Offer",
@@ -1416,35 +1419,37 @@ ItemDetailPage.getInitialProps = async ({ store, query, asPath }: any) => {
         const { slug } = query;
         const optionId = slug.split('-i.')[1];
         let response = await ItemAPI.detailOption(optionId);
-        if (!response.code) {
-            const { parent_id } = response.data;
-            const param = `${parent_id}?sid=${optionId}`;
-            if (parent_id) {
-                response = await ItemAPI.detail(param);
-            }
-        }
+        // if (!response.code) {
+        //     const { parent_id } = response.data;
+        //     const param = `${parent_id}?sid=${optionId}`;
+        //     if (parent_id) {
+        //         response = await ItemAPI.detail(param);
+        //     }
+        // }
+        const { parent_id } = response.data;
+        const param = `${parent_id}?sid=${optionId}`;
+        let main_product = await ItemAPI.detail(param);
 
-        if (response.code) {
-            store.dispatch(
-                loadProductDetail({
-                    query: query,
-                    isEmpty: true
-                })
-            );
-        }
+        // if (response.code) {
+        //     store.dispatch(
+        //         loadProductDetail({
+        //             query: query,
+        //             isEmpty: true
+        //         })
+        //     );
+        // }
 
-        // handle success
-        store.dispatch(
-            loadProductDetail({
-                data: response.data,
-                query: { ...query, path: asPath }
-            })
-        );
-        return { query };
+        // // handle success
+        // store.dispatch(
+        //     loadProductDetail({
+        //         data: response.data,
+        //         query: { ...query, path: asPath }
+        //     })
+        // );
+        return { data: main_product.data };
     } catch (error: any) {
         return {
-            isFailure: true,
-            messages: error.messages
+            data: []
         };
     }
 };

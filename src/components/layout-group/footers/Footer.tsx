@@ -33,9 +33,7 @@ export const Footer: React.FC = () => {
                             <img src={config.logo_footer} alt='footer-logo' />
                         </div>
                         <div className='brand-info--content'>
-                            Cocolux là hệ thống phân phối mỹ phẩm chính hãng và uy tín có quy mô hàng đầu Việt Nam.
-                            Đến với Coco bạn có thể hoàn toàn yên tâm khi sẽ chọn được cho mình bộ sản phẩm phù hợp
-                            và ưng ý từ các nhãn hàng nổi tiếng trên toàn thế giới.
+                            Cocolux là hệ thống phân phối mỹ phẩm chính hãng uy tín và dịch vụ chăm sóc khách hàng tận tâm . Đến với Coco bạn có thể hoàn toàn yên tâm khi sẽ chọn được cho mình bộ sản phẩm phù hợp và ưng ý từ các nhãn hàng nổi tiếng trên toàn thế giới.
                         </div>
                         <div dangerouslySetInnerHTML={renderStringToHtml2()} />
                     </div>
