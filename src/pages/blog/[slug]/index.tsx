@@ -70,10 +70,10 @@ const ArticleDetail: NextPage<Props> = ({ model, topItems }) => {
 
     const settings = {
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
         nextArrow: <ButtonNext />,
         prevArrow: <ButtonPreview />,
         responsive: [
@@ -81,7 +81,7 @@ const ArticleDetail: NextPage<Props> = ({ model, topItems }) => {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 4,
-                    slidesToScroll: 3,
+                    slidesToScroll: 1,
                 }
             },
             {
@@ -349,43 +349,23 @@ const ArticleDetail: NextPage<Props> = ({ model, topItems }) => {
                                                 ) : null
                                         }
                                         {
-                                            topItems.length
+                                            topItems && topItems.length
                                                 ? (
                                                     <>
                                                     <div>
                                                         <div className='item-gallery'>
-                                                                <Slider {...settings}>
-                                                                    {
-                                                                        topItems.map((item, index) => (
-                                                                            <HotItem
-                                                                                key={index}
-                                                                                hotItem={item}
-                                                                                className={'item-wrap'}
-                                                                            />
-                                                                        ))
-                                                                    }
-                                                                </Slider>
-                                                            </div>
-                                                            {/* {
-                                                                model?.products?.length > 3
-                                                                    ? (
-                                                                        <div className='block-expand-row'
-                                                                            onClick={() => {
-                                                                                const products = model?.products || [];
-                                                                                if (topItems.length <= 3) {
-                                                                                    setTopItems(products);
-                                                                                } else {
-                                                                                    setTopItems(products.slice(0, 2));
-                                                                                }
-                                                                            }}
-                                                                        >
-                                                                            <a className='expand-toggle'>
-                                                                                {topItems.length <= 3 ? 'Xem thêm' : 'Thu gọn'}
-                                                                                <span className={`toggle-icon ${topItems.length <= 3 ? null : 'flip-icon'}`}></span>
-                                                                            </a>
-                                                                        </div>
-                                                                    ) : null
-                                                            } */}
+                                                            <Slider {...settings}>
+                                                                {
+                                                                    topItems.map((item, index) => (
+                                                                        <HotItem
+                                                                            key={index}
+                                                                            hotItem={item}
+                                                                            className={'item-wrap'}
+                                                                        />
+                                                                    ))
+                                                                }
+                                                            </Slider>
+                                                        </div>
                                                     </div>
                                                     </>
                                                 ) : null
@@ -465,7 +445,8 @@ ArticleDetail.getInitialProps = async ({ query }: any = {}) => {
     }
     const articleId = query.slug.split('-i.')[1];
     const response = await ArticleAPI.detail(articleId);
-    return { model: response.data, topItems: response.data.products || null };
+    const products = response.data.products ? response.data.products : null;
+    return { model: response.data, topItems: products || null };
 };
 
 export default ArticleDetail;

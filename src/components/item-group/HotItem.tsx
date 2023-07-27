@@ -69,7 +69,7 @@ export const HotItem: React.FC<Props> = ({ hotItem, className }) => {
                 setItemDeal(currentDeal);
             }
 
-            if (hotItem.attributes && hotItem.attributes?.length) {
+            if (hotItem.attributes && hotItem.attributes[0] && hotItem.attributes?.length) {
                 // Load detail brand
                 const brand = hotItem.attributes.find(
                     (i: any) => i.value && i.name.toLowerCase() === 'thương hiệu'
