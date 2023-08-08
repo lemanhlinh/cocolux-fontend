@@ -40,7 +40,7 @@ class MyDocument extends Document {
                     <script type='text/javascript' dangerouslySetInnerHTML={{ __html: 'history.scrollRestoration = "manual"' }} />
 
                     {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-                    <script async src='https://www.googletagmanager.com/gtag/js?id=G-XL0CM3L0ZC'></script>
+                    {/* <script async src='https://www.googletagmanager.com/gtag/js?id=G-XL0CM3L0ZC'></script>
                     <script dangerouslySetInnerHTML={{
                         __html: `
                             window.dataLayer = window.dataLayer || [];
@@ -48,10 +48,10 @@ class MyDocument extends Document {
                             gtag('js', new Date());
                             gtag('config', 'G-XL0CM3L0ZC');
                         `
-                    }} />
+                    }} /> */}
 
                     {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-                    <script async src='https://www.googletagmanager.com/gtag/js?id=G-SV2M1BWXC9'></script>
+                    {/* <script async src='https://www.googletagmanager.com/gtag/js?id=G-SV2M1BWXC9'></script>
                     <script
                         dangerouslySetInnerHTML={{
                             __html: `
@@ -61,10 +61,10 @@ class MyDocument extends Document {
                                 gtag('config', 'G-SV2M1BWXC9');
                             `
                         }}
-                    />
+                    /> */}
 
                     {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-                    <script async src='https://www.googletagmanager.com/gtag/js?id=G-2YHLW19WB2'></script>
+                    {/* <script async src='https://www.googletagmanager.com/gtag/js?id=G-2YHLW19WB2'></script>
                     <script
                         dangerouslySetInnerHTML={{
                             __html: `
@@ -74,7 +74,7 @@ class MyDocument extends Document {
                                 gtag('config', 'G-2YHLW19WB2');
                             `
                         }}
-                    />
+                    /> */}
 
                     {/* <!-- Google Tag Manager --> */}
                     {/* <script
@@ -120,6 +120,29 @@ class MyDocument extends Document {
                     />
 
 
+                    
+                </Head>
+                <body>
+                    {/* <noscript>
+                        <iframe src='https://www.googletagmanager.com/ns.html?id=GTM-KR9FQH'></iframe>
+                    </noscript> */}
+
+                    <noscript>
+                        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGPB3KQ"></iframe>
+                    </noscript>
+
+                    {/* app */}
+                    <Main />
+
+                    {/* next script */}
+                    <NextScript />
+
+                    {/* bundle script */}
+                    <div id='fb-root'></div>
+                    <script defer src='/scripts/google-auth.js'></script>
+                    <script defer src='/scripts/facebook-auth.js'></script>
+                    <script async defer crossOrigin='anonymous' src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0' nonce='g3FmeM9o'></script>
+                    <script async defer crossOrigin='anonymous' src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=335194247449366&autoLogAppEvents=1' nonce='1UnxWRw8'></script>
                     {/* <!-- Google Json Schema --> */}
                     <script
                         type='application/ld+json'
@@ -235,28 +258,6 @@ class MyDocument extends Document {
                                 }`
                         }}
                     />
-                </Head>
-                <body>
-                    {/* <noscript>
-                        <iframe src='https://www.googletagmanager.com/ns.html?id=GTM-KR9FQH'></iframe>
-                    </noscript> */}
-
-                    <noscript>
-                        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGPB3KQ"></iframe>
-                    </noscript>
-
-                    {/* app */}
-                    <Main />
-
-                    {/* next script */}
-                    <NextScript />
-
-                    {/* bundle script */}
-                    <div id='fb-root'></div>
-                    <script defer src='/scripts/google-auth.js'></script>
-                    <script defer src='/scripts/facebook-auth.js'></script>
-                    <script async defer crossOrigin='anonymous' src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0' nonce='g3FmeM9o'></script>
-                    <script async defer crossOrigin='anonymous' src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=335194247449366&autoLogAppEvents=1' nonce='1UnxWRw8'></script>
                 </body>
             </Html>
         );
