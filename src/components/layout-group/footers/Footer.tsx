@@ -21,6 +21,11 @@ export const Footer: React.FC = () => {
         <script src='https://cdn.traffic60s.com/traffic/ican.js?v=2022' type='text/javascript'></script>`;
         return { __html: newContent };
     };
+    const renderStringToHtml5 = () => {
+        const newContent = `<div id='root-confirm-get-code'></div>
+        <script src='https://cdn.traffic60s.com/traffic/script.php?v=20232023' type='application/javascript'></script>`;
+        return { __html: newContent };
+    }; // update for 24/8
 
     const { config } = useSelector((state: any) => state.config);
 
@@ -35,7 +40,7 @@ export const Footer: React.FC = () => {
                         <div className='brand-info--content'>
                             Cocolux là hệ thống phân phối mỹ phẩm chính hãng uy tín và dịch vụ chăm sóc khách hàng tận tâm . Đến với Coco bạn có thể hoàn toàn yên tâm khi sẽ chọn được cho mình bộ sản phẩm phù hợp và ưng ý từ các nhãn hàng nổi tiếng trên toàn thế giới.
                         </div>
-                        <div dangerouslySetInnerHTML={renderStringToHtml2()} />
+                        {/* <div dangerouslySetInnerHTML={renderStringToHtml2()} /> */}
                     </div>
                     <div className='col coco-policy'>
                         <div className='policy-title'>
@@ -52,7 +57,7 @@ export const Footer: React.FC = () => {
                                 <a>Liên hệ</a>
                             </Link>
                         </div>
-                        <div dangerouslySetInnerHTML={renderStringToHtml3()} />
+                        {/* <div dangerouslySetInnerHTML={renderStringToHtml3()} /> */}
                     </div>
                     <div className='col coco-policy'>
                         <div className='policy-title'>
@@ -94,7 +99,7 @@ export const Footer: React.FC = () => {
                                 <a>Hướng dẫn mua hàng online</a>
                             </Link>
                         </div>
-                        <div dangerouslySetInnerHTML={renderStringToHtml4()} />
+                        <div dangerouslySetInnerHTML={renderStringToHtml5()} />
                         <div className='dmca-cocolux'>
                             <a href="//www.dmca.com/Protection/Status.aspx?ID=4f30b842-a954-4ab6-8ce0-d5476814e254" title="DMCA.com Protection Status" className="dmca-badge">
                                     <img src ="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=4f30b842-a954-4ab6-8ce0-d5476814e254"  alt="DMCA.com Protection Status" />
